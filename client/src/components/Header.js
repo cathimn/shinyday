@@ -13,7 +13,7 @@ export default ({ username, token }) => {
 
     return (
         <>
-            <div className={styles.header}>
+            {/* <div className={styles.header}>
                 <div className={styles.left}>
                     <div className={styles.logo}>
                         <Link to="/">Image</Link>
@@ -25,7 +25,7 @@ export default ({ username, token }) => {
                 <div className={styles.right}>
                     {token ? <UserModule username={username} token={token} /> : <LoginModule />}
                 </div>
-            </div>
+            </div> */}
         </>
     );
 };

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default () => (
     <>
-        <div className={styles.left}>
+        {/* <div className={styles.left}>
             <Link to="/signup">
                 sign up
             </Link>
@@ -14,6 +14,6 @@ export default () => (
             <Link to="/login">
                 log in
             </Link>
-        </div>
+        </div> */}
     </>
 );
