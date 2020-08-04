@@ -47,7 +47,7 @@ const Signup = ({ updateToken }) => {
             <div className="center">
                 <form
                     onSubmit={handleSubmit}
-                    className="form"
+                    className="login__form"
                 >
                     <div>
                         <label>Username</label>
@@ -72,7 +72,7 @@ const Signup = ({ updateToken }) => {
                     </div>
                     <button type="submit">Sign up</button>
                 </form>
-                <div className="login-redirects">
+                <div className="login__redirects">
                     Want to sign up as artist? <Link to="/signup/artist">Sign up here</Link>!
                     <br />
                     Already have an account? <Link to="/login">Log in!</Link>

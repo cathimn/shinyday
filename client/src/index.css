@@ -1,0 +1,83 @@
+html, main, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Helvetica Neue, sans-serif;
+    background-color: whitesmoke;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.center {
+    margin: auto;
+}
+
+.login__form {
+    width: 350px;
+}
+.login__form > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.login__form > button {
+    background-color: thistle;
+}
+
+.login__redirects {
+    width: 350px;
+}
+
+/* HEADER STYLES */
+.header {
+    display: flex;
+    height: 55px;
+    background-color: aquamarine;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__left {
+    display: flex;
+    padding-left: 30px;
+}
+
+.header__right {
+    display: flex;
+    padding-right: 30px;
+}
+
+.header__left--logo {
+    width: 150px;
+    background-color: pink;
+    margin-right: 20px;
+}
+
+/* MODULE STYLES */
+.module__left {
+    background-color: purple;
+    margin-right: 20px;
+}
+
+/* BANNER STYLES */
+.banner {
+    display: flex;
+    margin: auto;
+    width: 100vw;
+    height: 20vw;
+}
+
+.banner__left {
+    flex-basis: 70%;
+    background-color: teal;
+}
+
+.banner__right {
+    flex-basis: 30%;
+}
