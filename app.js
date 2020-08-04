@@ -25,10 +25,6 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-app.use(function(_req, _res, next) {
-    next(createError(404));
-});
-
 app.use(function (err, _req, res, _next) {
     res.status(err.status || 500);
     if (err.status === 401) {
