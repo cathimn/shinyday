@@ -13,19 +13,19 @@ export default ({ username, token }) => {
 
     return (
         <>
-            {/* <div className={styles.header}>
-                <div className={styles.left}>
-                    <div className={styles.logo}>
+            <div className="header">
+                <div className="left">
+                    <div className="logo">
                         <Link to="/">Image</Link>
                     </div>
-                    <div className={styles.search}>
+                    <div className="search">
                         <Searchbar />
                     </div>
                 </div>
-                <div className={styles.right}>
+                <div className="right">
                     {token ? <UserModule username={username} token={token} /> : <LoginModule />}
                 </div>
-            </div> */}
+            </div>
         </>
     );
 };

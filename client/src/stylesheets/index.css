@@ -15,10 +15,6 @@ body {
     margin: auto;
 }
 
-a {
-    
-}
-
 .center {
     margin: auto;
 }
@@ -37,4 +33,21 @@ a {
 
 .login-redirects {
     width: 350px;
+}
+
+/* BANNER STYLES */
+.wrapper {
+    display: flex;
+    margin: auto;
+    width: 100vw;
+    height: 20vw;
+}
+
+.left {
+    flex-basis: 70%;
+    background-color: teal;
+}
+
+.right {
+    flex-basis: 30%;
 }

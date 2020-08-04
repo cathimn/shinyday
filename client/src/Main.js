@@ -23,8 +23,10 @@ export default ({ token }) => {
     };
 
     useEffect(() => {
-        loadProfile(token);
-    })
+        if (token) {
+            loadProfile(token);
+        }
+    }, [token])
 
     return (
         <>
