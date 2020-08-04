@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Divider } from 'antd';
 
 import { baseUrl } from './config';
 
@@ -29,6 +30,7 @@ export default ({ token }) => {
         <>
             <Header token={token} username={username}/>
             <Banner />
+            <Divider />
         </>
     );
 };
