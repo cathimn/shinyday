@@ -47,4 +47,10 @@ router.put('/', [login, password], asyncHandler(async (req, res, next) => {
     res.json({ token, user: user.toSafeObject() });
 }));
 
+router.delete('/', [authenticated], asyncHandler(async (req, res) => {
+    req.user.session_token = null;
+    await req.user.save();
+    res.json({ message: 'success' });
+}));
+
 module.exports = router;

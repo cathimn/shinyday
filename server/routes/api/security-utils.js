@@ -7,9 +7,8 @@ const UserRepository = require('../../db/user-repository');
 
 function generateToken(user) {
     const data = {
-        username: user.username
+        username: user.username,
     };
-
     const jwtid = uuid();
 
     return {
@@ -28,23 +27,23 @@ function restoreUser(req, res, next) {
     return jwt.verify(token, secret, null, async (err, payload) => {
         if (err) {
             err.status = 403;
-            return next(err);``
+            return next(err);
         }
 
-        const token = payload.jti;
+        const tokenId = payload.jti;
 
         try {
-            req.user = await UserRepository.findBySession(token);
+            req.user = await UserRepository.findBySession(tokenId);
         } catch (e) {
             return next(e);
         }
-    
-        if (!req.player.isValid()) {
+
+        if (!req.user.isValid()) {
             return next({ status: 404, message: 'session not found' });
         }
 
         next();
-    })
+    });
 }
 
 const authenticated = [bearerToken(), restoreUser];
