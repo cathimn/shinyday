@@ -8,6 +8,7 @@ export default () => {
   
     return (
         <>
+            <a href="/test">test</a>
             <Banner />
             <LatestAlbums />
             <GenreTags />

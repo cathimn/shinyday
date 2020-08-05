@@ -1,11 +1,11 @@
 import React from 'react';
 
-export default ({ token, username }) => {
+export default () => {
 
     return (
         <>
             <div>
-
+                Album page
             </div>
         </>
     );

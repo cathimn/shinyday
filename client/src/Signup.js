@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { baseUrl } from './config';
 import { Redirect, Link } from 'react-router-dom';
-import FormInput from './components/FormInput';
 
-const Signup = ({ updateToken }) => {
+const Signup = ({ needLogin, updateToken }) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -36,7 +35,7 @@ const Signup = ({ updateToken }) => {
         setPassword(e.target.value);
     }
 
-    if (authToken) {
+    if (!needLogin && authToken) {
         return <Redirect to="/" />;
     }
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { baseUrl } from './config';
 
-const LoginPanel = ({ updateToken }) => {
+const LoginPanel = ({ needLogin, updateToken }) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [authToken, setAuthToken] = useState(localStorage.getItem('shinyday_session'));
@@ -35,7 +35,7 @@ const LoginPanel = ({ updateToken }) => {
         setPassword(e.target.value);
     };
 
-    if (authToken) {
+    if (!needLogin && authToken) {
         return <Redirect to="/" />;
     }
 

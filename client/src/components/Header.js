@@ -5,7 +5,7 @@ import Searchbar from './Searchbar';
 import LoginModule from './LoginModule';
 import UserModule from './UserModule';
 
-export default ({ username, token }) => {
+export default ({ loaded, setNeedLogin, needLogin, username, token }) => {
 
     return (
         <>
@@ -19,7 +19,10 @@ export default ({ username, token }) => {
                     </div>
                 </div>
                 <div className="header__right">
-                    {token ? <UserModule username={username} token={token} /> : <LoginModule />}
+                    {!needLogin
+                        ? <UserModule setNeedLogin={setNeedLogin} username={username} token={token} />
+                        : <LoginModule />
+                    }
                 </div>
             </div>
         </>
