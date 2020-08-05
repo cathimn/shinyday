@@ -15,7 +15,9 @@ function r(o) {
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Users', [
-      r({ username: 'rin-bear', email: 'rin@outdooractivities.club', password: createPassword()})
+      r({ username: 'rin-bear', email: 'rin@outdooractivities.club', password: createPassword() }),
+      r({ username: 'nadeshiko_loves_food', email: 'nadeshiko@outdooractivities.club', password: createPassword() }),
+      r({ username: 'oaclub', email: 'admin@outdooractivities.club', password: createPassword() })
     ]);
   },
 

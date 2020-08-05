@@ -1,14 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// import styles from './Header.module.css'
-
 import Searchbar from './Searchbar';
 import LoginModule from './LoginModule';
 import UserModule from './UserModule';
 
 export default ({ username, token }) => {
-
 
     return (
         <>

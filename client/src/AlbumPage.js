@@ -1,12 +1,12 @@
 import React from 'react';
 
-export default () => {
-    
+export default ({ token, username }) => {
+
     return (
         <>
             <div>
-                THIS IS A SEARCH BAR
+
             </div>
         </>
     );
-};
+}

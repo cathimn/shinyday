@@ -1,38 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Divider } from 'antd';
+import React from 'react';
 
-import { baseUrl } from './config';
-
-import Header from './components/Header';
 import Banner from './components/Banner';
+import LatestAlbums from './components/LatestAlbums';
+import GenreTags from './components/GenreTags';
 
-export default ({ token }) => {
-    const [username, setUsername] = useState('');
-
-    const loadProfile = async authToken => {
-        const response = await fetch(`${baseUrl}/user/me`, {
-            headers: {
-                Authorization: `Bearer ${authToken}`
-            }
-        });
-
-        if (response.ok) {
-            const res = await response.json();
-            setUsername(res.username);
-        }
-    };
-
-    useEffect(() => {
-        if (token) {
-            loadProfile(token);
-        }
-    }, [token])
-
+export default () => {
+  
     return (
         <>
-            <Header token={token} username={username}/>
             <Banner />
-            <Divider />
+            <LatestAlbums />
+            <GenreTags />
         </>
     );
 };

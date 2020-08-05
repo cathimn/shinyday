@@ -31,7 +31,19 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   User.associate = function(models) {
-    // associations can be defined here
+    User.hasOne(models.Artist, { foreignKey: 'user_id' });
+
+    User.belongsToMany(models.Artist, {
+      through: 'User_Follows',
+      otherKey: 'artist_id',
+      foreignKey: 'user_id',
+    })
+
+    User.belongsToMany(models.Album, {
+      through: 'User_Collections',
+      otherKey: 'album_id',
+      foreignKey: 'user_id',
+    })
   };
 
   User.prototype.isValid = () => true;
