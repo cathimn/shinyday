@@ -5,8 +5,6 @@ import Searchbar from './Searchbar';
 import LoginModule from './LoginModule';
 import UserModule from './UserModule';
 
-import { imageUrl } from '../config';
-
 export default ({ loaded, setNeedLogin, needLogin, username, token }) => {
 
     return (
@@ -15,7 +13,7 @@ export default ({ loaded, setNeedLogin, needLogin, username, token }) => {
                 <div className="header__left">
                     <Link to="/">
                         <div className="header__left--logo">
-                            <img src="/coloredtent.svg" className="img-logo" />
+                            <img src="/coloredtent.svg" className="img-logo" alt="logo" />
                             <div className="logo">shinyday</div>
                         </div>
                     </Link>

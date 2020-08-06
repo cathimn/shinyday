@@ -5,8 +5,9 @@ import { userImageAWSUrl } from '../config';
 const AvatarMenu = ({ setNeedLogin, toggleMenu }) => {
     return (
         <div className="module__menu" onMouseLeave={toggleMenu}>
-            <div>profile</div>
-            <div onClick={e => {
+            <div className="module__menu--link">profile</div>
+            <div className="module__menu--link"
+                onClick={e => {
                 window.localStorage.removeItem("shinyday_session");
                 setNeedLogin(true);
                 window.location.reload(false);
@@ -27,9 +28,9 @@ export default ({ setNeedLogin, username }) => {
             <div className="module">
                 <HeartOutlined className="module__heart" />
             </div>
-            <div>
+            <div className="module__avatar-container">
                 <div className="module__avatar" onMouseOver={toggleMenu} >
-                    <img src={userImageAWSUrl + username + '.png'}></img>
+                    <img src={userImageAWSUrl + username + '.png'} alt="avatar"></img>
                 </div>
                 {menuDisplay ? <AvatarMenu setNeedLogin={setNeedLogin} toggleMenu={toggleMenu}/> : null }
             </div>

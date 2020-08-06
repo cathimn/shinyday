@@ -21,23 +21,27 @@ const App = () => {
   const [username, setUsername] = useState('');
 
   const loadProfile = async authToken => {
-    const response = await fetch(`${baseUrl}/user/me`, {
-      headers: { Authorization: `Bearer ${authToken}` }
-    });
+    try {
+      const response = await fetch(`${baseUrl}/user/me`, {
+        headers: { Authorization: `Bearer ${authToken}` }
+      });
 
-    if (response.ok) {
-      const res = await response.json();
-      setNeedLogin(false);
-      setUsername(res.username);
-    } else {
-      setNeedLogin(true);
-      window.localStorage.removeItem("shinyday_session")
+      if (response.ok) {
+        const res = await response.json();
+        setNeedLogin(false);
+        setUsername(res.username);
+      } else {
+        setNeedLogin(true);
+        window.localStorage.removeItem("shinyday_session")
+      }
+    } catch (e) {
+      console.error(e)
     }
   };
   
   useEffect(() => {
     setLoaded(true);
-    loadProfile(token)
+    if (token) loadProfile(token)
   }, [token])
 
   const updateToken = authToken => {
@@ -63,7 +67,7 @@ const App = () => {
             render={props => <Signup {...props} needLogin={needLogin} updateToken={updateToken} />}
           />
           <Route 
-            path="/test"
+            path="/:artist/:album"
             render={props => <AlbumPage />}
           />
           <Route

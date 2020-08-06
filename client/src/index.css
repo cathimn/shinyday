@@ -122,6 +122,46 @@ a {
     box-shadow: lightpink 0px 0px 5px;
 }
 
+.search-results-container {
+    position: relative;
+}
+
+.search-results {
+    font-size: x-small;
+    width: 300px;
+    position: absolute;
+    box-shadow: 0 0 2px rgb(252, 245, 245);
+    background-color: white;
+}
+
+.result-container {
+    display: flex;
+}
+
+.result-container:hover {
+    background-color: #fff8f8;
+}
+
+.img-placeholder {
+    width: 40px;
+    height: 40px;
+    background-color: #7cc5d2;
+    align-self: center;
+    margin-left: 10px;
+}
+.result {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding: 0;
+    margin: 10px
+}
+
+.search-matched-term {
+    font-weight: 600;
+    font-size: 11px;
+}
+
 /* MODULE STYLES */
 .module {
     /* background-color: purple; */
@@ -135,8 +175,8 @@ a {
 
 .module__avatar {
     background-color: tomato;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     overflow: hidden;
 }
@@ -147,16 +187,28 @@ a {
     object-fit: cover;
 }
 
+.module__avatar-container {
+    position: relative;
+}
+
 .module__menu {
+    box-shadow: 0 0 2px lightgray;
+    border-radius: 4px;
     position: absolute;
-    right: 30px;
-    background-color: crimson;
+    top: 38px;
+    right: 0px;
+    background-color: white;
     height: 60px;
-    width: 120px;
+    width: 100px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    padding-left: 10px;
+    padding: 10px 5px;
+    font-size: small;
+    text-align: center;
+}
+.module__menu :hover {
+    color: #7cc5d2;
 }
 
 /* BANNER STYLES */
@@ -276,7 +328,7 @@ a {
 
 .genre-gradient > ul {
     height: 25px;
-    width: 75vw;
+    width: 73%;
     padding: 0;
     margin: 0 auto;
     list-style-type: none;
@@ -296,4 +348,69 @@ a {
 .footer {
     width: auto;
     background-color: wheat;
+}
+
+/* TESTING */
+.asdf {
+    background-color: cornflowerblue;
+}
+.albumpage-container {
+    width: 70%;
+    align-self: center;
+    background-color: rebeccapurple;
+}
+
+.albumpage__header {
+    background-color: rgb(193, 149, 235);
+    height: 180px;
+    overflow: hidden;
+}
+
+.albumpage__main {
+    display: flex;
+    width: auto;
+}
+
+.albumpage__main--left {
+    padding-left: 25px;
+    flex-basis: 99%;
+    display: flex;
+}
+.albumpage__main--right {
+    margin-top: 50px;
+    margin-right: 25px;
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+}
+
+.ap--player-songs {
+    flex-basis: 70%;
+    margin-right: 25px;
+}
+
+.ap--art-fans {
+    margin-right: 25px;
+    margin-top: 50px;
+    width: 350px;
+}
+
+.ap-art {
+    width: 350px;
+    height: 350px;
+    margin-bottom: 25px;
+}
+
+.ap-avatar {
+    width: 120px;
+    height: 120px;
+    background-color: plum;
+    margin-bottom: 5px;
+    /* margin: 50px auto 20px auto; */
+}
+
+.follow-button {
+    width: auto;
+    height: 25px;
+    margin: 5px 0px;
 }
