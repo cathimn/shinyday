@@ -8,10 +8,12 @@ export default () => {
   
     return (
         <>
-            <a href="/test">test</a>
             <Banner />
+            <div className="divider" />
             <LatestAlbums />
+            <div className="divider" />
             <GenreTags />
+            <div className="divider" />
         </>
     );
 };

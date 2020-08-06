@@ -6,12 +6,12 @@ export default () => {
         <>
             <div className="banner">
                 <div className="banner__left">
-                    this is big one on left
+                    {/* set this to be a feature on any random album!!! */}
                 </div>
                 <div className="banner__right">
-                    <div>one on the right</div>
-                    <div>another one on the right</div>
-                    <div>another another one on the right</div>
+                    <div className="banner__right mini--first">:o)</div>
+                    <div className="banner__right mini--second">:o(</div>
+                    <div className="banner__right mini--third">;o)</div>
                 </div>
             </div>
         </>

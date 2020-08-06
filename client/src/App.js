@@ -5,7 +5,7 @@ import { baseUrl } from './config';
 
 import Login from './Login';
 import Main from './Main';
-// import Signup from './Signup';
+import Signup from './Signup';
 import AlbumPage from './AlbumPage';
 // import SignupArtist from './SignupArtist';
 
@@ -52,15 +52,16 @@ const App = () => {
   return (
     <Router>
       <Header loaded={loaded} needLogin={needLogin} setNeedLogin={setNeedLogin} token={token} username={username} />
+        <div className="container">
         <Switch>
           <Route
             path='/login'
             render={props => <Login {...props} needLogin={needLogin} updateToken={updateToken} />}
           />
-          {/* <Route 
+          <Route 
             path='/signup'
             render={props => <Signup {...props} needLogin={needLogin} updateToken={updateToken} />}
-          /> */}
+          />
           <Route 
             path="/test"
             render={props => <AlbumPage />}
@@ -72,6 +73,7 @@ const App = () => {
           />
           <Route path="*" render={props => <div>eRORO</div>}></Route>
         </Switch>
+        </div>
       <Footer />
     </Router>
   );

@@ -43,18 +43,18 @@ const LoginPanel = ({ needLogin, updateToken }) => {
         <div className="center">
             <form onSubmit={handleSubmit} className="login__form">
                 <div>
-                    <label>Username / Email</label>
+                    <label>username / email</label>
                     <input type="text"
                         value={login}
                         onChange={updateLogin} />
                 </div>
                 <div>
-                    <label>Password</label>
+                    <label>password</label>
                     <input type="password"
                         value={password}
                         onChange={updatePassword} />
                 </div>
-                <button type="submit">Log in</button>
+                <button type="submit">log in</button>
             </form>
             <div className="login__redirects">
                 <Link to="/login" onClick={demo}>This is a link to try a demo.</Link>

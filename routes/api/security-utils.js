@@ -9,6 +9,7 @@ function generateToken(user) {
     const data = {
         username: user.username,
     };
+    
     const jwtid = uuid();
 
     return {

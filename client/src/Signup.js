@@ -43,24 +43,24 @@ const Signup = ({ needLogin, updateToken }) => {
         <div className="center">
             <form onSubmit={handleSubmit} className="login__form">
                 <div>
-                    <label>Username</label>
+                    <label>username</label>
                     <input type="text"
                         value={username}
                         onChange={updateUsername} />
                 </div>
                 <div>
-                    <label>Email</label>
+                    <label>email</label>
                     <input type="email"
                         value={email}
                         onChange={updateEmail} />
                 </div>
                 <div>
-                    <label>Password</label>
+                    <label>password</label>
                     <input type="password"
                         value={password}
                         onChange={updatePassword} />
                 </div>
-                <button type="submit">Sign up</button>
+                <button type="submit">sign up</button>
             </form>
             <div className="login__redirects">
                 Want to sign up as artist? <Link to="/signup/artist">Sign up here</Link>!

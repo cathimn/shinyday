@@ -10,7 +10,8 @@ const AlbumCard = () => (
 export default () => {
 
     return (
-        <>
+        <div className="new-and-notable">
+            <h3 className="main--h3">new and notable</h3>
             <div className="main__latest">
                 <AlbumCard />
                 <AlbumCard />
@@ -18,6 +19,6 @@ export default () => {
                 <AlbumCard />
                 <AlbumCard />
             </div>
-        </>
+        </div>
     );
 }

@@ -5,15 +5,20 @@ import Searchbar from './Searchbar';
 import LoginModule from './LoginModule';
 import UserModule from './UserModule';
 
+import { imageUrl } from '../config';
+
 export default ({ loaded, setNeedLogin, needLogin, username, token }) => {
 
     return (
         <>
             <div className="header">
                 <div className="header__left">
-                    <div className="header__left--logo">
-                        <Link to="/">Image</Link>
-                    </div>
+                    <Link to="/">
+                        <div className="header__left--logo">
+                            <img src="/coloredtent.svg" className="img-logo" />
+                            <div className="logo">shinyday</div>
+                        </div>
+                    </Link>
                     <div>
                         <Searchbar />
                     </div>

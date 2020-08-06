@@ -5,7 +5,6 @@ export default () => {
     return (
         <>
             <div>
-                Album page
             </div>
         </>
     );

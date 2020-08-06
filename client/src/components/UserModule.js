@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { HeartOutlined } from '@ant-design/icons'
+import { userImageAWSUrl } from '../config';
 
 const AvatarMenu = ({ setNeedLogin, toggleMenu }) => {
     return (
@@ -13,7 +14,6 @@ const AvatarMenu = ({ setNeedLogin, toggleMenu }) => {
         </div>
     )
 }
-
     
 export default ({ setNeedLogin, username }) => {
     const [menuDisplay, setMenuDisplay] = useState(false);
@@ -29,7 +29,7 @@ export default ({ setNeedLogin, username }) => {
             </div>
             <div>
                 <div className="module__avatar" onMouseOver={toggleMenu} >
-                    {username}
+                    <img src={userImageAWSUrl + username + '.png'}></img>
                 </div>
                 {menuDisplay ? <AvatarMenu setNeedLogin={setNeedLogin} toggleMenu={toggleMenu}/> : null }
             </div>
