@@ -10,34 +10,46 @@ router.get('/', asyncHandler(async (req, res) => {
         attributes: [ "id", "artist_name"]});
     const search = new Object();
     let id = 0;
-    searchArray.forEach(ele => {
-        // const artistId = ele.id;
+    // searchArray.forEach(ele => {
+    //     const artistName = ele.artist_name;
+    //     ele.albums.forEach(ele => {
+    //         const albumName = ele.name;
+    //         ele.songs.forEach(ele => {
+    //             search[id] = {
+    //                 song: ele.name,
+    //                 album: albumName,
+    //                 artist: artistName,
+    //             };
+    //             id++;
+    //         })
+    //         search[id] = {
+    //             album: albumName,
+    //             artist: artistName,
+    //         }
+    //         id++;
+    //     })
+    //     search[id] = {
+    //         artist: artistName
+    //     }
+    //     id++;
+    // })
+
+    const albArtSearch = await Artist.findAll({
+        include: [{ model: Album, as: "albums", required: true, attributes: ["id", "name"] }],
+        attributes: ["id", "artist_name"],
+    })
+    albArtSearch.forEach(ele => {
         const artistName = ele.artist_name;
         ele.albums.forEach(ele => {
-            // const albumId = ele.id;
-            const albumName = ele.name;
-            ele.songs.forEach(ele => {
-                // search[`${artistId}${albumId}${ele.id}`] = {
-                //     song: ele.name,
-                //     album: albumName,
-                //     artist: artistName,
-                // };
-                search[id] = {
-                    song: ele.name,
-                    album: albumName,
-                    artist: artistName,
-                };
-                id++;
-            })
             search[id] = {
-                album: albumName,
+                album: ele.name,
                 artist: artistName,
             }
             id++;
         })
         search[id] = {
-            artist: artistName
-        }
+            artist: artistName,
+        };
         id++;
     })
     res.json(search)
