@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 export default () => {
 
     return (
-        <>
+        <div className="grey">
             <div className="banner">
                 <div className="banner__left">
                     {/* set this to be a feature on any random album!!! */}
-                    <Link to="/monplaisir/good">go to a test album</Link>
-                    <Link to="/monplaisir/">artist page</Link>
+                    <Link to="/monplaisir/good">go to a test album</Link><br/>
+                    <Link to="/monplaisir">artist page</Link><br/>
                     <Link to="/nonsense">bad link</Link>
                 </div>
                 <div className="banner__right">
@@ -18,6 +18,6 @@ export default () => {
                     <div className="banner__right mini--third">;o)</div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };

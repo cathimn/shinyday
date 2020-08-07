@@ -5,7 +5,7 @@ const Results = ({ list }) => (
     <div className="search-results">
         {Object.values(list).map(li => {
             const result = Object.entries(li)
-            
+
             if (result.length > 1) {
                 return (
                     <div className="result-container" key={result[0][1] + "xD"}>
@@ -66,14 +66,14 @@ export default () => {
             console.error(e)
         }
     }
-    
+
     useEffect(() => {
         if (query && !searched) {
             populateList(query);
         } else if (query.length === 0) {
             setList({});
         }
-    }, [query.length, searched]);
+    }, [query, query.length, searched]);
 
     return (
         <>
@@ -89,7 +89,7 @@ export default () => {
             <div className="search-results-container">
                 {(Object.keys(list).length > 0) ? <Results list={list} /> : null}
             </div>
-            
+
         </>
     );
 };

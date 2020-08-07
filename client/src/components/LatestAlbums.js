@@ -2,9 +2,15 @@ import React from 'react';
 
 const AlbumCard = () => (
     <div className="main__latest--card">
-        <div>Image</div>
-        <div>album name</div>
-        <div>artist</div>
+        <div className="latest--card-image">
+            #
+        </div>
+        <div className="latest--card-blurb">
+            <li>album name</li>
+            <li>artist</li>
+            <li>genre</li>
+            <li>description</li>
+        </div>
     </div>
 );
 export default () => {

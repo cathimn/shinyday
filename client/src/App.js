@@ -6,11 +6,12 @@ import { baseUrl } from './config';
 import Login from './Login';
 import Main from './Main';
 import Signup from './Signup';
-import AlbumPage from './AlbumPage';
+import MusicPage from './MusicPage';
+import TheEnd from './TheEnd'
 // import SignupArtist from './SignupArtist';
 
 import Header from './components/Header';
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 
 const App = () => {
   const authToken = window.localStorage.getItem('shinyday_session');
@@ -38,7 +39,7 @@ const App = () => {
       console.error(e)
     }
   };
-  
+
   useEffect(() => {
     setLoaded(true);
     if (token) loadProfile(token)
@@ -58,27 +59,33 @@ const App = () => {
       <Header loaded={loaded} needLogin={needLogin} setNeedLogin={setNeedLogin} token={token} username={username} />
         <div className="container">
         <Switch>
+          <Route exact path="/404" render={props => <TheEnd />} />
           <Route
             path='/login'
             render={props => <Login {...props} needLogin={needLogin} updateToken={updateToken} />}
           />
-          <Route 
+          <Route
             path='/signup'
             render={props => <Signup {...props} needLogin={needLogin} updateToken={updateToken} />}
           />
-          <Route 
+          <Route
+            exact
+            path="/:artist"
+            render={props => <MusicPage type="artist"/>}
+          />
+          <Route
             path="/:artist/:album"
-            render={props => <AlbumPage />}
+            render={props => <MusicPage type="album" />}
           />
           <Route
             exact
             path="/"
             render={props => <Main {...props} token={token} username={username}/>}
           />
-          <Route path="*" render={props => <div>eRORO</div>}></Route>
+          <Route path="*" render={props => <div>EROROROROORRO</div>}></Route>
         </Switch>
         </div>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 };

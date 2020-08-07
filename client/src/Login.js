@@ -40,7 +40,10 @@ const LoginPanel = ({ needLogin, updateToken }) => {
     }
 
     return (
+        <>
         <div className="center">
+            <div className="divider" />
+            <h1>log in</h1>
             <form onSubmit={handleSubmit} className="login__form">
                 <div>
                     <label>username / email</label>
@@ -57,11 +60,12 @@ const LoginPanel = ({ needLogin, updateToken }) => {
                 <button type="submit">log in</button>
             </form>
             <div className="login__redirects">
-                <Link to="/login" onClick={demo}>This is a link to try a demo.</Link>
+                Use a <Link to="/login" onClick={demo}>demo account</Link> as a fan.
                 <br />
-                Need to sign up? <Link to="/signup">Sign up here!</Link>
+                Want to sign up? <Link to="/signup">Sign up here!</Link>
             </div>
         </div>
+        </>
     );
 };
 

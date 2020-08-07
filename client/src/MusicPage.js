@@ -1,5 +1,5 @@
-import React from 'react';
-import { useParams } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useParams, Redirect } from 'react-router-dom'
 
 const MusicPlayer = () => {
 
@@ -25,16 +25,29 @@ const Songlist = () => {
     )
 }
 
-export default () => {
-    const { artist, album } = useParams();
+export default ({ type }) => {
+    const [validPath, setValidPath] = useState(false);
+
+    if (type === "artist") {
+        // check if artist in params exists, set valid path to true
+        // find all albums
+        // render albums display on "musicpage__main--left"
+    } else if (type === "album") {
+        // fetch if album with artist name exists in db
+    }
+
+
+    // if (!validPath) {
+    //     return <Redirect to="/404"/>
+    // }
     return (
         <>
-        <div className="albumpage-container">
-            <div className="albumpage__header">
+        <div className="musicpage-container">
+            <div className="musicpage__header">
                 sad cat
             </div>
-            <div className="albumpage__main">
-                <div className="albumpage__main--left">
+            <div className="musicpage__main">
+                <div className="musicpage__main--left">
                     <div className="ap--player-songs">
                         <MusicPlayer />
                         <Songlist />
@@ -48,7 +61,7 @@ export default () => {
                         </div>
                     </div>
                 </div>
-                <div className="albumpage__main--right">
+                <div className="musicpage__main--right">
                     <div className="ap-avatar">artist pic</div>
                     artist name
                     <button className="follow-button">FOLLOW</button>

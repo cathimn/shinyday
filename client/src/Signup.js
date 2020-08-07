@@ -41,6 +41,8 @@ const Signup = ({ needLogin, updateToken }) => {
 
     return (
         <div className="center">
+            <div className="divider" />
+            <h1>fan sign up</h1>
             <form onSubmit={handleSubmit} className="login__form">
                 <div>
                     <label>username</label>
@@ -63,7 +65,7 @@ const Signup = ({ needLogin, updateToken }) => {
                 <button type="submit">sign up</button>
             </form>
             <div className="login__redirects">
-                Want to sign up as artist? <Link to="/signup/artist">Sign up here</Link>!
+                {/* Want to sign up as artist? <Link to="/signup/artist">Sign up here</Link>! */}
                 <br />
                 Already have an account? <Link to="/login">Log in!</Link>
             </div>

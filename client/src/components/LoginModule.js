@@ -1,19 +1,39 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default () => {
-    return (
-        <>
-            <div className="module">
-                <Link to="/signup">
-                    sign up
-            </Link>
-            </div>
+    const location = useLocation();
+    if(location.pathname === "/signup") {
+        console.log(true)
+        return (
             <div>
                 <Link to="/login">
                     log in
-            </Link>
+                </Link>
             </div>
-        </>
-    );
+        );
+    } else if (location.pathname === "/login") {
+        return (
+            <div>
+                <Link to="/signup">
+                    sign up
+                </Link>
+            </div>
+        )
+    } else {
+        return (
+            <>
+                <div className="module">
+                    <Link to="/signup">
+                        sign up
+                    </Link>
+                </div>
+                <div>
+                    <Link to="/login">
+                        log in
+                    </Link>
+                </div>
+            </>
+        );
+    }
 }
