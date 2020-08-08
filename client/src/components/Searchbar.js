@@ -46,25 +46,23 @@ export default () => {
     }
 
     const populateList = async (query) => {
-        try {
-            const response = await fetch(`${baseUrl}/search`, {
-                method: 'post',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ "query": query }),
-            });
-            if (response.ok) {
-                const recentListLen = Object.keys(list).length;
-                const res = await response.json();
-                setList(res);
-                if (recentListLen === Object.keys(list).length) {
-                    setSearched(false);
-                } else {
-                    setSearched(true);
-                }
+        const response = await fetch(`${baseUrl}/search`, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ "query": query }),
+        });
+        
+        if (response.ok) {
+            const recentListLen = Object.keys(list).length;
+            const res = await response.json();
+            setList(res);
+            if (recentListLen === Object.keys(list).length) {
+                setSearched(false);
+            } else {
+                setSearched(true);
             }
-        } catch (e) {
-            console.error(e)
         }
+
     }
 
     useEffect(() => {

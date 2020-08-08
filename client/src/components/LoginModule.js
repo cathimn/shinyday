@@ -6,7 +6,7 @@ export default () => {
     if(location.pathname === "/signup") {
         console.log(true)
         return (
-            <div>
+            <div className="module">
                 <Link to="/login">
                     log in
                 </Link>
@@ -14,7 +14,7 @@ export default () => {
         );
     } else if (location.pathname === "/login") {
         return (
-            <div>
+            <div className="module">
                 <Link to="/signup">
                     sign up
                 </Link>
@@ -28,7 +28,7 @@ export default () => {
                         sign up
                     </Link>
                 </div>
-                <div>
+                <div className="module">
                     <Link to="/login">
                         log in
                     </Link>

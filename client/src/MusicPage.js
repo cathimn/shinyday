@@ -1,45 +1,61 @@
-import React, { useState } from 'react';
-import { useParams, Redirect } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom'
 
-const MusicPlayer = () => {
+import { baseUrl } from './config';
+
+import PlayerLeft from './components/Player';
+
+const ArtistLeft = () => {
 
     return (
-        <div className="ap--musicplayer">
-            <h1>current song title</h1>
-            todo: music player
-        </div>
-    )
-}
-
-const Songlist = () => {
-    return (
-        <div className="ap--songlist">
-            <ul>
-                <li>tracks listed out</li>
-                <li>tracks listed out</li>
-                <li>tracks listed out</li>
-                <li>tracks listed out</li>
-                <li>tracks listed out</li>
-            </ul>
-        </div>
-    )
+        <>
+            <div>
+                discography for the artist
+            </div>
+        </>
+    );
 }
 
 export default ({ type }) => {
+    const { artistTerm, albumTerm } = useParams();
+    const [loaded, setLoaded] = useState(false);
     const [validPath, setValidPath] = useState(false);
+    const [artistId, setArtistId] = useState();
+    const [artistName, setArtistName] = useState();
+    const [disc, setDisc] = useState();
 
-    if (type === "artist") {
-        // check if artist in params exists, set valid path to true
-        // find all albums
-        // render albums display on "musicpage__main--left"
-    } else if (type === "album") {
-        // fetch if album with artist name exists in db
+    const checkArtist = async (term) => {
+        const response = await fetch(`${baseUrl}/music/${artistTerm}`);
+        if (response.ok) {
+            const res = await response.json();
+            res ? setValidPath(true) : setValidPath(false);
+            // console.log(res[0].id)
+            setArtistId(res[0].id)
+            setArtistName(res[0].name)
+        }
     }
 
+    const requestDiscography = async (artistId) => {
+        const response = await fetch(`${baseUrl}/music/discography/${artistId}`);
+        if (response.ok) {
+            const res = await response.json();
+            // console.log(res)
+            setDisc(res);
+        }
+    }
 
-    // if (!validPath) {
-    //     return <Redirect to="/404"/>
-    // }
+    useEffect(() => {
+        checkArtist(artistTerm);
+    }, [])
+
+    useEffect(() => {
+        requestDiscography(artistId)
+    }, [artistId])
+
+    if (!validPath && loaded) {
+        // return <TheEnd />;
+    }
+
     return (
         <>
         <div className="musicpage-container">
@@ -48,30 +64,19 @@ export default ({ type }) => {
             </div>
             <div className="musicpage__main">
                 <div className="musicpage__main--left">
-                    <div className="ap--player-songs">
-                        <MusicPlayer />
-                        <Songlist />
-                    </div>
-                    <div className="ap--art-fans">
-                        <div className="ap-art asdf">
-                            todo: album art
-                        </div>
-                        <div>
-                            todo: fan counter or display fans as grid
-                        </div>
-                    </div>
+                    {(type === 'album')
+                        ? <PlayerLeft artist={artistTerm} album={albumTerm}/>
+                        : <ArtistLeft />}
                 </div>
                 <div className="musicpage__main--right">
                     <div className="ap-avatar">artist pic</div>
-                    artist name
+                        <h3>{artistName}</h3>
                     <button className="follow-button">FOLLOW</button>
-                    <div>small blurb idk wat yet</div>
+                    <div>bio</div>
                     <div>
                         discography
                         <ul>
-                            <li>album</li>
-                            <li>album</li>
-                            <li>album</li>
+                            {disc}
                         </ul>
                     </div>
                 </div>

@@ -94,7 +94,7 @@ button, input {
 
 /* HEADER STYLES */
 .header {
-    width: 1500px;
+    width: 1400px;
     margin: 0 auto;
     display: flex;
     height: 55px;
@@ -105,13 +105,13 @@ button, input {
 
 .header__left {
     display: flex;
-    padding-left: 60px;
+    padding-left: 35px;
     align-items: center;
 }
 
 .header__right {
     display: flex;
-    padding-right: 60px;
+    padding-right: 35px;
     align-items: center;
     font-weight: 600;
 }
@@ -405,8 +405,9 @@ button, input {
 
 /* TESTING */
 .asdf {
-    background-color:
+    background-color: mediumturquoise;
 }
+
 .musicpage-container {
     width: 975px;
     align-self: center;

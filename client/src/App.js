@@ -70,11 +70,11 @@ const App = () => {
           />
           <Route
             exact
-            path="/:artist"
+            path="/:artistTerm"
             render={props => <MusicPage type="artist"/>}
           />
           <Route
-            path="/:artist/:album"
+            path="/:artistTerm/:albumTerm"
             render={props => <MusicPage type="album" />}
           />
           <Route
