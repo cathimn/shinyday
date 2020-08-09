@@ -48,9 +48,8 @@ router.get('/:artistTerm', asyncHandler(async (req, res) => {
         name = name.replace(regex, "");
         return (name === artistTerm) ? name : null;
     })
-    console.log(matches)
     if (matches.length > 0) {
-        res.json(matches);
+        res.json(...matches);
     } else {
         res.json(false);
     }

@@ -5,7 +5,7 @@ import Tracklist from './Tracklist';
 
 import { baseUrl, bucketUrl } from '../config';
 
-export default ({ artist, album }) => {
+export default ({ artist, album, artistName, albumName }) => {
     const [songlistUrls, setSonglistUrls] = useState([]);
     const [songlistNames, setSonglistNames] = useState([]);
     const [currentSongIdx, setCurrentSongIdx] = useState(0);
@@ -48,9 +48,14 @@ export default ({ artist, album }) => {
     return (
         <>
             <div className="ap--player-songs">
+                <div className="current-album">
+                    <h2>{albumName}</h2>
+                    <div>by <a href={`/${artist}`}>{artistName}</a></div>
+                </div>
                 <MusicPlayer
                     currentSongUrl={currentSongUrl}
-                    currentSongName={currentSongName} />
+                    currentSongName={currentSongName}
+                     />
                 <Tracklist
                     setCurrentSongIdx={setCurrentSongIdx}
                     setCurrentSongName={setCurrentSongName}
@@ -60,7 +65,9 @@ export default ({ artist, album }) => {
             </div>
             <div className="ap--art-fans">
                 <div className="ap-art asdf">
-                    todo: album art
+                    <img src={`${bucketUrl}/artists/${artist}/${album}/art.jpg`}
+                        className="large-cover"
+                        alt="album art" />
                             </div>
                 <div>
                     todo: fan counter or display fans as grid

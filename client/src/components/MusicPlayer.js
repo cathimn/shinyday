@@ -6,14 +6,14 @@ export default ({ currentSongUrl, currentSongName }) => {
     useEffect(() => {
         load();
     }, [currentSongUrl, currentSongName])
-
+    
     const load = () => {
         player.current.load();
     }
 
     return (
         <div className="ap--musicplayer">
-            <h3>{currentSongName}</h3>
+            <span>{currentSongName}</span>
             <div className='player-wrapper'>
                 <audio controls ref={player}>
                     <source src={currentSongUrl} type="audio/mp3" />
