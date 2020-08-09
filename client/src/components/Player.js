@@ -5,7 +5,7 @@ import Tracklist from './Tracklist';
 
 import { baseUrl, bucketUrl } from '../config';
 
-export default ({ artist, album, artistName, albumName }) => {
+export default ({ artist, album, artistName, albumName, follows }) => {
     const [songlistUrls, setSonglistUrls] = useState([]);
     const [songlistNames, setSonglistNames] = useState([]);
     const [currentSongIdx, setCurrentSongIdx] = useState(0);
@@ -69,9 +69,9 @@ export default ({ artist, album, artistName, albumName }) => {
                         className="large-cover"
                         alt="album art" />
                             </div>
-                <div>
-                    todo: fan counter or display fans as grid
-                            </div>
+                    <div>
+                        todo: users that follow this
+                    </div>
             </div>
         </>
     );

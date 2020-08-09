@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler');
 const { check, validationResult } = require('express-validator');
 
 const UserRepository = require('../../db/user-repository');
+const { Artist } = require('../../db/models')
 const { authenticated, generateToken } = require('./security-utils');
 
 const router = express.Router();
@@ -37,11 +38,30 @@ router.post('/', email, username, password, asyncHandler(async (req, res) => {
     res.json({ token, user: user.toSafeObject() });
 }));
 
-router.get('/me', authenticated, function (req, res) {
+// router.get('/me', authenticated, function (req, res) {
+//     res.json({
+//         email: req.user.email,
+//         username: req.user.username,
+//     });
+// });
+
+router.get('/me', authenticated, asyncHandler(async (req, res) => {
+    const checkArtist = await Artist.findOne({
+        where: {
+            user_id: req.user.id
+        },
+        attributes: ['id', 'artist_name']
+    })
+
+    // console.log(checkArtist)
+
     res.json({
         email: req.user.email,
         username: req.user.username,
-    });
-});
+        checkArtist: checkArtist,
+    })
+}));
+
+
 
 module.exports = router;

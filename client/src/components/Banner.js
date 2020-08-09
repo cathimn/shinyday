@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 export default () => {
 
@@ -7,15 +7,27 @@ export default () => {
         <div className="grey">
             <div className="banner">
                 <div className="banner__left">
-                    {/* set this to be a feature on any random album!!! */}
-                    <a href="/monplaisir/good">go to a test album</a><br/>
-                    <a to="/monplaisir">artist page</a><br/>
-                    <a to="/nonsense">bad link</a>
+                    <div className="banner_left-blurb">
+                        Weekly Feature: Monplaisir
+
+                    </div>
                 </div>
                 <div className="banner__right">
-                    <div className="banner__right mini--first">:o)</div>
-                    <div className="banner__right mini--second">:o(</div>
-                    <div className="banner__right mini--third">;o)</div>
+                    <div className="banner__right mini--first">
+                        <div className="banner__right-blurb">
+                            first blub
+                        </div>
+                    </div>
+                    <div className="banner__right mini--second">
+                        <div className="banner__right-blurb">
+                            2nd blub
+                        </div>
+                    </div>
+                    <div className="banner__right mini--third">
+                        <div className="banner__right-blurb">
+                            third blubb
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

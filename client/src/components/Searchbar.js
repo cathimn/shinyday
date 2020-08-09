@@ -68,7 +68,6 @@ const ArtistResult = ({result}) => {
 }
 
 const Results = ({ list }) => {
-    const [artistPath, setArtistPath] = useState();
 
     return (
         <div className="search-results">

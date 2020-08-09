@@ -5,30 +5,7 @@ import { baseUrl, bucketUrl } from './config';
 
 import Player from './components/Player';
 import ArtistLeft from './components/ArtistLeft';
-
-const Discography = ({disc, artistTerm}) => {
-    const DiscCard = ({album}) => {
-        const albumTerm = album.toLowerCase().replace(/[\s|\W]/gm, "");
-        return (
-            <a href={`/${artistTerm}/${albumTerm}`}>
-                <img src={`${bucketUrl}/artists/${artistTerm}/${albumTerm}/art.jpg`}
-                    className="side-discography__album-art"/>
-                <li key={album} className="side-discography__album-name">
-                    {album}
-                </li>
-            </a>
-        );
-    }
-    return (
-        <ul className="side-discography">
-            <span>discography</span>
-            {disc
-                ? disc.map(ele => <DiscCard album={ele}/>)
-                : null
-            }
-        </ul>
-    )
-}
+import Discography from './components/Discography';
 
 export default ({ type }) => {
     const { artistTerm, albumTerm } = useParams();
@@ -36,6 +13,7 @@ export default ({ type }) => {
     const [artistName, setArtistName] = useState();
     const [albumName, setAlbumName] = useState();
     const [disc, setDisc] = useState();
+    const [follows, setFollows] = useState();
 
     const checkArtist = async (term) => {
         const response = await fetch(`${baseUrl}/music/${artistTerm}`);
@@ -54,12 +32,23 @@ export default ({ type }) => {
         }
     }
 
+    // const requestFollows = async (artistId) => {
+    //     const response = await fetch(`${baseUrl}/follows/${artistId}`);
+    //     if (response.ok) {
+    //         const res = await response.json();
+    //         setFollows(res);
+    //     }
+    // }
+
     useEffect(() => {
         checkArtist(artistTerm);
     }, [])
 
     useEffect(() => {
-        if (artistId) requestDiscography(artistId)
+        if (artistId) {
+            requestDiscography(artistId);
+            // requestFollows(artistId)
+        }
     }, [artistId])
 
     useEffect(() => {
@@ -86,7 +75,8 @@ export default ({ type }) => {
                             artist={artistTerm}
                             album={albumTerm}
                             artistName={artistName}
-                            albumName={albumName} />
+                            albumName={albumName}
+                            follows={follows} />
                         : <ArtistLeft
                             artist={artistTerm}
                             disc={disc} />}
@@ -98,7 +88,7 @@ export default ({ type }) => {
                             alt="artist pic" />
                     </div>
                         <h3>{artistName}</h3>
-                    <button className="follow-button">Follow</button>
+                        <button className="follow-button">Follow</button>
                     <div>
                         {(type === 'artist')
                             ? null

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { HeartOutlined } from '@ant-design/icons'
 import { bucketUrl, baseUrl } from '../config';
 
-const AvatarMenu = ({ setNeedLogin, toggleMenu }) => {
+const AvatarMenu = ({ artistAccount, setNeedLogin, toggleMenu }) => {
     const logout = async (e) => {
         const authToken = window.localStorage.getItem("shinyday_session");
         console.log(authToken)
@@ -18,14 +18,16 @@ const AvatarMenu = ({ setNeedLogin, toggleMenu }) => {
     }
     return (
         <div className="module__menu" onMouseLeave={toggleMenu}>
-            <div className="module__menu--link">profile</div>
+            <div className="module__menu--link">
+                profile
+            </div>
             <div className="module__menu--link"
                 onClick={logout}>logout</div>
         </div>
     )
 }
 
-export default ({ setNeedLogin, username }) => {
+export default ({ artistAccount, setNeedLogin, username }) => {
     const [menuDisplay, setMenuDisplay] = useState(false);
 
     const toggleMenu = e => {
@@ -35,7 +37,22 @@ export default ({ setNeedLogin, username }) => {
     return (
         <>
             <div className="module">
-                <HeartOutlined className="module__heart" />
+                { artistAccount.id
+                    ? (
+                        <div>
+                            <a href="/new">
+                                add an album
+                            </a>
+                        </div>
+                    ) 
+                    : (
+                        <div>
+                            <a href={`/profile/${username}`}>
+                                <HeartOutlined className="module__heart" />
+                            </a>
+                        </div>
+                    )
+                }
             </div>
             <div className="module__avatar-container">
                 <div className="module__avatar" onMouseOver={toggleMenu} >
