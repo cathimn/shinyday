@@ -6,6 +6,7 @@ const LoginPanel = ({ needLogin, updateToken }) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [authToken, setAuthToken] = useState(localStorage.getItem('shinyday_session'));
+    const [errors, setErrors] = useState();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,10 +16,18 @@ const LoginPanel = ({ needLogin, updateToken }) => {
             body: JSON.stringify({ login, password }),
         });
 
+        if (!login || !password) {
+            setErrors('Do not leave any fields empty.')
+            return;
+        }
+
         if (response.ok) {
             const { token } = await response.json();
             updateToken(token);
             setAuthToken(token);
+        } else {
+            const error = await response.json();
+            setErrors(error.message);
         }
     };
 
@@ -44,6 +53,9 @@ const LoginPanel = ({ needLogin, updateToken }) => {
         <div className="center">
             <div className="divider" />
             <h1>log in</h1>
+            <div>
+                    {errors ? <span className="errors">{errors} Please try again.</span> : null}
+                </div>
             <form onSubmit={handleSubmit} className="login__form">
                 <div>
                     <label>username / email</label>
@@ -60,7 +72,7 @@ const LoginPanel = ({ needLogin, updateToken }) => {
                 <button type="submit">log in</button>
             </form>
             <div className="login__redirects">
-                Use a <Link to="/login" onClick={demo}>demo account</Link> as a fan.
+                <Link to="/login" onClick={demo}>Click here</Link> to use a fan's demo account.
                 <br />
                 Want to sign up? <Link to="/signup">Sign up here!</Link>
             </div>

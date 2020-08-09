@@ -6,9 +6,13 @@ export default ({ currentSongUrl, currentSongName }) => {
     useEffect(() => {
         load();
     }, [currentSongUrl, currentSongName])
-    
+
     const load = () => {
         player.current.load();
+    }
+
+    const play = () => {
+        player.current.play();
     }
 
     return (
@@ -19,6 +23,7 @@ export default ({ currentSongUrl, currentSongName }) => {
                     <source src={currentSongUrl} type="audio/mp3" />
                 </audio>
             </div>
+            <button onClick={play}>PLAY</button>
         </div>
     )
 }

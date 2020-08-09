@@ -7,6 +7,7 @@ import Login from './Login';
 import Main from './Main';
 import Signup from './Signup';
 import MusicPage from './MusicPage';
+import Profile from './Profile';
 import TheEnd from './TheEnd'
 // import SignupArtist from './SignupArtist';
 
@@ -67,6 +68,9 @@ const App = () => {
           <Route
             path='/signup'
             render={props => <Signup {...props} needLogin={needLogin} updateToken={updateToken} />}
+          />
+          <Route to="/profile/:user"
+            render={props => <Profile />}
           />
           <Route
             exact

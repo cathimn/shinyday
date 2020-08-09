@@ -90,6 +90,11 @@ button, input {
     text-decoration: underline lightpink;
 }
 
+.errors {
+    color: maroon;
+    font-size: 14px;
+}
+
 /* HEADER STYLES */
 .header {
     width: 1400px;
@@ -491,13 +496,14 @@ button, input {
 }
 
 .follow-button {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
+    text-decoration: underline;
     color: deeppink;
     width: auto;
     height: 30px;
     border-radius: 5px;
-    border: 2px solid darkgrey;
+    border: 1px solid darkgrey;
     background-color: transparent;
 }
 

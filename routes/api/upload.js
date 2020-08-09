@@ -33,4 +33,6 @@ router.post('/users/avatar', fileUpload("users/").single("file"), (req, res) => 
     return res.json({ imageUrl: req.file.location, message: "Success!" })
 });
 
+router.post('/artist/album', fileUpload("").single("file"))
+
 module.exports = router;

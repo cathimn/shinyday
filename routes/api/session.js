@@ -12,7 +12,7 @@ const login =
         .not().isEmpty()
         .withMessage('Please provide a username/email.');
 
-const password = 
+const password =
     check('password')
         .not().isEmpty()
         .withMessage('Please provide a password.');
@@ -24,7 +24,7 @@ router.put('/', [login, password], asyncHandler(async (req, res, next) => {
     }
 
     const { login, password } = req.body;
-    
+
     let user;
     if (login.includes('@')) {
         user = await UserRepository.findByEmail(login);

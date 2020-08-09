@@ -8,9 +8,9 @@ export default () => {
             <div className="banner">
                 <div className="banner__left">
                     {/* set this to be a feature on any random album!!! */}
-                    <Link to="/monplaisir/good">go to a test album</Link><br/>
-                    <Link to="/monplaisir">artist page</Link><br/>
-                    <Link to="/nonsense">bad link</Link>
+                    <a href="/monplaisir/good">go to a test album</a><br/>
+                    <a to="/monplaisir">artist page</a><br/>
+                    <a to="/nonsense">bad link</a>
                 </div>
                 <div className="banner__right">
                     <div className="banner__right mini--first">:o)</div>
