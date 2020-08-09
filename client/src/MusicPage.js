@@ -4,23 +4,26 @@ import { useParams } from 'react-router-dom'
 import { baseUrl, bucketUrl } from './config';
 
 import Player from './components/Player';
-
-const ArtistLeft = () => {
-
-    return (
-        <>
-            <div>
-                discography for the artist
-            </div>
-        </>
-    );
-}
+import ArtistLeft from './components/ArtistLeft';
 
 const Discography = ({disc, artistTerm}) => {
+    const DiscCard = ({album}) => {
+        const albumTerm = album.toLowerCase().replace(/[\s|\W]/gm, "");
+        return (
+            <a href={`/${artistTerm}/${albumTerm}`}>
+                <img src={`${bucketUrl}/artists/${artistTerm}/${albumTerm}/art.jpg`}
+                    className="side-discography__album-art"/>
+                <li key={album} className="side-discography__album-name">
+                    {album}
+                </li>
+            </a>
+        );
+    }
     return (
-        <ul>
+        <ul className="side-discography">
+            <span>discography</span>
             {disc
-                ? disc.map(ele => <li key={ele}>{ele}</li>)
+                ? disc.map(ele => <DiscCard album={ele}/>)
                 : null
             }
         </ul>
@@ -84,18 +87,26 @@ export default ({ type }) => {
                             album={albumTerm}
                             artistName={artistName}
                             albumName={albumName} />
-                        : <ArtistLeft />}
+                        : <ArtistLeft
+                            artist={artistTerm}
+                            disc={disc} />}
                 </div>
                 <div className="musicpage__main--right">
-                    <div className="ap-avatar">artist pic</div>
+                    <div className="ap-avatar">
+                        <img src={`${bucketUrl}/artists/${artistTerm}/avatar.jpg`}
+                            className="artist-avatar"
+                            alt="artist pic" />
+                    </div>
                         <h3>{artistName}</h3>
                     <button className="follow-button">Follow</button>
-                    <div>bio</div>
                     <div>
-                        <Discography
-                            disc={disc}
-                            artistTerm={artistTerm}
+                        {(type === 'artist')
+                            ? null
+                            : <Discography
+                                disc={disc}
+                                artistTerm={artistTerm}
                             />
+                        }
                     </div>
                 </div>
             </div>
