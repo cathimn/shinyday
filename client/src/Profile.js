@@ -4,11 +4,27 @@ import { useParams } from 'react-router-dom';
 import { baseUrl, bucketUrl } from './config';
 
 const FollowCards = ({artistNames, artistIds}) => {
-
+    const makeCards = (artistNames, artistIds) => {
+        const temp = [];
+        for(let i = 0; i < artistIds.length; i++) {
+            temp.push(
+                <div className="follow-card">
+                    <img src={`${bucketUrl}/artists/${artistNames[i].toLowerCase().replace(/[\s|\W]/gm,"")}/avatar.jpg`}
+                        alt="artist art"/>
+                    <div>
+                        <a href={`/${artistNames[i].toLowerCase().replace(/[\s|\W]/gm,"")}`}>
+                            {artistNames[i]}
+                        </a>
+                    </div>
+                </div>
+            )
+        }
+        return (temp)
+    }
 
     return (
         <div className="follow-cards-container">
-            {artistNames}
+            {makeCards(artistNames, artistIds)}
         </div>
     )
 }
@@ -56,7 +72,7 @@ export default ({ needLogin, loggedInUser, artistAccount }) => {
 
     return (
         <>
-        <div className="profile__header">header</div>
+        <div className="profile__header" />
         <div className="profile-container">
             <div className="profile__fan-bio">
                 <img src={`${bucketUrl}/users/${username}.png`} alt="avatar" width="150px"/>
@@ -67,12 +83,11 @@ export default ({ needLogin, loggedInUser, artistAccount }) => {
                     collection
                 </div>
                 <div>
-                    following
-                    <span>{artistNames.length}</span>
+                    following <span>{artistNames.length}</span>
                 </div>
             </div>
             <div className="profile__collection-box">
-                
+
             </div>
             <div className="profile__following-box">
                 <FollowCards artistNames={artistNames} artistIds={artistIds}/>

@@ -5,7 +5,7 @@ import Tracklist from './Tracklist';
 
 import { baseUrl, bucketUrl } from '../config';
 
-export default ({ artist, album, artistName, albumName, follows }) => {
+export default ({ artist, album, artistName, albumName }) => {
     const [songlistUrls, setSonglistUrls] = useState([]);
     const [songlistNames, setSonglistNames] = useState([]);
     const [currentSongIdx, setCurrentSongIdx] = useState(0);
@@ -70,7 +70,7 @@ export default ({ artist, album, artistName, albumName, follows }) => {
                         alt="album art" />
                             </div>
                     <div>
-                        todo: users that follow this
+
                     </div>
             </div>
         </>

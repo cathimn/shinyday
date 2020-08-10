@@ -98,7 +98,7 @@ const App = () => {
                 loggedInUser={username}
                 artistAccount={artistAccount}/>}
           />
-          <Route 
+          <Route
             path='/profile/:username'
             render={props=>
               <Profile {...props}
@@ -109,12 +109,16 @@ const App = () => {
             exact
             path="/:artistTerm"
             render={props =>
-              <MusicPage type="artist"/>}
+              <MusicPage
+                type="artist"
+                username={username}/>}
           />
           <Route
             path="/:artistTerm/:albumTerm"
             render={props =>
-              <MusicPage type="album" />}
+              <MusicPage
+                type="album"
+                username={username}/>}
           />
           <Route
             exact

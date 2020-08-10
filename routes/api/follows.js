@@ -3,40 +3,72 @@ const asyncHandler = require('express-async-handler');
 
 const { User_Follow, User, Artist } = require('../../db/models');
 
+router.post('/amfollowing', asyncHandler(async (req, res) => {
+    const { username, artist_id } = req.body;
+
+    const check = await Artist.findOne({
+        include: [{model: User, attributes: ["username"]}],
+        where: {
+            id: artist_id,
+        },
+        attributes: []
+    });
+    let followStatus = false;
+    for(let i = 0; i < check.Users.length; i++) {
+        if (check.Users[i].username === username) {
+            followStatus = true;
+            break;
+        }
+    }
+    res.json(followStatus);
+}));
 
 router.post('/new', asyncHandler(async (req, res) => {
-    const { user_id, artist_id } = req.body;
+    const { username, artist_id } = req.body;
 
+    const user = await User.findOne({
+        where: {
+            username
+        }
+    });
+
+    const user_id = await user.id;
     const newFollow = User_Follow.build({
-        user_id,
-        artist_id,
+        "artist_id": artist_id,
+        "user_id": user_id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
     })
 
     await newFollow.save();
+
+    res.json(newFollow)
 }));
 
-router.post('/remove', asyncHandler(async (req, res) => {
-    const { user_id, aritst_id } = req.body;
+router.delete('/', asyncHandler(async (req, res) => {
+    const { username, artist_id } = req.body;
 
-    const currentFollow = await User_Follow.findOne({
+    const check = await Artist.findOne({
+        include: [{model: User, attributes: ["username"]}],
         where: {
+            id: artist_id,
+        },
+        attributes: []
+    });
+
+    const user_id = check.Users.filter(ele => ele.username === username)[0].User_Follow.user_id;
+
+    const entry = await User_Follow.findOne({
+        where: {
+            artist_id,
             user_id,
-            aritst_id,
         }
     })
 
+    await entry.destroy();
+
+    res.json(":o(")
 }))
-
-router.get('/:artistId', asyncHandler(async (req, res) => {
-    const follows = await User_Follow.findOne({
-        where: {
-            artist_id: req.params.artistId
-        }
-    })
-
-    res.json(follows.length);
-}));
-
 
 router.get('/:username', asyncHandler(async (req, res) => {
     const {username} = req.params;
