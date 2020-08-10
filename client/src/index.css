@@ -747,3 +747,7 @@ audio {
 *:focus, textarea:focus, input:focus {
     outline: none;
 }
+
+a {
+    color: black
+}
