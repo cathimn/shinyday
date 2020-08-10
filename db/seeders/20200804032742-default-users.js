@@ -9,7 +9,7 @@ function createPassword() {
 }
 
 function createSecretPassword() {
-  return bcrypt.hashSync(secretPass)
+  return bcrypt.hashSync('test')
 }
 
 function r(o) {
