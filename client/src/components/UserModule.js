@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { HeartOutlined } from '@ant-design/icons'
 import { bucketUrl, baseUrl } from '../config';
 
-const AvatarMenu = ({ artistAccount, setNeedLogin, toggleMenu }) => {
+const AvatarMenu = ({ username, setNeedLogin, toggleMenu }) => {
     const logout = async (e) => {
         const authToken = window.localStorage.getItem("shinyday_session");
         console.log(authToken)
@@ -18,9 +18,11 @@ const AvatarMenu = ({ artistAccount, setNeedLogin, toggleMenu }) => {
     }
     return (
         <div className="module__menu" onMouseLeave={toggleMenu}>
+            <a href={`/profile/${username}`}>
             <div className="module__menu--link">
                 profile
             </div>
+            </a>
             <div className="module__menu--link"
                 onClick={logout}>logout</div>
         </div>
@@ -44,7 +46,7 @@ export default ({ artistAccount, setNeedLogin, username }) => {
                                 add an album
                             </a>
                         </div>
-                    ) 
+                    )
                     : (
                         <div>
                             <a href={`/profile/${username}`}>
@@ -58,7 +60,7 @@ export default ({ artistAccount, setNeedLogin, username }) => {
                 <div className="module__avatar" onMouseOver={toggleMenu} >
                     <img src={`${bucketUrl}/users/${username}.png`} alt="avatar"></img>
                 </div>
-                {menuDisplay ? <AvatarMenu setNeedLogin={setNeedLogin} toggleMenu={toggleMenu}/> : null }
+                {menuDisplay ? <AvatarMenu username={username} setNeedLogin={setNeedLogin} toggleMenu={toggleMenu}/> : null }
             </div>
         </>
     );

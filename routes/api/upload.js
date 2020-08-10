@@ -29,7 +29,7 @@ const fileUpload = function upload(directory) {
     })
 }
 
-router.post('/users/avatar', fileUpload("users/").single("file"), (req, res) => {
+router.post('/users/avatar/:username:', fileUpload("users/").single("file"), (req, res) => {
     return res.json({ imageUrl: req.file.location, message: "Success!" })
 });
 

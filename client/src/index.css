@@ -132,10 +132,11 @@ button, input {
 }
 
 .logo {
-    font-stretch: expanded;
     color: black;
     align-self: center;
     font-weight: 600;
+    font-size: 16px;
+    margin-top: 4px;
 }
 
 .search-container {
@@ -286,7 +287,7 @@ button, input {
     flex-grow: 1;
     /* background-color: rgba(255, 160, 122, 0.459); */
     /* background-blend-mode: multiply; */
-    background-image: url(http://shinyday.s3.us-east-2.amazonaws.com/artists/blahblahblah/avatar.jpg);
+    background-image: url(http://shinyday.s3.us-east-2.amazonaws.com/artists/blahblahblah/header.jpg);
     background-size: cover;
 }
 
@@ -294,7 +295,7 @@ button, input {
     flex-grow: 1;
     /* background-color: rgba(255, 182, 193, 0.479);
     background-blend-mode: multiply; */
-    background-image: url(http://shinyday.s3.us-east-2.amazonaws.com/artists/monplaisir/heatofthesummer/art.jpg);
+    background-image: url(http://shinyday.s3.us-east-2.amazonaws.com/artists/monplaisir/header.jpg);
     background-position: center;
     background-size: cover;
     border-top: 2px solid white;
@@ -372,7 +373,15 @@ button, input {
 
 .latest--card-image {
     height: 200px;
-    background-color: olivedrab;
+    /* background-color: olivedrab; */
+}
+
+.latest--card-image > img {
+    box-sizing: border-box;
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border: 1px solid rgba(59, 59, 59, 0.123);
 }
 
 .latest--card-blurb {
@@ -479,6 +488,27 @@ button, input {
 .ap--player-songs {
     flex-basis: 70%;
     margin-right: 25px;
+}
+
+.ap--songlist {
+    display: flex;
+    flex-direction: column;
+}
+
+.ap--musicplayer {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+#currently-playing {
+    height: 40px;
+    font-size: 12px;
+}
+
+audio {
+    height: 30px;
+    width: 100%;
+    margin-bottom: 5px;
 }
 
 .current-album > h2 {
@@ -625,7 +655,6 @@ button, input {
     margin-top: 25px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 .follow-card {
@@ -646,6 +675,73 @@ button, input {
 .follow-card > div {
     align-self: center;
     padding-left: 10px;
+}
+
+.new-album__container {
+    display: flex;
+    flex-direction: column;
+    width: 975px;
+    margin: auto;
+}
+
+.new-album__container > form {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: auto;
+}
+
+#change-avatar {
+    position: absolute;
+    width: 152px;
+    height: 152px;
+    background-color: rgba(0, 0, 0, 0.226);
+    font-size: 60px;
+    color: white;
+
+}
+
+.hidden {
+    display: none;
+}
+
+.play-button {
+    width: 56px;
+    height: 52px;
+}
+
+.track-item {
+    text-decoration: underline;
+}
+
+.track-item-number {
+    display: none;
+}
+
+.track-item-name {
+    background-color: transparent;
+    font-size: 12px;
+    margin: 4px 0px;
+}
+
+.track-item-name:hover {
+    cursor: pointer;
+}
+
+.track-item:hover {
+    background-color: lavenderblush;
+}
+
+.ap--songlist > h3 {
+    margin: 0;
+}
+
+.mini-play-button {
+    color: pink;
+    border: 1px solid pink;
+    padding: 2px 4px;
+    border-radius: 2px;
+    margin-right: 5px;
 }
 
 *:focus, textarea:focus, input:focus {

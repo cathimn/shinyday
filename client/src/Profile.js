@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { baseUrl, bucketUrl } from './config';
@@ -30,15 +30,18 @@ const FollowCards = ({artistNames, artistIds}) => {
 }
 
 export default ({ needLogin, loggedInUser, artistAccount }) => {
+    const avatarRef = useRef();
+    const avatarFormRef = useRef();
     const { username } = useParams();
     const [editMode, setEditMode] = useState(false);
+    const [allowEditMode, setAllowEditMode] = useState(false);
     const [following, setFollowing] = useState([]);
     const [artistNames, setArtistNames] = useState([]);
     const [artistIds, setArtistIds] = useState([]);
 
     useEffect(() => {
         if (username === loggedInUser) {
-            setEditMode(true);
+            setAllowEditMode(true);
         }
     }, [username, loggedInUser])
 
@@ -49,8 +52,6 @@ export default ({ needLogin, loggedInUser, artistAccount }) => {
             if (response.ok) {
                 const res = await response.json();
                 setFollowing(res);
-
-                console.log(res);
             }
         }
 
@@ -70,18 +71,39 @@ export default ({ needLogin, loggedInUser, artistAccount }) => {
         setArtistIds(tempIds);
     }, [following])
 
+    const changeEditMode = () => {
+        setEditMode(!editMode);
+    }
+
+    const updateAvatar = async () => {
+        avatarRef.current.click();
+    }
+
+    const submitAvatar = async () => {
+        // console.log(avatarRef)
+        avatarFormRef.current.submit();
+    }
+
     return (
         <>
         <div className="profile__header" />
         <div className="profile-container">
             <div className="profile__fan-bio">
                 <img src={`${bucketUrl}/users/${username}.png`} alt="avatar" width="150px"/>
+                {/* { editMode ? <button onClick={updateAvatar} id="change-avatar">+</button> : null} */}
                 <h2>{username}</h2>
+                <div>
+                    {/* { allowEditMode && !editMode ? <button onClick={changeEditMode}>edit profile</button> : null}
+                    { editMode ? <button onClick={submitAvatar}>finish</button> : null} */}
+                </div>
+                {/* <form className="hidden" action={`${baseUrl}/upload/users/${username}`} ref={avatarFormRef}>
+                    <input type="file" id="avatar" className="hidden" name="avatar" accept="image/png" ref={avatarRef} />
+                </form> */}
             </div>
             <div className="profile__tabs">
-                <div>
+                {/* <div>
                     collection
-                </div>
+                </div> */}
                 <div>
                     following <span>{artistNames.length}</span>
                 </div>

@@ -6,45 +6,7 @@ import { baseUrl, bucketUrl } from './config';
 import Player from './components/Player';
 import ArtistLeft from './components/ArtistLeft';
 import Discography from './components/Discography';
-
-const FollowButton = ({ username, artistId, followStatus}) => {
-
-
-    const follow = async (username, artistId) => {
-        await fetch(`${baseUrl}/follows/new`, {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "username": username,
-                "artist_id": artistId
-            })
-        })
-        window.location.reload(false);
-    }
-
-    const unfollow = async (username, artistId) => {
-        await fetch(`${baseUrl}/follows`, {
-            method: 'delete',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "username": username,
-                "artist_id": artistId
-            })
-        })
-        window.location.reload(false);
-    }
-
-    if (followStatus) {
-        return (
-            <button className="follow-button" onClick={() => unfollow(username, artistId)}>Following</button>
-        )
-    } else {
-        return (
-            <button className="follow-button" onClick={() => follow(username, artistId)}>Follow</button>
-        )
-    }
-
-}
+import FollowButton from './components/FollowButton';
 
 export default ({ type, username }) => {
     const { artistTerm, albumTerm } = useParams();

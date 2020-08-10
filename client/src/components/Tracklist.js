@@ -35,7 +35,7 @@ export default ({ setCurrentSongIdx, setCurrentSongUrl, setCurrentSongName, song
                         {trackNums[i]}
                     </span>
                     <button value={i} onClick={updateCurrentSong} className="track-item-name">
-                        {names[i]}
+                        <span class="mini-play-button">▶</span>{names[i]}
                     </button>
                 </div>
             );
@@ -45,6 +45,7 @@ export default ({ setCurrentSongIdx, setCurrentSongUrl, setCurrentSongName, song
 
     return (
         <div className="ap--songlist">
+            <h3>tracklist</h3>
             {renderLi(trackNums, names)}
         </div>
     )

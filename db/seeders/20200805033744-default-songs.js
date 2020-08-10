@@ -45,9 +45,9 @@ module.exports = {
       r({ track_num: 5, name: 'Cold Summer Landscape', album_id: 9 }),
       r({ track_num: 6, name: 'Gean', album_id: 9 }),
       r({ track_num: 1, name: 'Everything\'s Gone', album_id: 1 }),
-      r({ track_num: 1, name: 'There are no answers', album_id: 12 }),
-      r({ track_num: 1, name: 'I\'m putting my house on wheels', album_id: 12 }),
-      r({ track_num: 1, name: 'You\'re not a bird', album_id: 12 }),
+      r({ track_num: 2, name: 'There are no answers', album_id: 12 }),
+      r({ track_num: 3, name: 'I\'m putting my house on wheels', album_id: 12 }),
+      r({ track_num: 4, name: 'You\'re not a bird', album_id: 12 }),
 
     ])
   },
