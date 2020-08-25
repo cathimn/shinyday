@@ -10,11 +10,10 @@ import FollowButton from './components/FollowButton';
 
 export default ({ type, username }) => {
     const { artistTerm, albumTerm } = useParams();
-    const [artistId, setArtistId] = useState();
-    const [artistName, setArtistName] = useState();
-    const [albumName, setAlbumName] = useState();
-    const [disc, setDisc] = useState();
-    const [followStatus, setFollowStatus] = useState(false);
+    const [ artistId, setArtistId ] = useState();
+    const [ artistName, setArtistName ] = useState();
+    const [ albumName, setAlbumName ] = useState();
+    const [ disc, setDisc ] = useState();
 
     const checkArtist = async (term) => {
         const response = await fetch(`${baseUrl}/music/${artistTerm}`);
@@ -30,21 +29,6 @@ export default ({ type, username }) => {
         if (response.ok) {
             const res = await response.json();
             setDisc(res);
-        }
-    }
-
-    const checkFollow = async (artistId, username) => {
-        const response = await fetch(`${baseUrl}/follows/amfollowing`, {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ "artist_id": artistId, username })
-        })
-
-        if (response.ok) {
-            let res = await response.json();
-            if (res) {
-                setFollowStatus(true);
-            }
         }
     }
 
@@ -66,12 +50,6 @@ export default ({ type, username }) => {
             setAlbumName(current[0])
         }
     }, [disc])
-
-    useEffect(() => {
-        if (artistId && username) {
-            checkFollow(artistId, username);
-        }
-    }, [artistId, username])
 
     return (
         <>
@@ -102,7 +80,6 @@ export default ({ type, username }) => {
                     </div>
                         <h3>{artistName}</h3>
                         <FollowButton
-                            followStatus={followStatus}
                             username={username}
                             artistId={artistId} />
                     <div>

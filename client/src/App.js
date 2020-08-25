@@ -9,41 +9,34 @@ import Signup from './Signup';
 import MusicPage from './MusicPage';
 import Profile from './Profile';
 import NewAlbum from './NewAlbum';
-// import TheEnd from './TheEnd'
-// import SignupArtist from './SignupArtist';
 
 import Header from './components/Header';
-// import Footer from './components/Footer';
 
 const App = () => {
   const authToken = window.localStorage.getItem('shinyday_session');
 
-  const [loaded, setLoaded] = useState(false);
-  const [token, setToken] = useState(authToken);
-  const [needLogin, setNeedLogin] = useState(!null);
-  const [username, setUsername] = useState('');
-  const [artistAccount, setArtistAccount] = useState({});
+  const [ loaded, setLoaded ] = useState(false);
+  const [ token, setToken ] = useState(authToken);
+  const [ needLogin, setNeedLogin ] = useState(!null);
+  const [ username, setUsername ] = useState('');
+  const [ artistAccount, setArtistAccount ] = useState({});
 
   const loadProfile = async authToken => {
-    try {
-      const response = await fetch(`${baseUrl}/user/me`, {
-        headers: { Authorization: `Bearer ${authToken}` }
-      });
+    const response = await fetch(`${baseUrl}/user/me`, {
+      headers: { Authorization: `Bearer ${authToken}` }
+    });
 
-      if (response.ok) {
-        const res = await response.json();
-        setNeedLogin(false);
-        setUsername(res.username);
+    if (response.ok) {
+      const res = await response.json();
+      setNeedLogin(false);
+      setUsername(res.username);
 
-        if (res.checkArtist !== null) {
-          setArtistAccount(res.checkArtist)
-        }
-      } else {
-        setNeedLogin(true);
-        window.localStorage.removeItem("shinyday_session")
+      if (res.checkArtist !== null) {
+        setArtistAccount(res.checkArtist)
       }
-    } catch (e) {
-      console.error(e)
+    } else {
+      setNeedLogin(true);
+      window.localStorage.removeItem("shinyday_session")
     }
   };
 
@@ -71,11 +64,6 @@ const App = () => {
         username={username} />
         <div className="container">
         <Switch>
-          {/* <Route
-            exact
-            path="/404"
-            render={props =>
-              <TheEnd />} /> */}
           <Route
             path='/login'
             render={props =>
@@ -129,10 +117,8 @@ const App = () => {
           <Route path="*" render={props => <div>erorrorororo</div>}></Route>
         </Switch>
         </div>
-      {/* <Footer /> */}
     </Router>
   );
 };
-
 
 export default App;

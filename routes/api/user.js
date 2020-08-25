@@ -53,8 +53,6 @@ router.get('/me', authenticated, asyncHandler(async (req, res) => {
         attributes: ['id', 'artist_name']
     })
 
-    // console.log(checkArtist)
-
     res.json({
         email: req.user.email,
         username: req.user.username,

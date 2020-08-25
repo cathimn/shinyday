@@ -27,12 +27,11 @@ router.post('/new', asyncHandler(async (req, res) => {
     const { username, artist_id } = req.body;
 
     const user = await User.findOne({
-        where: {
-            username
-        }
+        where: { username }
     });
 
     const user_id = await user.id;
+
     const newFollow = User_Follow.build({
         "artist_id": artist_id,
         "user_id": user_id,
@@ -50,9 +49,7 @@ router.delete('/', asyncHandler(async (req, res) => {
 
     const check = await Artist.findOne({
         include: [{model: User, attributes: ["username"]}],
-        where: {
-            id: artist_id,
-        },
+        where: { id: artist_id },
         attributes: []
     });
 
@@ -71,12 +68,10 @@ router.delete('/', asyncHandler(async (req, res) => {
 }))
 
 router.get('/:username', asyncHandler(async (req, res) => {
-    const {username} = req.params;
+    const { username } = req.params;
 
     const userId = await User.findOne({
-        where: {
-            "username": username
-        },
+        where: { "username": username },
         attributes: ["id"]
     })
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { HeartOutlined } from '@ant-design/icons'
 import { bucketUrl, baseUrl } from '../config';
+import _default from '@ant-design/icons/lib/icons/AimOutlined';
 
 const AvatarMenu = ({ username, setNeedLogin, toggleMenu }) => {
     const logout = async (e) => {
