@@ -7,6 +7,7 @@ const Signup = ({ needLogin, updateToken }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [authToken, setAuthToken] = useState(localStorage.getItem('shinyday_session'));
+    const [errors, setErrors] = useState();
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -16,10 +17,18 @@ const Signup = ({ needLogin, updateToken }) => {
             body: JSON.stringify({ username, email, password })
         })
 
+        if (!username || !password || !email ) {
+            setErrors('Do not leave any fields empty.')
+            return;
+        }
+
         if (response.ok) {
             const { token } = await response.json();
             updateToken(token);
             setAuthToken(token);
+        } else {
+            // const error = await response.json();
+            // setErrors(error.message)
         }
     };
 
@@ -43,6 +52,9 @@ const Signup = ({ needLogin, updateToken }) => {
         <div className="center">
             <div className="divider" />
             <h1>fan sign up</h1>
+            <div>
+                {errors ? <span className="errors">{errors} Please try again.</span> : null}
+            </div>
             <form onSubmit={handleSubmit} className="login__form">
                 <div>
                     <label>username</label>

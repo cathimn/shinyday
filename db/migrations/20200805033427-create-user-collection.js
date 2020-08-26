@@ -13,14 +13,16 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users'
-        }
+        },
+        unique: 'compositeIndex'
       },
       album_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: 'Albums'
-        }
+        },
+        unique: 'compositeIndex'
       },
       createdAt: {
         allowNull: false,

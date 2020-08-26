@@ -1,89 +1,60 @@
 import React, { useState, useEffect } from 'react';
-import { baseUrl } from '../config';
+import { Link } from 'react-router-dom';
+import { baseUrl, toLowerNoSpecial } from '../config';
 
-const AlbumResult = ({result}) => {
-    const [albumPath, setAlbumPath] = useState();
-    const [albumName, setAlbumName] = useState();
-    const [artistName, setArtistName] = useState();
-
-    useEffect(() => {
-        const translateToAlbumPath = (test) => {
-            setArtistName(test[1][1]);
-            setAlbumName(test[0][1]);
-
-            const artistPath = test[1][1].toLowerCase().replace(/[\s|\W]/gm,"");
-            const albumPath = test[0][1].toLowerCase().replace(/[\s|\W]/gm, "");
-            setAlbumPath(`/${artistPath}/${albumPath}`)
-        }
-
-        translateToAlbumPath(result)
-    }, [result])
+const AlbumResult = ({ result }) => {
+    const albumName = result[0][1];
+    const artistName = result[1][1];
+    const albumPath = `/${toLowerNoSpecial(artistName)}/${toLowerNoSpecial(albumName)}`;
 
     return (
-        <a href={albumPath}>
-            <div className="result-container" key={{albumName} + "xD"}>
-                <div className="img-placeholder">
+        <Link to={albumPath}>
+            <div className="result-container">
+                <div className="result-img-placeholder">
 
                 </div>
                 <ul className="result">
-                    <li key={"1" + {albumName}}
-                        className="search-matched-term">{albumName}</li>
-                    <li key={"2" + artistName}>by {artistName}</li>
-                    <li key={"5" + artistName}
-                        className="search-match-type">ALBUM</li>
+                    <li className="search-matched-term">{albumName}</li>
+                    <li>by {artistName}</li>
+                    <li>ALBUM</li>
                 </ul>
             </div>
-        </a>
-
-    )
-}
+        </Link>
+    );
+};
 
 const ArtistResult = ({result}) => {
-    const [artistPath, setArtistPath] = useState();
-    const [artistName, setArtistName] = useState();
-
-    useEffect(() => {
-        const translateToArtistPath = (test) => {
-            setArtistName(test[0][1]);
-
-            const artistPath = test[0][1].toLowerCase().replace(/[\s|\W]/gm, "");
-            setArtistPath(`/${artistPath}`);
-        }
-
-        translateToArtistPath(result);
-    }, [result])
+    const artistName = result[0][1];
 
     return (
-        <a href={artistPath}>
-            <div className="result-container" key={artistName + "xd"}>
+        <Link to={`/${toLowerNoSpecial(artistName)}`}>
+            <div className="result-container">
+                <div className="result-img-placeholder artist">
+                    
+                </div>
                 <ul className="result">
-                    <li key={"3" + artistName}
-                        className="search-matched-term">{artistName}</li>
-                    <li key={"4" + artistName}
-                        className="search-match-type">ARTIST</li>
+                    <li className="search-matched-term">{artistName}</li>
+                    <li>ARTIST</li>
                 </ul>
             </div>
-        </a>
-    )
-}
+        </Link>
+    );
+};
 
-const Results = ({ list }) => {
-
-    return (
-        <div className="search-results">
+const Results = ({ list }) => (
+    <div className="search-results">
         {Object.values(list).map(li => {
             const result = Object.entries(li)
 
             if (result.length > 1) {
-                return <AlbumResult result={result} />
+                return <AlbumResult key={result[0][1]} result={result} />
             } else {
-                return <ArtistResult result={result} />
+                return <ArtistResult key={result[0][1]} result={result} />
             }
         }
         )}
     </div>
-    );
-}
+);
 
 export default () => {
     const [query, setQuery] = useState('');
@@ -101,15 +72,10 @@ export default () => {
             body: JSON.stringify({ "query": query }),
         });
 
-        if (response.ok) {
-            const recentListLen = Object.keys(list).length;
+        if (response.ok) {   
             const res = await response.json();
             setList(res);
-            if (recentListLen === Object.keys(list).length) {
-                setSearched(false);
-            } else {
-                setSearched(true);
-            }
+            setSearched(true)
         }
     }
 
@@ -119,7 +85,11 @@ export default () => {
         } else if (query.length === 0) {
             setList({});
         }
-    }, [query, query.length, searched]);
+    }, [query, searched]);
+
+    useEffect(() => {
+        setSearched(false);
+    }, [query.length])
 
     return (
         <>
@@ -135,7 +105,6 @@ export default () => {
             <div className="search-results-container">
                 {(Object.keys(list).length > 0) ? <Results list={list} /> : null}
             </div>
-
         </>
     );
 };

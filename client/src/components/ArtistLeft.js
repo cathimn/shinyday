@@ -1,28 +1,24 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { bucketUrl } from '../config'
+import { Link } from 'react-router-dom';
+import { bucketUrl, toLowerNoSpecial } from '../config'
 
-export default ({ disc, artist }) => {
-    const location = useLocation();
-
-    return (
-        <div className="full-discography">
-        {disc ? disc.map(ele=> {
-            return (
+export default ({ disc, artist }) => (
+    <div className="full-discography">
+        {disc
+            ? disc.map(ele => (
                 <div className="album-card">
-                    <a href={`${location.pathname}/${ele.toLowerCase().replace(/[\s|\W]/gm, "")}`}>
-                    <img src={`${bucketUrl}/artists/${artist}/${ele.toLowerCase().replace(/[\s|\W]/gm, "")}/art.jpg`}
+                    <Link to={`/${artist}/${toLowerNoSpecial(ele)}`}>
+                    <img src={`${bucketUrl}/artists/${artist}/${toLowerNoSpecial(ele)}/art.jpg`}
                         alt="album art"
                         className="album-card__art" />
                     <span className="album-card__name">
                         {ele}
                     </span>
-                    </a>
+                    </Link>
                 </div>
+                )
             )
-            })
             : null
         }
-        </div>
-    )
-}
+    </div>
+);

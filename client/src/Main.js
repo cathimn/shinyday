@@ -12,7 +12,7 @@ export default () => {
             <div className="divider" />
             <LatestAlbums />
             <div className="divider" />
-            {/* <GenreTags /> */}
+            <GenreTags />
             <div className="divider" />
         </>
     );

@@ -5,6 +5,7 @@ import { baseUrl } from '../config';
 export default ({ username, artistId }) => {
     const [loaded, setLoaded] = useState(false)
     const [followStatus, setFollowStatus] = useState(false);
+    const [followingButton, setFollowingButton] = useState(true);
 
     const checkFollow = async (artistId, username) => {
         const response = await fetch(`${baseUrl}/follows/amfollowing`, {
@@ -58,7 +59,12 @@ export default ({ username, artistId }) => {
     
     if (followStatus) {
         return (
-            <button className="follow-button" onClick={() => unfollow(username, artistId)}>Following</button>
+            <button className="follow-button following"
+                onMouseEnter={() => setFollowingButton(false)}
+                onMouseLeave={() => setFollowingButton(true)}
+                onClick={() => unfollow(username, artistId)}>
+                { followingButton ? "Following" : "Unfollow" }
+            </button>
         )
     } else {
         return (

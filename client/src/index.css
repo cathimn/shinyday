@@ -176,19 +176,26 @@ button, input {
 
 .result-container {
     display: flex;
+    height: 55px;
 }
 
 .result-container:hover {
     background-color: #fff8f8;
 }
 
-.img-placeholder {
+.result-img-placeholder {
     width: 40px;
     height: 40px;
     background-color: #7cc5d2;
     align-self: center;
     margin-left: 10px;
 }
+
+.result-img-placeholder.artist {
+    border-radius: 50%;
+    background-color: red;
+}
+
 .result {
     display: flex;
     flex-direction: column;
@@ -564,13 +571,45 @@ audio {
 .follow-button {
     font-size: 12px;
     font-weight: 600;
-    text-decoration: underline;
-    color: deeppink;
+    color: darkgray;
+    background-color: rgba(211, 211, 211, 0.2);
     width: auto;
     height: 30px;
     border-radius: 5px;
-    border: 1px solid darkgrey;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.follow-button:hover {
+    text-decoration: underline;
+}
+
+.following {
+    background-color: rgb(230, 105, 147);
+    color: white;
+    border: none;
+}
+
+.following:hover {
+    text-decoration: none;
+}
+
+.follow-card__button > .follow-button {
+    text-transform: uppercase;
+    font-size: 10px;
     background-color: transparent;
+    color: deeppink;
+    border: 1px solid deeppink;
+    width: 80px;
+    content: "asdf";
+}
+
+.follow-card__button > .following {
+    border: none;
+    color: gray;
+}
+
+.follow-card__button > .following:hover {
+    border: 1px solid gray
 }
 
 .full-discography {
@@ -661,10 +700,9 @@ audio {
     display: flex;
     margin: 10px;
     background-color:white;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     width: 200px;
-    padding: 5px;
 }
 
 .follow-card > img {
@@ -672,9 +710,13 @@ audio {
     height: 70px;
 }
 
-.follow-card > div {
-    align-self: center;
-    padding-left: 10px;
+.follow-card--blurb {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 130px;
+    height: 60px;
+    margin: auto 10px;
 }
 
 .new-album__container {

@@ -55,7 +55,7 @@ const LoginPanel = ({ needLogin, updateToken }) => {
             <h1>log in</h1>
             <div>
                     {errors ? <span className="errors">{errors} Please try again.</span> : null}
-                </div>
+            </div>
             <form onSubmit={handleSubmit} className="login__form">
                 <div>
                     <label>username / email</label>
@@ -74,7 +74,7 @@ const LoginPanel = ({ needLogin, updateToken }) => {
             <div className="login__redirects">
                 <Link to="/login" onClick={demo}>Click here</Link> to use a fan's demo account.
                 <br />
-                Want to sign up? <Link to="/signup">Sign up here!</Link>
+                Need an account? <Link to="/signup">Sign up here!</Link>
             </div>
         </div>
         </>

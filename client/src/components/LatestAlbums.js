@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const AlbumCard = ({info, img, link}) => (
-    <a href={link}>
+    <Link to={link}>
     <div className="main__latest--card">
         <div className="latest--card-image">
             <img src={img} />
@@ -11,7 +12,7 @@ const AlbumCard = ({info, img, link}) => (
             <li>by {info.artist}</li>
         </div>
     </div>
-    </a>
+    </Link>
 );
 export default () => {
 

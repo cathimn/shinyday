@@ -8,7 +8,6 @@ import Main from './Main';
 import Signup from './Signup';
 import MusicPage from './MusicPage';
 import Profile from './Profile';
-import NewAlbum from './NewAlbum';
 
 import Header from './components/Header';
 
@@ -54,6 +53,7 @@ const App = () => {
   if(!loaded) {
     return null;
   }
+  
   return (
     <Router>
       <Header
@@ -64,57 +64,24 @@ const App = () => {
         username={username} />
         <div className="container">
         <Switch>
-          <Route
-            path='/login'
-            render={props =>
-              <Login {...props}
-                needLogin={needLogin}
-                updateToken={updateToken} />}
-          />
-          <Route
-            path='/signup'
-            render={props =>
-              <Signup {...props}
-                needLogin={needLogin}
-                updateToken={updateToken} />}
-          />
-          <Route
-            path="/new"
-            render={props=>
-              <NewAlbum
-                needLogin={needLogin}
-                loggedInUser={username}
-                artistAccount={artistAccount}/>}
-          />
-          <Route
-            path='/profile/:username'
-            render={props=>
-              <Profile {...props}
-                needLogin={needLogin}
-                loggedInUser={username} />}
-          />
-          <Route
-            exact
-            path="/:artistTerm"
-            render={props =>
-              <MusicPage
-                type="artist"
-                username={username}/>}
-          />
-          <Route
-            path="/:artistTerm/:albumTerm"
-            render={props =>
-              <MusicPage
-                type="album"
-                username={username}/>}
-          />
-          <Route
-            exact
-            path="/"
-            render={props =>
-              <Main {...props} />}
-          />
-          <Route path="*" render={props => <div>erorrorororo</div>}></Route>
+          <Route path='/login'>
+            <Login needLogin={needLogin} updateToken={updateToken} />
+          </Route>
+          <Route path='/signup'>
+            <Signup needLogin={needLogin} updateToken={updateToken} />
+          </Route>
+          <Route path='/profile/:username'>
+            <Profile needLogin={needLogin} loggedInUser={username} />
+          </Route>
+          <Route exact path="/:artistTerm">
+            <MusicPage type="artist" username={username} />
+          </Route>
+          <Route path="/:artistTerm/:albumTerm">
+            <MusicPage type="album" username={username} />
+          </Route>
+          <Route exact path="/">
+            <Main />
+          </Route>
         </Switch>
         </div>
     </Router>

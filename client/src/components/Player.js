@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 
 import MusicPlayer from './MusicPlayer';
 import Tracklist from './Tracklist';
@@ -50,7 +51,7 @@ export default ({ artist, album, artistName, albumName }) => {
             <div className="ap--player-songs">
                 <div className="current-album">
                     <h2>{albumName}</h2>
-                    <div>by <a href={`/${artist}`}>{artistName}</a></div>
+                    <div>by <Link to={`/${artist}`}>{artistName}</Link></div>
                 </div>
                 <MusicPlayer
                     currentSongUrl={currentSongUrl}

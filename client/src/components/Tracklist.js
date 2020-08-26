@@ -35,7 +35,7 @@ export default ({ setCurrentSongIdx, setCurrentSongUrl, setCurrentSongName, song
                         {trackNums[i]}
                     </span>
                     <button value={i} onClick={updateCurrentSong} className="track-item-name">
-                        <span class="mini-play-button">▶</span>{names[i]}
+                        <span className="mini-play-button">▶</span>{names[i]}
                     </button>
                 </div>
             );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { HeartOutlined } from '@ant-design/icons'
 import { bucketUrl, baseUrl } from '../config';
-import _default from '@ant-design/icons/lib/icons/AimOutlined';
 
 const AvatarMenu = ({ username, setNeedLogin, toggleMenu }) => {
     const logout = async (e) => {
@@ -19,11 +19,11 @@ const AvatarMenu = ({ username, setNeedLogin, toggleMenu }) => {
     }
     return (
         <div className="module__menu" onMouseLeave={toggleMenu}>
-            <a href={`/profile/${username}`}>
-            <div className="module__menu--link">
-                profile
-            </div>
-            </a>
+            <Link to={`/profile/${username}`}>
+                <div className="module__menu--link">
+                    profile
+                </div>
+            </Link>
             <div className="module__menu--link"
                 onClick={logout}>logout</div>
         </div>
@@ -43,16 +43,16 @@ export default ({ artistAccount, setNeedLogin, username }) => {
                 { artistAccount.id
                     ? (
                         <div>
-                            <a href="/new">
+                            <Link to="/new">
                                 add an album
-                            </a>
+                            </Link>
                         </div>
                     )
                     : (
                         <div>
-                            <a href={`/profile/${username}`}>
+                            <Link to={`/profile/${username}`}>
                                 <HeartOutlined className="module__heart" />
-                            </a>
+                            </Link>
                         </div>
                     )
                 }

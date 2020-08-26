@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import { baseUrl, bucketUrl } from './config';
 
-const FollowCards = ({artistNames, artistIds}) => {
+import FollowButton from './components/FollowButton'
+
+const FollowCards = ({artistNames, artistIds, loggedInUser}) => {
     const makeCards = (artistNames, artistIds) => {
         const temp = [];
         for(let i = 0; i < artistIds.length; i++) {
@@ -11,10 +13,13 @@ const FollowCards = ({artistNames, artistIds}) => {
                 <div className="follow-card">
                     <img src={`${bucketUrl}/artists/${artistNames[i].toLowerCase().replace(/[\s|\W]/gm,"")}/avatar.jpg`}
                         alt="artist art"/>
-                    <div>
-                        <a href={`/${artistNames[i].toLowerCase().replace(/[\s|\W]/gm,"")}`}>
+                    <div className="follow-card--blurb">
+                        <Link to={`/${artistNames[i].toLowerCase().replace(/[\s|\W]/gm,"")}`}>
                             {artistNames[i]}
-                        </a>
+                        </Link>
+                        <div className="follow-card__button">
+                            <FollowButton  username={loggedInUser} artistId={artistIds[i]}/>
+                        </div>
                     </div>
                 </div>
             )
@@ -112,7 +117,7 @@ export default ({ needLogin, loggedInUser, artistAccount }) => {
 
             </div>
             <div className="profile__following-box">
-                <FollowCards artistNames={artistNames} artistIds={artistIds}/>
+                <FollowCards artistNames={artistNames} artistIds={artistIds} loggedInUser={loggedInUser}/>
             </div>
         </div>
         </>
