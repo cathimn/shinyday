@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation, Redirect } from 'react-router-dom'
 
-import { baseUrl, bucketUrl } from './config';
+import { baseUrl, bucketUrl, toLowerNoSpecial } from './config';
 
 import Player from './components/Player';
 import ArtistLeft from './components/ArtistLeft';
@@ -9,47 +9,51 @@ import Discography from './components/Discography';
 import FollowButton from './components/FollowButton';
 
 export default ({ type, username }) => {
+    const location = useLocation();
     const { artistTerm, albumTerm } = useParams();
+    const [ albumName, setAlbumName ] = useState();
     const [ artistId, setArtistId ] = useState();
     const [ artistName, setArtistName ] = useState();
-    const [ albumName, setAlbumName ] = useState();
     const [ disc, setDisc ] = useState();
 
-    const checkArtist = async (term) => {
-        const response = await fetch(`${baseUrl}/music/${artistTerm}`);
-        if (response.ok) {
-            const res = await response.json();
-            setArtistId(res.id)
-            setArtistName(res.artist_name)
-        }
-    }
-
-    const requestDiscography = async (artistId) => {
-        const response = await fetch(`${baseUrl}/music/discography/${artistId}`);
-        if (response.ok) {
-            const res = await response.json();
-            setDisc(res);
-        }
-    }
-
     useEffect(() => {
+        const checkArtist = async (term) => {
+            const response = await fetch(`${baseUrl}/music/${artistTerm}`);
+            if (response.ok) {
+                const res = await response.json();
+                setArtistId(res.id)
+                setArtistName(res.artist_name)
+            } else {
+                setArtistId(0);
+            }
+        }
         checkArtist(artistTerm);
-    }, [])
+    }, [location, artistTerm])
 
     useEffect(() => {
-        if (artistId) {
-            requestDiscography(artistId);
+        const requestDiscography = async (artistId) => {
+            const response = await fetch(`${baseUrl}/music/discography/${artistId}`);
+            if (response.ok) {
+                const res = await response.json();
+                setDisc(res);
+            }
         }
+
+        requestDiscography(artistId);
     }, [artistId])
 
     useEffect(() => {
-        if (disc) {
-            const current = disc.filter(ele => {
-                return ele.toLowerCase().replace(/[\s|\W]/gm, "") === albumTerm;
-            })
-            setAlbumName(current[0])
+        const getCurrentAlbum = (disc, albumTerm) => {
+            const current = disc.filter(ele => toLowerNoSpecial(ele) === albumTerm)[0];
+            setAlbumName(current)
         }
-    }, [disc])
+
+        if (disc) getCurrentAlbum(disc, albumTerm);
+    }, [disc, albumTerm])
+
+    if (artistId === 0) {
+        return <Redirect to='/404'/>
+    }
 
     return (
         <>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-import { baseUrl, bucketUrl } from './config';
+import { baseUrl, bucketUrl, toLowerNoSpecial } from './config';
 
 import FollowButton from './components/FollowButton'
 
@@ -11,10 +11,10 @@ const FollowCards = ({artistNames, artistIds, loggedInUser}) => {
         for(let i = 0; i < artistIds.length; i++) {
             temp.push(
                 <div className="follow-card">
-                    <img src={`${bucketUrl}/artists/${artistNames[i].toLowerCase().replace(/[\s|\W]/gm,"")}/avatar.jpg`}
+                    <img src={`${bucketUrl}/artists/${toLowerNoSpecial(artistNames[i])}/avatar.jpg`}
                         alt="artist art"/>
                     <div className="follow-card--blurb">
-                        <Link to={`/${artistNames[i].toLowerCase().replace(/[\s|\W]/gm,"")}`}>
+                        <Link to={`/${toLowerNoSpecial(artistNames[i])}`}>
                             {artistNames[i]}
                         </Link>
                         <div className="follow-card__button">

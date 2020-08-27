@@ -79,6 +79,10 @@ export default () => {
         }
     }
 
+    const loseFocus = e => {
+        setTimeout(() => setQuery(''), 100)
+    }
+
     useEffect(() => {
         if (query && !searched) {
             populateList(query);
@@ -93,7 +97,7 @@ export default () => {
 
     return (
         <>
-            <div className="search-container">
+            <div className="search-container" onBlur={loseFocus}>
                 <input
                     className="search"
                     type="text"

@@ -51,7 +51,7 @@ router.get('/:artistTerm', asyncHandler(async (req, res) => {
     if (matches.length > 0) {
         res.json(...matches);
     } else {
-        res.json(false);
+        res.status(404).json("Invalid artist")
     }
 }));
 

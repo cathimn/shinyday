@@ -64,6 +64,9 @@ const App = () => {
         username={username} />
         <div className="container">
         <Switch>
+          <Route path='/404'>
+            404
+          </Route>
           <Route path='/login'>
             <Login needLogin={needLogin} updateToken={updateToken} />
           </Route>
