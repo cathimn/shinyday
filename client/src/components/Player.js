@@ -1,46 +1,79 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { Link } from 'react-router-dom'
 
-import MusicPlayer from './MusicPlayer';
-import Tracklist from './Tracklist';
-
-import { baseUrl, bucketUrl } from '../config';
-
 export default ({ artist, album }) => {
-  // const [songlistUrls, setSonglistUrls] = useState([]);
-  // const [songlistNames, setSonglistNames] = useState([]);
+  const player = useRef(null);
   const [currentSong, setCurrentSong] = useState({
     index: 0,
-    name: null,
-    songUrl: null,
+    name: '',
+    songUrl: '',
   });
+  const [playing, setPlaying] = useState(false);
+
+  const updateCurrentSong = (e) => {
+    e.preventDefault();
+    player.current.pause();
+    setCurrentSong(album.songs[e.target.value]);
+    player.current.currentTime = 0;
+    player.current.load();
+    player.current.play();
+    setPlaying(true);
+  }
+  
+  const play = () => {
+    if (!playing) {
+      player.current.play();
+      setPlaying(true);
+    }
+  }
+
+  const pause = () => {
+    if (playing) {
+      player.current.pause();
+      setPlaying(false);
+    }
+  }
 
   useEffect(() => {
-    setCurrentSong(album.songs[0])
-  }, [artist, album])
-
-  // useEffect(() => {
-  //     setCurrentSongUrl(songlistUrls[currentSongIdx]);
-  // }, [songlistUrls, currentSongIdx])
+    setCurrentSong(album.songs[0]);
+    player.current.load();
+  }, [album.songs])
 
   return (
     <>
-      <div className="ap--player-songs">
-        <div className="current-album">
-          <h2>{album.name}</h2>
-          <div>
-            by&nbsp;<Link to={`/${artist.url}`}>{artist.artistName}</Link>
+      <div style={{ marginRight: "25px" }}>
+        <h1 style={{ margin: "0", fontWeight: "400" }}>{album.name}</h1>
+        <div>
+          by&nbsp;
+          <Link to={`/${artist.url}`} style={{ color: "deeppink" }}>{artist.artistName}</Link>
+        </div>
+        <div id="music-player-container">
+          <div id="currently-playing">
+            {currentSong.name}<br/>
           </div>
+          <audio id="player" controls ref={player} className="hidden">
+            <source src={currentSong.song_url} type="audio/mp3" />
+          </audio>
+          <button onClick={playing ? pause : play} id="play-pause-button">
+            {playing ? "pause" : "play"}
+          </button>
         </div>
-        <MusicPlayer currentSong={currentSong} />
-        <Tracklist setCurrentSong={setCurrentSong} songs={album.songs} />
+        <div>
+          {album.songs.map((song, index) =>
+            <div key={song.id}>
+              <button value={index} onClick={updateCurrentSong}>
+                <span>▶</span> 
+                <span>{song.track_num}.&nbsp;</span>
+                {song.name}
+              </button>
+            </div>)}
+        </div>
       </div>
-      <div className="ap--art-fans">
-        <div className="ap-art asdf">
-          <img src={album.coverUrl}
-              className="large-cover"
-              alt="album art" />
-        </div>
+      <div>
+        <img
+          src=""
+          className="large-cover"
+          alt="album art" />
       </div>
     </>
   );

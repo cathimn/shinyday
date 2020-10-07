@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation, Redirect, Link } from 'react-router-dom'
+import { useParams, Redirect, Link } from 'react-router-dom'
 
-import { baseUrl, bucketUrl, toLowerNoSpecial } from './config';
+import { baseUrl, bucketUrl } from './config';
 
 import Player from './components/Player';
 import ArtistLeft from './components/ArtistLeft';
 import FollowButton from './components/FollowButton';
 
 export default ({ type, username }) => {
-  const location = useLocation();
   const { artistTerm, albumTerm } = useParams();
 
   const [ album, setAlbum ] = useState({
@@ -33,7 +32,6 @@ export default ({ type, username }) => {
       const response = await fetch(`${baseUrl}/music/${artistTerm}`);
       if (response.ok) {
         const res = await response.json();
-        console.log(res)
         setArtist({
           id: res.id,
           url: res.url,
@@ -46,7 +44,6 @@ export default ({ type, username }) => {
           const response = await fetch(`${baseUrl}/music/${artistTerm}/${albumTerm}`);
           if (response.ok) {
             const res = await response.json();
-            console.log(res)
             setAlbum({...res})
           } else {
             setInvalidAlbum(true);
@@ -57,8 +54,9 @@ export default ({ type, username }) => {
       }
       setLoaded(true);
     }
+    setLoaded(false);
     fetchData();
-  }, [artistTerm, albumTerm])
+  }, [artistTerm, albumTerm, type])
 
   if ((invalidArtist || invalidAlbum) && loaded) {
     return <Redirect to='/404'/>
@@ -70,14 +68,14 @@ export default ({ type, username }) => {
 
   return (
     <>
-    <div className="musicpage-container">
-      <div className="musicpage__header">
-        <img src=""
-            className="large-header"
-            alt="header" />
-      </div>
-      <div className="musicpage__main">
-        <div className="musicpage__main--left">
+    <div id="musicpage-container">
+      <img
+        width="975px"
+        src={`${bucketUrl}/artists/${artist.url}/header.jpg`}
+        className="large-header"
+        alt="header" />
+      <div id="musicpage__main">
+        <div id="musicpage__main--left">
           {type === "artist" &&
           <ArtistLeft
             discography={discography}
@@ -87,7 +85,7 @@ export default ({ type, username }) => {
             artist={artist}
             album={album}/>}
         </div>
-        <div className="musicpage__main--right">
+        <div id="musicpage__main--right">
           <div className="ap-avatar">
             <img src=""
                 className="artist-avatar"

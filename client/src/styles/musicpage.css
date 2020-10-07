@@ -1,31 +1,63 @@
-.musicpage-container {
+#musicpage-container {
   width: 975px;
   align-self: center;
   background-color: white;
 }
 
-.musicpage__header {
-  height: 180px;
-  overflow: hidden;
-}
-
-.musicpage__main {
-  display: flex;
-  width: auto;
-  margin-top: 30px;
+#musicpage__main {
+  display: grid;
+  grid-template-columns: 1fr 120px;
   min-height: 600px;
+  margin: 30px 25px 0 25px;
 }
 
-.musicpage__main--left {
-  margin-left: 25px;
-  flex-basis: 99%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.musicpage__main--right {
+#musicpage__main--left {
+  display: grid;
+  grid-template-columns: 1fr 350px;
   margin-right: 25px;
+}
+
+#musicpage__main--right {
   display: flex;
   flex-direction: column;
   width: 120px;
+}
+
+.large-cover {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.large-header {
+  width: 975px;
+  height: 180px;
+  object-fit: cover;
+  object-position: center;
+}
+
+#currently-playing {
+  margin-left: 65px;
+  font-size: 15px;
+  padding: 10px 0;
+}
+
+#music-player-container {
+  position: relative;
+  margin: 15px 0;
+  min-height: 55px;
+}
+
+#play-pause-button {
+  position: absolute;
+  top: 0;
+  background-color: white;
+  border: 1px solid lightpink;
+  border-radius: 4px;
+  height: 55px;
+  width: 55px;
+  font-size: 30px;
+  color: deeppink;
+  cursor: pointer;
 }
