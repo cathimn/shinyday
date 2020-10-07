@@ -68,7 +68,7 @@ export default ({ type, username }) => {
     }
     setLoaded(false);
     fetchData();
-  }, [artistTerm, albumTerm, type])
+  }, [])
 
   if ((invalidArtist || invalidAlbum) && loaded) {
     return <Redirect to='/404'/>

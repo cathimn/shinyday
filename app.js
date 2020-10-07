@@ -9,7 +9,7 @@ const routes = require('./routes/index');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: true }));
 app.use(helmet({ hsts: false }));
 app.use(logger('dev'));
 app.use(express.json());
