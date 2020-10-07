@@ -88,7 +88,7 @@ const App = () => {
           <Route path='/profile/:username'>
             <Profile needLogin={needLogin} loggedInUser={username} />
           </Route>
-          <Route path="/:artistTerm">
+          <Route exact path="/:artistTerm">
             <MusicPage type="artist" username={username} />
           </Route>
           <Route path="/:artistTerm/:albumTerm">
