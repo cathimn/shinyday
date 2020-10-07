@@ -6,14 +6,14 @@ import GenreTags from './components/GenreTags';
 
 export default () => {
 
-    return (
-        <>
-            <Banner />
-            <div className="divider" />
-            <LatestAlbums />
-            <div className="divider" />
-            <GenreTags />
-            <div className="divider" />
-        </>
-    );
+  return (
+    <>
+      <Banner />
+      <div className="divider" />
+      <LatestAlbums />
+      <div className="divider" />
+      <GenreTags />
+      <div className="divider" />
+    </>
+  );
 };

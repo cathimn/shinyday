@@ -5,7 +5,7 @@ export default ({ discography }) => {
     const DiscCard = ({ album }) => {
         const albumTerm = toLowerNoSpecial(album);
         return (
-            <Link to={`/${artistTerm}/${albumTerm}`}>
+            <Link to={`/${artistTerm}/album/${albumTerm}`}>
                 <img src={`${bucketUrl}/artists/${artistTerm}/${albumTerm}/art.jpg`}
                     className="side-discography__album-art"
                     alt="album arts" />

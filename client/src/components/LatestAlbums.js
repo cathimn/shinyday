@@ -23,27 +23,27 @@ export default () => {
                 <AlbumCard
                     info={{album: "Heat of the Summer", artist: "Monplaisir"}}
                     img={`https://shinyday.s3.us-east-2.amazonaws.com/artists/monplaisir/heatofthesummer/art.jpg`}
-                    link="/monplaisir/heatofthesummer"
+                    link="/monplaisir/album/heatofthesummer"
                     />
                 <AlbumCard
                     info={{album: "Haumea", artist: "Bisou"}}
                     img={`https://shinyday.s3.us-east-2.amazonaws.com/artists/bisou/haumea/art.jpg`}
-                    link="/bisou/haumea"
+                    link="/bisou/album/haumea"
                     />
                 <AlbumCard
                     info={{album: "Town of Two Houses", artist: "Blear Moon"}}
                     img={`https://shinyday.s3.us-east-2.amazonaws.com/artists/blearmoon/townoftwohouses/art.jpg`}
-                    link="/blearmoon/townoftwohouses"
+                    link="/blearmoon/album/townoftwohouses"
                     />
                 <AlbumCard
                     info={{album: "Everything's Gone", artist: "Blah Blah Blah"}}
                     img={`https://shinyday.s3.us-east-2.amazonaws.com/artists/blahblahblah/everythingsgone/art.jpg`}
-                    link="/blahblahblah/everythingsgone"
+                    link="/blahblahblah/album/everythingsgone"
                     />
                 <AlbumCard
                     info={{album: "Funeral Void", artist: "Cryosyncopy"}}
                     img={`https://shinyday.s3.us-east-2.amazonaws.com/artists/cryosyncopy/funeralvoid/art.jpg`}
-                    link="/cryosyncopy/funeralvoid"
+                    link="/cryosyncopy/album/funeralvoid"
                     />
             </div>
         </div>

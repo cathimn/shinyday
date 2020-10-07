@@ -5,7 +5,7 @@ import { baseUrl, toLowerNoSpecial } from '../config';
 const AlbumResult = ({ result }) => {
   const albumName = result[0][1];
   const artistName = result[1][1];
-  const albumPath = `/${toLowerNoSpecial(artistName)}/${toLowerNoSpecial(albumName)}`;
+  const albumPath = `/${toLowerNoSpecial(artistName)}/album/${toLowerNoSpecial(albumName)}`;
 
   return (
       <Link to={albumPath}>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Redirect, Link } from 'react-router-dom'
 
-import { baseUrl, bucketUrl } from './config';
+import { baseUrl } from './config';
 
 import Player from './components/Player';
 import ArtistLeft from './components/ArtistLeft';
@@ -34,7 +34,6 @@ export default ({ type, username }) => {
       const response = await fetch(`${baseUrl}/music/${artistTerm}`);
       if (response.ok) {
         const res = await response.json();
-        console.log(res)
         setArtist({
           id: res.id,
           url: res.url,
@@ -68,7 +67,7 @@ export default ({ type, username }) => {
     }
     setLoaded(false);
     fetchData();
-  }, [])
+  }, [artistTerm, albumTerm, type])
 
   if ((invalidArtist || invalidAlbum) && loaded) {
     return <Redirect to='/404'/>
@@ -105,14 +104,14 @@ export default ({ type, username }) => {
           </div>
             <h3>{artist.artistName}</h3>
               {/* <FollowButton
-                  username={artist.url}
-                  artistId={artist.id} /> */}
+                username={artist.url}
+                artistId={artist.id} /> */}
           { type === "album" &&
             <ul className="side-discography">
               {discography.map(album =>
-                <Link to={`/${artist.url}/${album.url}`}>
+                <Link to={`/${artist.url}/album/${album.url}`}>
                   <img src={album.cover_url} className="side-discography__album-art" alt="album art" />
-                  <li className="side-discography__album-name">{album.name}</li>
+                  <li className="pink">{album.name}</li>
                 </Link>)}
             </ul> }
         </div>

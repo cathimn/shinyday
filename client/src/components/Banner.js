@@ -8,7 +8,7 @@ export default () => {
             <div className="banner">
                 <div className="banner__left">
                     <div className="banner_left-blurb">
-                        <Link to="/deeyankey/lullaby">
+                        <Link to="/deeyankey/album/lullaby">
                             <div className="banner__left-blurb">
                                 Album Feature:<br/> lullaby by Dee Yan-Key
                             </div>

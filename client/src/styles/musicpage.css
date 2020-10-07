@@ -8,13 +8,13 @@
   display: grid;
   grid-template-columns: 1fr 120px;
   min-height: 600px;
-  margin: 30px 25px 0 25px;
+  margin: 30px 30px 0 30px;
 }
 
 #musicpage__main--left {
   display: grid;
   grid-template-columns: 1fr 350px;
-  margin-right: 25px;
+  margin-right: 30px;
 }
 
 #musicpage__main--right {
@@ -35,6 +35,25 @@
   height: 180px;
   object-fit: cover;
   object-position: center;
+}
+
+#full-discography {
+  grid-column: 1/3;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding-bottom: 45px;
+}
+
+.album-card {
+  width: 350px;
+  height: 375px;
+  margin-bottom: 35px;
+}
+
+.album-name {
+  font-size: smaller;
+  word-wrap: break-word;
 }
 
 #currently-playing {
