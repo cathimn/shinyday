@@ -1,0 +1,31 @@
+.musicpage-container {
+  width: 975px;
+  align-self: center;
+  background-color: white;
+}
+
+.musicpage__header {
+  height: 180px;
+  overflow: hidden;
+}
+
+.musicpage__main {
+  display: flex;
+  width: auto;
+  margin-top: 30px;
+  min-height: 600px;
+}
+
+.musicpage__main--left {
+  margin-left: 25px;
+  flex-basis: 99%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.musicpage__main--right {
+  margin-right: 25px;
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+}

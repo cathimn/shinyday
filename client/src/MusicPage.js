@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation, Redirect } from 'react-router-dom'
+import { useParams, useLocation, Redirect, Link } from 'react-router-dom'
 
 import { baseUrl, bucketUrl, toLowerNoSpecial } from './config';
 
 import Player from './components/Player';
 import ArtistLeft from './components/ArtistLeft';
-import Discography from './components/Discography';
 import FollowButton from './components/FollowButton';
 
 export default ({ type, username }) => {
@@ -89,24 +88,23 @@ export default ({ type, username }) => {
             album={album}/>}
         </div>
         <div className="musicpage__main--right">
-            <div className="ap-avatar">
-                <img src=""
-                    className="artist-avatar"
-                    alt="artist pic" />
-            </div>
-                <h3>{artist.name}</h3>
-                {/* <FollowButton
-                    username={artist.url}
-                    artistId={artist.id} /> */}
-            {/* <div>
-                {(type === 'artist')
-                    ? null
-                    : <Discography
-                        disc={disc}
-                        artistTerm={artistTerm}
-                    />
-                }
-            </div> */}
+          <div className="ap-avatar">
+            <img src=""
+                className="artist-avatar"
+                alt="artist pic" />
+          </div>
+            <h3>{artist.name}</h3>
+              {/* <FollowButton
+                  username={artist.url}
+                  artistId={artist.id} /> */}
+          { type === "album" &&
+            <ul className="side-discography">
+              {discography.map(album =>
+                <Link to={`/${artist.url}/${album.url}`}>
+                  <img src={album.coverUrl} className="side-discography__album-art" alt="album art" />
+                  <li className="side-discography__album-name">{album.name}</li>
+                </Link>)}
+            </ul> }
         </div>
       </div>
     </div>

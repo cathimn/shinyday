@@ -1,46 +1,47 @@
 html, main, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:visited {
-    color: black;
+  color: black;
 }
 
 button, input {
-    border: none;
+  border: none;
 }
 
-#root, .container {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
+#root,
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
 }
 
 .container {
-    background-color: whitesmoke;
-    width: 100%;
+  background-color: whitesmoke;
+  width: 100%;
 }
 
 .center {
-    margin: auto;
+  margin: auto;
 }
 
 .center > h1 {
-    color: rgb(80, 80, 80);
-    padding-bottom: 10px;
-    border-bottom: 2px dotted lightpink;
+  color: rgb(80, 80, 80);
+  padding-bottom: 10px;
+  border-bottom: 2px dotted lightpink;
 }
 
 .login__form {
@@ -460,38 +461,6 @@ button, input {
     background-color: mediumturquoise;
 }
 
-.musicpage-container {
-    width: 975px;
-    align-self: center;
-    background-color: white;
-}
-
-.musicpage__header {
-    height: 180px;
-    overflow: hidden;
-}
-
-.musicpage__main {
-    display: flex;
-    width: auto;
-    margin-top: 30px;
-    min-height: 600px;
-}
-
-.musicpage__main--left {
-    margin-left: 25px;
-    flex-basis: 99%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.musicpage__main--right {
-    margin-right: 25px;
-    display: flex;
-    flex-direction: column;
-    width: 120px;
-}
-
 .ap--player-songs {
     flex-basis: 70%;
     margin-right: 25px;
@@ -793,3 +762,5 @@ audio {
 a {
     color: black
 }
+
+@import 'styles/musicpage.css'
