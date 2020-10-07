@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Artist = sequelize.define('Artist', {
     artist_name: DataTypes.STRING,
+    url: DataTypes.STRING,
     user_id: DataTypes.INTEGER,
     description: DataTypes.STRING,
   }, {});

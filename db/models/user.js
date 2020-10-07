@@ -26,6 +26,12 @@ module.exports = (sequelize, DataTypes) => {
         len: [60,60]
       }
      },
+    avatar_url: {
+      type : DataTypes.STRING
+    },
+    banner_url: {
+      type : DataTypes.STRING
+    },
     session_token: {
       type : DataTypes.STRING
     }

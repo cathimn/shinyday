@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { HeartOutlined } from '@ant-design/icons'
 import { bucketUrl, baseUrl } from '../config';
 
 const AvatarMenu = ({ username, setNeedLogin, toggleMenu }) => {
@@ -51,7 +50,7 @@ export default ({ artistAccount, setNeedLogin, username }) => {
                     : (
                         <div>
                             <Link to={`/profile/${username}`}>
-                                <HeartOutlined className="module__heart" />
+                                <div className="module__heart">💗</div>
                             </Link>
                         </div>
                     )

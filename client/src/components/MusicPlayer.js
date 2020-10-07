@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-export default ({ currentSongUrl, currentSongName }) => {
+export default ({ currentSong }) => {
     const player = useRef(null);
 
     const [duration, setDuration] = useState();
@@ -8,7 +8,7 @@ export default ({ currentSongUrl, currentSongName }) => {
     useEffect(() => {
         load();
         setDuration(player.duration)
-    }, [currentSongUrl, currentSongName])
+    }, [currentSong])
 
     const load = () => {
         player.current.load();
@@ -21,11 +21,11 @@ export default ({ currentSongUrl, currentSongName }) => {
     return (
         <div className="ap--musicplayer">
             <div id="currently-playing">
-                currently playing:<br/>{currentSongName}
+                currently playing:<br/>{currentSong.name}
             </div>
             <div className='player-wrapper'>
                 <audio controls ref={player}>
-                    <source src={currentSongUrl} type="audio/mp3" />
+                    <source src={currentSong.songUrl} type="audio/mp3" />
                 </audio>
             </div>
             <div className="player-wrapper">

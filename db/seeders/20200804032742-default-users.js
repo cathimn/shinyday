@@ -1,8 +1,9 @@
 'use strict';
 
-const { secretPass } = require('../../config/index');
-
 const bcrypt = require('bcryptjs');
+const faker = require('faker')
+
+faker.seed(4444)
 
 function createPassword() {
   return bcrypt.hashSync('password');
@@ -16,6 +17,18 @@ function r(o) {
   o.createdAt = new Date();
   o.updatedAt = new Date();
   return o;
+}
+
+let fakes = [];
+while (fakes.length < 5) {
+  let fake = [faker.name.firstName(), faker.name.lastName()]
+  fakes.push({
+    username: faker.internet.userName(...fake),
+    email: faker.internet.email(...fake),
+    password: faker.internet.password(),
+    createdAt: faker.date.past(),
+    updatedAt: new Date(),
+  })
 }
 
 module.exports = {
@@ -33,6 +46,7 @@ module.exports = {
       r({ username: 'captain', email: 'captain@thecat.com', password: createSecretPassword() }),
       r({ username: 'blahblahblah', email: 'blahblahblah@mail.com', password: createSecretPassword() }),
       r({ username: 'cryosyncopy', email: 'cryosyncopy@mail.com', password: createSecretPassword() }),
+      ...fakes
     ]);
   },
 

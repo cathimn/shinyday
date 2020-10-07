@@ -12,6 +12,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      url: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       artist_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
@@ -24,6 +28,9 @@ module.exports = {
         references: {
           model: 'Genres'
         }
+      },
+      cover_url: {
+        type: Sequelize.STRING
       },
       description: {
         type: Sequelize.STRING

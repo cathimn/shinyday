@@ -2,9 +2,11 @@
 module.exports = (sequelize, DataTypes) => {
   const Album = sequelize.define('Album', {
     name: DataTypes.STRING,
+    url: DataTypes.STRING,
     artist_id: DataTypes.INTEGER,
     genre_id: DataTypes.INTEGER,
-    description: DataTypes.STRING
+    cover_url: DataTypes.STRING,
+    description: DataTypes.STRING,
   }, {});
   Album.associate = function(models) {
     Album.belongsTo(models.Artist, { foreignKey: 'artist_id', as: "artist" });

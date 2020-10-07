@@ -20,6 +20,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(60).BINARY
       },
+      avatar_url: {
+        type: Sequelize.STRING
+      },
+      banner_url: {
+        type: Sequelize.STRING
+      },
       session_token: {
         type: Sequelize.STRING(36)
       },

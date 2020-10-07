@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { bucketUrl, toLowerNoSpecial } from '../config'
-
-export default ({ disc, artistTerm }) => {
+export default ({ discography }) => {
     const DiscCard = ({ album }) => {
         const albumTerm = toLowerNoSpecial(album);
         return (

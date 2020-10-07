@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 
 import { baseUrl } from './config';
 
@@ -10,6 +10,17 @@ import MusicPage from './MusicPage';
 import Profile from './Profile';
 
 import Header from './components/Header';
+
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    document.querySelector('body').scrollTo(0, 0)
+  }, [pathname]);
+
+  return null;
+}
 
 const App = () => {
   const authToken = window.localStorage.getItem('shinyday_session');
@@ -53,9 +64,10 @@ const App = () => {
   if(!loaded) {
     return null;
   }
-  
+
   return (
     <Router>
+      <ScrollToTop />
       <Header
         artistAccount={artistAccount}
         needLogin={needLogin}

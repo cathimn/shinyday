@@ -1,24 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { bucketUrl, toLowerNoSpecial } from '../config'
 
-export default ({ disc, artist }) => (
-    <div className="full-discography">
-        {disc
-            ? disc.map(ele => (
-                <div className="album-card">
-                    <Link to={`/${artist}/${toLowerNoSpecial(ele)}`}>
-                    <img src={`${bucketUrl}/artists/${artist}/${toLowerNoSpecial(ele)}/art.jpg`}
-                        alt="album art"
-                        className="album-card__art" />
-                    <span className="album-card__name">
-                        {ele}
-                    </span>
-                    </Link>
-                </div>
-                )
-            )
-            : null
-        }
-    </div>
+export default ({ discography, artist }) => (
+  <div className="full-discography">
+    {discography.map(album => (
+      <div key={album.id} className="album-card">
+          <Link to={`/${artist}/${album.url}`}>
+          <img src={album.cover_url}
+              alt="album art"
+              className="album-card__art" />
+          <span className="album-card__name">
+              {album.name}
+          </span>
+          </Link>
+      </div>))
+    }
+  </div>
 );
