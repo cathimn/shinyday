@@ -25,6 +25,12 @@ module.exports = {
           model: 'Users',
         }
       },
+      avatar_url: {
+        type: Sequelize.STRING,
+      },
+      banner_url: {
+        type: Sequelize.STRING,
+      },
       description: {
         type: Sequelize.STRING,
       },

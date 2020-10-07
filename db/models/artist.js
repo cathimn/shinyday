@@ -5,6 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     url: DataTypes.STRING,
     user_id: DataTypes.INTEGER,
     description: DataTypes.STRING,
+    avatar_url: DataTypes.STRING,
+    banner_url: DataTypes.STRING,
   }, {});
   Artist.associate = function(models) {
     Artist.belongsTo(models.User, { foreignKey: 'user_id', as: "user" });

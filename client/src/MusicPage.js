@@ -21,7 +21,9 @@ export default ({ type, username }) => {
     id: null,
     url: null,
     artistName: null,
-    description: null });
+    description: null,
+    avatarUrl: null,
+    bannerUrl: null });
   const [ loaded, setLoaded ] = useState(null);
   const [ discography, setDiscography ] = useState([]);
   const [invalidArtist, setInvalidArtist] = useState(null);
@@ -32,11 +34,14 @@ export default ({ type, username }) => {
       const response = await fetch(`${baseUrl}/music/${artistTerm}`);
       if (response.ok) {
         const res = await response.json();
+        console.log(res)
         setArtist({
           id: res.id,
           url: res.url,
           artistName: res.artist_name,
           description: res.description,
+          avatarUrl: res.avatar_url,
+          bannerUrl: res.banner_url
         });
         setDiscography([...res.albums]);
 
@@ -44,7 +49,14 @@ export default ({ type, username }) => {
           const response = await fetch(`${baseUrl}/music/${artistTerm}/${albumTerm}`);
           if (response.ok) {
             const res = await response.json();
-            setAlbum({...res})
+            setAlbum({
+              id: res.id,
+              artistId: res.artist_id,
+              coverUrl: res.cover_url,
+              description: res.description,
+              name: res.name,
+              songs: [...res.songs]
+            })
           } else {
             setInvalidAlbum(true);
           }
@@ -71,7 +83,7 @@ export default ({ type, username }) => {
     <div id="musicpage-container">
       <img
         width="975px"
-        src={`${bucketUrl}/artists/${artist.url}/header.jpg`}
+        src={artist.bannerUrl}
         className="large-header"
         alt="header" />
       <div id="musicpage__main">
@@ -87,11 +99,11 @@ export default ({ type, username }) => {
         </div>
         <div id="musicpage__main--right">
           <div className="ap-avatar">
-            <img src=""
+            <img src={artist.avatarUrl}
                 className="artist-avatar"
                 alt="artist pic" />
           </div>
-            <h3>{artist.name}</h3>
+            <h3>{artist.artistName}</h3>
               {/* <FollowButton
                   username={artist.url}
                   artistId={artist.id} /> */}
@@ -99,7 +111,7 @@ export default ({ type, username }) => {
             <ul className="side-discography">
               {discography.map(album =>
                 <Link to={`/${artist.url}/${album.url}`}>
-                  <img src={album.coverUrl} className="side-discography__album-art" alt="album art" />
+                  <img src={album.cover_url} className="side-discography__album-art" alt="album art" />
                   <li className="side-discography__album-name">{album.name}</li>
                 </Link>)}
             </ul> }

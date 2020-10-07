@@ -71,7 +71,7 @@ export default ({ artist, album }) => {
       </div>
       <div>
         <img
-          src=""
+          src={album.coverUrl}
           className="large-cover"
           alt="album art" />
       </div>
