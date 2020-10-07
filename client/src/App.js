@@ -76,9 +76,9 @@ const App = () => {
         username={username} />
         <div className="container">
         <Switch>
-          <Route path='/404'>
+          {/* <Route path='/404'>
             404
-          </Route>
+          </Route> */}
           <Route path='/login'>
             <Login needLogin={needLogin} updateToken={updateToken} />
           </Route>
@@ -88,7 +88,7 @@ const App = () => {
           <Route path='/profile/:username'>
             <Profile needLogin={needLogin} loggedInUser={username} />
           </Route>
-          <Route exact path="/:artistTerm">
+          <Route path="/:artistTerm">
             <MusicPage type="artist" username={username} />
           </Route>
           <Route path="/:artistTerm/:albumTerm">
