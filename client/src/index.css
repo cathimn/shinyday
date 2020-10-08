@@ -32,6 +32,7 @@ ul {
   padding: 0;
 }
 
+p,
 h1,
 h3 {
   margin: 0;
@@ -369,42 +370,6 @@ audio {
   height: 30px;
   width: 100%;
   margin-bottom: 5px;
-}
-
-.ap-avatar {
-  width: 120px;
-  height: 120px;
-  margin-bottom: 5px;
-  /* margin: 50px auto 20px auto; */
-}
-
-.follow-button {
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 600;
-  color: darkgray;
-  background-color: rgba(211, 211, 211, 0.2);
-  width: auto;
-  padding: 10px;
-  border-radius: 5px;
-  margin: 10px 0;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-.follow-button:hover {
-  text-decoration: underline;
-}
-
-.following:after {
-  background-color: rgb(230, 105, 147);
-  color: white;
-  content: "Following"
-}
-
-.following:hover:after {
-  text-decoration: underline;
-  content: "Unfollow"
-
 }
 
 .follow-card__button > .follow-button {

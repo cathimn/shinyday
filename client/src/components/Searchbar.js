@@ -65,22 +65,18 @@ export default () => {
       setQuery(e.target.value);
   }
 
-  const populateList = async (query) => {
-      const response = await fetch(`${baseUrl}/search`, {
-          method: 'post',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ "query": query }),
-      });
+  const populateList = async () => {
+    const response = await fetch(`${baseUrl}/search/${query}`);
 
-      if (response.ok) {   
-          const res = await response.json();
-          setList(res);
-          setSearched(true)
-      }
+    if (response.ok) {   
+      const res = await response.json();
+      setList(res);
+      setSearched(true);
+    }
   }
 
   const loseFocus = e => {
-      setTimeout(() => setQuery(''), 100)
+    setTimeout(() => setQuery(''), 100)
   }
 
   useEffect(() => {

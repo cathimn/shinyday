@@ -81,9 +81,8 @@ export default ({ type }) => {
     <>
     <div id="musicpage-container">
       <img
-        width="975px"
+        id="large-header"
         src={artist.bannerUrl}
-        className="large-header"
         alt="header" />
       <div id="musicpage__main">
         <div id="musicpage__main--left">
@@ -98,10 +97,11 @@ export default ({ type }) => {
         </div>
         <div id="musicpage__main--right">
           <img src={artist.avatarUrl}
-              className="small-cover"
-              alt="artist pic" />
-          <h3>{artist.artistName}</h3>
+            className="artist-portrait"
+            alt="artist pic" />
+          <h3 style={{ margin: "10px 0"}}>{artist.artistName}</h3>
           <FollowButton artistId={artist.id} />
+          {artist.description && <p className="description">{artist.description}</p>}
           {type === "album" &&
           <>
             {discography.map(album =>

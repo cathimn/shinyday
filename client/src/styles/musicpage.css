@@ -23,6 +23,48 @@
   width: 120px;
 }
 
+/* Follow Button */
+.follow-button {
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: darkgray;
+  background-color: rgba(211, 211, 211, 0.2);
+  width: auto;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.follow-button:after {
+  content: "Follow"
+}
+
+.follow-button:hover {
+  text-decoration: underline;
+}
+
+.following {
+  border: 1px solid rgba(0, 0, 0, 0);
+  background-color: rgb(230, 105, 147);
+  color: white;
+}
+
+.following:after {
+  content: "Following"
+}
+
+.following:hover {
+  background-color: rgb(206, 173, 184);
+}
+
+.following:hover:after {
+  text-decoration: underline;
+  content: "Unfollow"
+}
+/* End Follow Button */
+
 .large-cover {
   width: 350px;
   height: 350px;
@@ -30,7 +72,7 @@
   object-position: center;
 }
 
-.large-header {
+#large-header {
   width: 975px;
   height: 180px;
   object-fit: cover;
@@ -45,10 +87,17 @@
   padding-bottom: 45px;
 }
 
+.artist-portrait {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  object-position: center;
+}
+
 .album-card {
   width: 350px;
   height: 375px;
-  margin-bottom: 35px;
+  margin: 5px 0 15px 0;
 }
 
 .album-name {
@@ -58,7 +107,7 @@
 
 .small-album {
   font-size: 14px;
-  margin: 10px 0px;
+  margin-bottom: 15px;
 }
 
 .small-cover {
@@ -66,6 +115,11 @@
   height: 120px;
   object-fit: cover;
   object-position: center;
+}
+
+.description {
+  font-size: 12px;
+  margin-bottom: 15px;
 }
 
 #currently-playing {

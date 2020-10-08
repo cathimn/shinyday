@@ -2,8 +2,8 @@ const asyncHandler = require('express-async-handler');
 const { Song, Artist, Album } = require('../../db/models');
 const router = require('express').Router();
 
-router.post('/', asyncHandler(async (req, res) => {
-    const { query } = req.body;
+router.get('/:query', asyncHandler(async (req, res) => {
+    const { query } = req.params;
     const search = new Object();
     let id = 0;
 
