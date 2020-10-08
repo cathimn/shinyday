@@ -10,8 +10,6 @@ const routes = require('./routes/index');
 const app = express();
 
 app.use(cors({ origin: true }));
-app.use(helmet());
-// app.use(helmet({ hsts: false }));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
