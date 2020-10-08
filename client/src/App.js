@@ -67,18 +67,14 @@ const App = () => {
 
   return (
     <Router>
-      <ScrollToTop />
-      <Header
+      {/* <Header
         artistAccount={artistAccount}
         needLogin={needLogin}
         setNeedLogin={setNeedLogin}
         token={token}
-        username={username} />
+        username={username} /> */}
         <div className="container">
         <Switch>
-          {/* <Route path='/404'>
-            404
-          </Route> */}
           <Route path='/login'>
             <Login needLogin={needLogin} updateToken={updateToken} />
           </Route>
