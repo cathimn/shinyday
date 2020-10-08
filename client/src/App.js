@@ -23,35 +23,53 @@ const ScrollToTop = () => {
 }
 
 const App = () => {
+  const authToken = window.localStorage.getItem("shinyday_session");
+
   const [session, setSession] = useState({
     token: null,
     id: null,
     username: null,
-    artist: false,
+    isArtist: null,
+    avatarUrl: null,
+    bannerUrl: null,
   });
-  const authToken = window.localStorage.getItem("shinyday_session");
   const [ loaded, setLoaded ] = useState(false);
-  const [ token, setToken ] = useState(authToken);
+  
+  const loadProfile = async () => {
 
+    if (authToken) {
+      const response = await fetch(`${baseUrl}/user/me`, {
+        headers: { Authorization: `Bearer ${authToken}` }
+      });
 
-  const loadProfile = async authToken => {
-    const response = await fetch(`${baseUrl}/user/me`, {
-      headers: { Authorization: `Bearer ${authToken}` }
-    });
-
-    if (response.ok) {
       const res = await response.json();
-      console.log(res);
-    } else {
-      window.localStorage.removeItem("shinyday_session")
+      if (response.ok) {
+        setSession({
+          token: authToken,
+          id: res.id,
+          username: res.username,
+          isArtist: res.checkArtist,
+          avatarUrl: res.avatarUrl,
+          bannerUrl: res.bannerUrl,
+        })
+      } else {
+        setSession({
+          token: null,
+          id: null,
+          username: null,
+          isArtist: null,
+          avatarUrl: null,
+          bannerUrl: null
+        })
+        window.localStorage.removeItem("shinyday_session");
+      }
     }
     setLoaded(true);
-    console.log("laodfdfjsj")
   };
 
   useEffect(() => {
     loadProfile();
-  }, [])
+  }, [authToken])
 
   // const updateToken = authToken => {
   //   window.localStorage.setItem('shinyday_session', authToken);
@@ -65,7 +83,7 @@ const App = () => {
 
   return (
     <AppContext.Provider
-      value={{ session, setSession }}>
+      value={{ session, setSession, loaded }}>
       <Router>
         <ScrollToTop />
         <Header session={session} />

@@ -34,7 +34,7 @@ while (fakes.length < 5) {
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Users', [
-      r({ username: 'rin-bear', email: 'rin@outdooractivities.club', password: createPassword() }),
+      r({ username: 'rin-bear', email: 'rin@outdooractivities.club', password: createPassword(), avatar_url: 'https://shinyday.s3.us-east-2.amazonaws.com/users/rin-bear.png' }),
       r({ username: 'nadeshiko_loves_food', email: 'nadeshiko@outdooractivities.club', password: createPassword() }),
       r({ username: 'bisou', email: 'bisou@mail.com', password: createSecretPassword() }),
       r({ username: 'breakmasterc', email: 'breakmasterc@mail.com', password: createSecretPassword() }),

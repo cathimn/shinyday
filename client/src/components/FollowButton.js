@@ -1,74 +1,83 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AppContext } from '../AppContext';
 
 import { baseUrl } from '../config';
 
-export default ({ username, artistId }) => {
-    const [loaded, setLoaded] = useState(false)
-    const [followStatus, setFollowStatus] = useState(false);
-    const [followingButton, setFollowingButton] = useState(true);
+export default ({ artistId }) => {
+  const { session } = useContext(AppContext);
+  const [loaded, setLoaded] = useState(false)
+  const [followStatus, setFollowStatus] = useState(false);
 
-    const checkFollow = async (artistId, username) => {
-        const response = await fetch(`${baseUrl}/follows/amfollowing`, {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ "artist_id": artistId, username })
-        })
+  const checkFollow = async () => {
+    const response = await fetch(`${baseUrl}/follows/id/${artistId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session.token}` },
+    })
 
-        if (response.ok) {
-            let res = await response.json();
-            if (res) {
-                setFollowStatus(true);
-            }
-        }
-        setLoaded(true)
+    if (response.ok) {
+      let res = await response.json();
+      setFollowStatus(res.following)
     }
+    setLoaded(true)
+  }
 
-    const follow = async (username, artistId) => {
-        await fetch(`${baseUrl}/follows/new`, {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "username": username,
-                "artist_id": artistId
-            })
-        })
-        setFollowStatus(true)
-    }
+  const follow = async () => {
+    const response = await fetch(`${baseUrl}/follows/`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session.token}` },
+      body: JSON.stringify({
+        "artistId": artistId
+      })
+    })
+    const res = await response.json()
+    setFollowStatus(res.following)
+  }
 
-    const unfollow = async (username, artistId) => {
-        await fetch(`${baseUrl}/follows`, {
-            method: 'delete',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "username": username,
-                "artist_id": artistId
-            })
-        })
-        setFollowStatus(false)
-    }
+  const unfollow = async () => {
+    const response = await fetch(`${baseUrl}/follows/`, {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session.token}` },
+      body: JSON.stringify({
+        "artistId": artistId
+      })
+    })
+    const res = await response.json()
+    setFollowStatus(res.following)
+  }
 
-    useEffect(() => {
-        if (artistId && username) {
-            checkFollow(artistId, username);
-        }
-    }, [artistId, username])
+  useEffect(() => {
+    if (session.token) checkFollow();
+  }, [session.token])
 
-    if (!loaded) {
-        return null
-    }
-    
-    if (followStatus) {
-        return (
-            <button className="follow-button following"
-                onMouseEnter={() => setFollowingButton(false)}
-                onMouseLeave={() => setFollowingButton(true)}
-                onClick={() => unfollow(username, artistId)}>
-                { followingButton ? "Following" : "Unfollow" }
-            </button>
-        )
-    } else {
-        return (
-            <button className="follow-button" onClick={() => follow(username, artistId)}>Follow</button>
-        )
-    }
+  if (!loaded) {
+      return null
+  }
+  
+
+  return (
+    <button
+      className={followStatus ? "follow-button following" : "follow-button"}
+      onClick={followStatus ? unfollow : follow}>
+    </button>
+  )
+  // if (followStatus) {
+  //     return (
+  //         <button className="follow-button following"
+  //             onMouseEnter={() => setFollowingButton(false)}
+  //             onMouseLeave={() => setFollowingButton(true)}
+  //             onClick={() => unfollow(username, artistId)}>
+  //             { followingButton ? "Following" : "Unfollow" }
+  //         </button>
+  //     )
+  // } else {
+  //     return (
+  //         <button className="follow-button" onClick={() => follow(username, artistId)}>Follow</button>
+  //     )
+  // }
 }

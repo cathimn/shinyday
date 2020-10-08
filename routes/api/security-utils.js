@@ -19,32 +19,32 @@ function generateToken(user) {
 }
 
 function restoreUser(req, res, next) {
-    const { token } = req;
+  const { token } = req;
 
-    if (!token) {
-        return next({ status: 401, message: 'no token' });
+  if (!token) {
+      return next({ status: 401, message: 'no token' });
+  }
+
+  return jwt.verify(token, secret, null, async (err, payload) => {
+    if (err) {
+      err.status = 403;
+      return next(err);
     }
 
-    return jwt.verify(token, secret, null, async (err, payload) => {
-        if (err) {
-            err.status = 403;
-            return next(err);
-        }
+    const tokenId = payload.jti;
 
-        const tokenId = payload.jti;
+    try {
+      req.user = await UserRepository.findBySession(tokenId);
+    } catch (e) {
+      return next(e);
+    }
 
-        try {
-            req.user = await UserRepository.findBySession(tokenId);
-        } catch (e) {
-            return next(e);
-        }
+    if (!req.user.isValid()) {
+      return next({ status: 404, message: 'session not found' });
+    }
 
-        if (!req.user.isValid()) {
-            return next({ status: 404, message: 'session not found' });
-        }
-
-        next();
-    });
+    next();
+  });
 }
 
 const authenticated = [bearerToken(), restoreUser];

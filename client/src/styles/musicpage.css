@@ -52,8 +52,20 @@
 }
 
 .album-name {
-  font-size: smaller;
+  font-size: 14px;
   word-wrap: break-word;
+}
+
+.small-album {
+  font-size: 14px;
+  margin: 10px 0px;
+}
+
+.small-cover {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  object-position: center;
 }
 
 #currently-playing {

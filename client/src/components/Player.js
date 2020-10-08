@@ -42,7 +42,7 @@ export default ({ artist, album }) => {
   return (
     <>
       <div style={{ marginRight: "25px" }}>
-        <h1 style={{ margin: "0", fontWeight: "400" }}>{album.name}</h1>
+        <h1>{album.name}</h1>
         <div>
           by&nbsp;
           <Link to={`/${artist.url}`} style={{ color: "deeppink" }}>{artist.artistName}</Link>

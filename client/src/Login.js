@@ -3,13 +3,11 @@ import { Redirect, Link } from 'react-router-dom';
 import { AppContext } from './AppContext';
 import { baseUrl } from './config';
 
-const LoginPanel = ({ needLogin, updateToken }) => {
-  const { session, setSession } = useContext(AppContext);
+const LoginPanel = () => {
+  const { session, setSession, loaded } = useContext(AppContext);
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-
-  const [authToken, setAuthToken] = useState(localStorage.getItem('shinyday_session'));
   const [errors, setErrors] = useState();
 
   const handleSubmit = async (e) => {
@@ -21,17 +19,22 @@ const LoginPanel = ({ needLogin, updateToken }) => {
     });
 
     if (!login || !password) {
-        setErrors('Do not leave any fields empty.')
-        return;
+      setErrors('Do not leave any fields empty.')
+      return;
     }
 
+    const res = await response.json();
     if (response.ok) {
-        const { token } = await response.json();
-        updateToken(token);
-        setAuthToken(token);
+      setSession({
+        token: res.token,
+        id: res.user["id"],
+        username: res.user["username"],
+        avatarUrl: res.user["avatarUrl"],
+        bannerUrl: res.user["bannerUrl"],
+      })
+      window.localStorage.setItem("shinyday_session", res.token);
     } else {
-        const error = await response.json();
-        setErrors(error.message);
+      setErrors(res.message);
     }
   };
 
@@ -40,7 +43,7 @@ const LoginPanel = ({ needLogin, updateToken }) => {
     setPassword('password');
   }
 
-  if (!needLogin && authToken) {
+  if (session.token && loaded) {
     return <Redirect to="/" />;
   }
 
@@ -50,7 +53,7 @@ const LoginPanel = ({ needLogin, updateToken }) => {
       <div className="divider" />
       <h1>log in</h1>
       <div>
-        {errors ? <span className="errors">{errors} Please try again.</span> : null}
+        {errors && <span className="errors">{errors} Please try again.</span>}
       </div>
       <form onSubmit={handleSubmit} className="login__form">
         <div>

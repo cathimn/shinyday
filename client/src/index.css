@@ -27,6 +27,17 @@ button, input {
   outline: none;
 }
 
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+h1,
+h3 {
+  margin: 0;
+  padding: 0;
+}
+
 .pink {
   color: hotpink;
 }
@@ -367,20 +378,16 @@ audio {
   /* margin: 50px auto 20px auto; */
 }
 
-.artist-avatar {
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
-}
-
 .follow-button {
+  cursor: pointer;
   font-size: 12px;
   font-weight: 600;
   color: darkgray;
   background-color: rgba(211, 211, 211, 0.2);
   width: auto;
-  height: 30px;
+  padding: 10px;
   border-radius: 5px;
+  margin: 10px 0;
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
@@ -388,14 +395,16 @@ audio {
   text-decoration: underline;
 }
 
-.following {
+.following:after {
   background-color: rgb(230, 105, 147);
   color: white;
-  border: none;
+  content: "Following"
 }
 
-.following:hover {
-  text-decoration: none;
+.following:hover:after {
+  text-decoration: underline;
+  content: "Unfollow"
+
 }
 
 .follow-card__button > .follow-button {
@@ -417,20 +426,6 @@ audio {
   border: 1px solid gray
 }
 
-
-
-.side-discography {
-  list-style-type: none;
-  padding: 0;
-  font-size: 14px;
-}
-
-.side-discography__album-art {
-  margin-top: 15px;
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-}
 
 .profile-container {
   top: -25px;

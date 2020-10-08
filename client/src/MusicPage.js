@@ -7,7 +7,7 @@ import Player from './components/Player';
 import ArtistLeft from './components/ArtistLeft';
 import FollowButton from './components/FollowButton';
 
-export default ({ type, username }) => {
+export default ({ type }) => {
   const { artistTerm, albumTerm } = useParams();
 
   const [ album, setAlbum ] = useState({
@@ -97,23 +97,21 @@ export default ({ type, username }) => {
             album={album}/>}
         </div>
         <div id="musicpage__main--right">
-          <div className="ap-avatar">
-            <img src={artist.avatarUrl}
-                className="artist-avatar"
-                alt="artist pic" />
-          </div>
-            <h3>{artist.artistName}</h3>
-              {/* <FollowButton
-                username={artist.url}
-                artistId={artist.id} /> */}
-          { type === "album" &&
-            <ul className="side-discography">
-              {discography.map(album =>
-                <Link to={`/${artist.url}/album/${album.url}`}>
-                  <img src={album.cover_url} className="side-discography__album-art" alt="album art" />
-                  <li className="pink">{album.name}</li>
-                </Link>)}
-            </ul> }
+          <img src={artist.avatarUrl}
+              className="small-cover"
+              alt="artist pic" />
+          <h3>{artist.artistName}</h3>
+          <FollowButton artistId={artist.id} />
+          {type === "album" &&
+          <>
+            {discography.map(album =>
+            <div key={album.id} className="small-album">
+              <Link to={`/${artist.url}/album/${album.url}`}>
+                <img src={album.cover_url} className="small-cover" alt="album art" />
+                <span className="pink">{album.name}</span>
+              </Link>
+            </div>)}
+          </>}
         </div>
       </div>
     </div>

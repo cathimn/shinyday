@@ -65,11 +65,10 @@ module.exports = (sequelize, DataTypes) => {
 
   User.prototype.toSafeObject = function () {
     return {
-      createdAt: this.createdAt,
-      username: this.username,
-      email: this.email,
       id: this.id,
-      updatedAt: this.updatedAt,
+      username: this.username,
+      avatarUrl: this.avatar_url,
+      bannerUrl: this.banner_url,
     }
   }
 

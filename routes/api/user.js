@@ -9,20 +9,20 @@ const { authenticated, generateToken } = require('./security-utils');
 const router = express.Router();
 
 const email =
-    check('email')
-        .isEmail()
-        .withMessage('Please provide a valid email address.')
-        .normalizeEmail();
+  check('email')
+    .isEmail()
+    .withMessage('Please provide a valid email address.')
+    .normalizeEmail();
 
 const username =
-    check('username')
-        .not().isEmpty()
-        .withMessage('Please provide a username.');
+  check('username')
+    .not().isEmpty()
+    .withMessage('Please provide a username.');
 
 const password =
-    check('password')
-        .not().isEmpty()
-        .withMessage('Please provide a password.');
+  check('password')
+    .not().isEmpty()
+    .withMessage('Please provide a password.');
 
 router.post('/', email, username, password, asyncHandler(async (req, res) => {
     const errors = validationResult(req);
@@ -38,28 +38,20 @@ router.post('/', email, username, password, asyncHandler(async (req, res) => {
     res.json({ token, user: user.toSafeObject() });
 }));
 
-// router.get('/me', authenticated, function (req, res) {
-//     res.json({
-//         email: req.user.email,
-//         username: req.user.username,
-//     });
-// });
-
 router.get('/me', authenticated, asyncHandler(async (req, res) => {
-    const checkArtist = await Artist.findOne({
-        where: {
-            user_id: req.user.id
-        },
-        attributes: ['id', 'artist_name']
-    })
+  const checkArtist = await Artist.findOne({
+    where: { user_id: req.user.id },
+    attributes: ['id', 'artist_name']
+  });
 
-    res.json({
-        email: req.user.email,
-        username: req.user.username,
-        checkArtist: checkArtist,
-    })
+  res.json({
+    id: req.user.id,
+    email: req.user.email,
+    username: req.user.username,
+    avatarUrl: req.user.avatar_url,
+    bannerUrl: req.user.banner_url,
+    checkArtist: checkArtist,
+  });
 }));
-
-
 
 module.exports = router;
