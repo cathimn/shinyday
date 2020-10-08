@@ -8,28 +8,31 @@ import Main from './Main';
 import Signup from './Signup';
 import MusicPage from './MusicPage';
 import Profile from './Profile';
-
 import Header from './components/Header';
+import { AppContext } from './AppContext';
 
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }, [pathname]);
 
   return null;
 }
 
 const App = () => {
-  const authToken = window.localStorage.getItem('shinyday_session');
-
+  const [session, setSession] = useState({
+    token: null,
+    id: null,
+    username: null,
+    artist: false,
+  });
+  const authToken = window.localStorage.getItem("shinyday_session");
   const [ loaded, setLoaded ] = useState(false);
   const [ token, setToken ] = useState(authToken);
-  const [ needLogin, setNeedLogin ] = useState(!null);
-  const [ username, setUsername ] = useState('');
-  const [ artistAccount, setArtistAccount ] = useState({});
+
 
   const loadProfile = async authToken => {
     const response = await fetch(`${baseUrl}/user/me`, {
@@ -38,64 +41,58 @@ const App = () => {
 
     if (response.ok) {
       const res = await response.json();
-      setNeedLogin(false);
-      setUsername(res.username);
-
-      if (res.checkArtist !== null) {
-        setArtistAccount(res.checkArtist)
-      }
+      console.log(res);
     } else {
-      setNeedLogin(true);
       window.localStorage.removeItem("shinyday_session")
     }
+    setLoaded(true);
+    console.log("laodfdfjsj")
   };
 
   useEffect(() => {
-    setLoaded(true);
-    if (token) loadProfile(token)
-  }, [token])
+    loadProfile();
+  }, [])
 
-  const updateToken = authToken => {
-    window.localStorage.setItem('shinyday_session', authToken);
-    setToken(authToken);
-    loadProfile(authToken);
-  };
+  // const updateToken = authToken => {
+  //   window.localStorage.setItem('shinyday_session', authToken);
+  //   setToken(authToken);
+  //   loadProfile(authToken);
+  // };
 
   if(!loaded) {
     return null;
   }
 
   return (
-    <Router>
-      {/* <Header
-        artistAccount={artistAccount}
-        needLogin={needLogin}
-        setNeedLogin={setNeedLogin}
-        token={token}
-        username={username} /> */}
-        <div className="container">
-        <Switch>
-          <Route path='/login'>
-            <Login needLogin={needLogin} updateToken={updateToken} />
-          </Route>
-          <Route path='/signup'>
-            <Signup needLogin={needLogin} updateToken={updateToken} />
-          </Route>
-          <Route path='/profile/:username'>
-            <Profile needLogin={needLogin} loggedInUser={username} />
-          </Route>
-          <Route path="/:artistTerm/album/:albumTerm">
-            <MusicPage type="album" username={username} />
-          </Route>
-          <Route path="/:artistTerm">
-            <MusicPage type="artist" username={username} />
-          </Route>
-          <Route exact path="/">
-            <Main />
-          </Route>
-        </Switch>
-        </div>
-    </Router>
+    <AppContext.Provider
+      value={{ session, setSession }}>
+      <Router>
+        <ScrollToTop />
+        <Header session={session} />
+          <div className="container">
+          <Switch>
+            <Route path='/login'>
+              <Login />
+            </Route>
+            <Route path='/signup'>
+              <Signup />
+            </Route>
+            <Route path='/profile/:username'>
+              <Profile />
+            </Route>
+            <Route path="/:artistTerm/album/:albumTerm">
+              <MusicPage type="album"/>
+            </Route>
+            <Route path="/:artistTerm">
+              <MusicPage type="artist" />
+            </Route>
+            <Route exact path="/">
+              <Main />
+            </Route>
+          </Switch>
+          </div>
+      </Router>
+    </AppContext.Provider>
   );
 };
 

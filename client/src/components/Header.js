@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import Searchbar from './Searchbar';
 import LoginModule from './LoginModule';
 import UserModule from './UserModule';
 
-export default ({ artistAccount, setNeedLogin, needLogin, username, token }) => (
+import { AppContext } from '../AppContext';
+
+export default () => {
+  const { session } = useContext(AppContext);
+  
+  return (
   <div className="header">
     <div className="header__left">
       <Link to="/">
@@ -19,14 +24,11 @@ export default ({ artistAccount, setNeedLogin, needLogin, username, token }) => 
       </div>
     </div>
     <div className="header__right">
-      {!needLogin
-          ? <UserModule
-              artistAccount={artistAccount}
-              setNeedLogin={setNeedLogin}
-              username={username}
-              token={token} />
+      {session.token
+          ? <UserModule />
           : <LoginModule />
       }
     </div>
   </div>
-);
+  );
+}
