@@ -5,7 +5,7 @@ export default ({ discography, artist }) => (
   <div id="full-discography">
     {discography.map(album =>
       <div key={album.id} className="album-card">
-          <Link to={`/${artist}/album/${album.url}`}>
+          <Link to={`/${artist}/${album.url}`}>
           <img
             src={album.cover_url}
             alt="album art"

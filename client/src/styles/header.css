@@ -2,7 +2,7 @@
   width: auto;
   margin: 0 auto;
   display: flex;
-  height: 65px;
+  height: 55px;
   background-color: white;
   justify-content: space-between;
   align-items: center;
@@ -40,16 +40,26 @@
 }
 
 .search-container {
-  width: 300px;
+  width: 325px;
   background-color: whitesmoke;
-  border-radius: 5px;
+  border-radius: 3px;
+  position: relative;
+}
+
+#search-button {
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  vertical-align: center;
+  background-color: transparent;
+  height: 40px;
 }
 
 .search {
   box-sizing: border-box;
-  padding: 0 10px;
+  padding: 0 15px;
   width: 100%;
-  height: 35px;
+  height: 40px;
   border:none;
   background-image:none;
   background-color:transparent;
@@ -58,7 +68,7 @@
 
 .search:focus {
   transition: box-shadow 0.25s;
-  box-shadow: rgba(255, 182, 193, 1) 0px 0px 5px;
+  box-shadow: rgb(125, 125, 125, .5) 0px 0px 5px;
   border-radius: 5px;
 }
 
@@ -68,16 +78,19 @@
 }
 
 .search-results {
+  box-sizing: border-box;
   font-size: 12px;
-  width: 300px;
+  width: 325px;
   position: absolute;
-  box-shadow: 0 0 5px rgb(252, 245, 245);
+  top: -3px;
+  border: 1px solid rgba(125, 125, 125, .1);
+  border-top: 2px solid whitesmoke;
   background-color: white;
 }
 
 .result-container {
   display: flex;
-  height: 55px;
+  height: 60px;
 }
 
 .result-container:hover {
@@ -87,14 +100,15 @@
 .result-img-placeholder {
   width: 40px;
   height: 40px;
-  background-color: lightpink;
   align-self: center;
   margin-left: 10px;
+  object-position: center;
+  object-fit: cover;
+  border: 1px solid rgba(139, 88, 88, 0.1);
 }
 
 .result-img-placeholder.artist {
   border-radius: 50%;
-  background-color: pink;
 }
 
 .result {
@@ -103,7 +117,7 @@
   flex-direction: column;
   list-style-type: none;
   padding: 0;
-  margin: 10px
+  margin: 10px;
 }
 
 .search-matched-term {

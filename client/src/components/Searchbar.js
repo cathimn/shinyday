@@ -1,65 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { baseUrl, toLowerNoSpecial } from '../config';
+import { baseUrl } from '../config';
 
-const AlbumResult = ({ result }) => {
-  const albumName = result[0][1];
-  const artistName = result[1][1];
-  const albumPath = `/${toLowerNoSpecial(artistName)}/album/${toLowerNoSpecial(albumName)}`;
+const AlbumResult = ({ album }) => (
+  <Link to={`/${album.artist.url}/${album.url}`}>
+    <div className="result-container">
+      <img src={album.cover_url} className="result-img-placeholder" />
+      <ul className="result">
+        <li className="search-matched-term">{album.name}</li>
+        <li>by {album.artist.artist_name}</li>
+        <li>ALBUM</li>
+      </ul>
+    </div>
+  </Link>
+);
 
-  return (
-      <Link to={albumPath}>
-          <div className="result-container">
-              <div className="result-img-placeholder">
-
-              </div>
-              <ul className="result">
-                  <li className="search-matched-term">{albumName}</li>
-                  <li>by {artistName}</li>
-                  <li>ALBUM</li>
-              </ul>
-          </div>
-      </Link>
-  );
-};
-
-const ArtistResult = ({result}) => {
-  const artistName = result[0][1];
-
-  return (
-    <Link to={`/${toLowerNoSpecial(artistName)}`}>
-        <div className="result-container">
-            <div className="result-img-placeholder artist">
-                
-            </div>
-            <ul className="result">
-                <li className="search-matched-term">{artistName}</li>
-                <li>ARTIST</li>
-            </ul>
-        </div>
-    </Link>
-  );
-};
-
-const Results = ({ list }) => (
-  <div className="search-results">
-      {Object.values(list).map(li => {
-          const result = Object.entries(li)
-
-          if (result.length > 1) {
-              return <AlbumResult key={result[0][1]} result={result} />
-          } else {
-              return <ArtistResult key={result[0][1]} result={result} />
-          }
-      }
-      )}
-  </div>
+const ArtistResult = ({ artist }) => (
+  <Link to={`/${artist.url}`}>
+    <div className="result-container">
+        <img src={artist.avatar_url} className="result-img-placeholder artist" />
+        <ul className="result">
+          <li className="search-matched-term">{artist.artist_name}</li>
+          <li>ARTIST</li>
+        </ul>
+    </div>
+  </Link>
 );
 
 export default () => {
   const [query, setQuery] = useState('');
   const [searched, setSearched] = useState(false);
-  const [list, setList] = useState({});
+  const [list, setList] = useState([]);
 
   const updateQuery = e => {
       setQuery(e.target.value);
@@ -80,30 +51,42 @@ export default () => {
   }
 
   useEffect(() => {
-      if (query && !searched) {
-          populateList(query);
-      } else if (query.length === 0) {
-          setList({});
-      }
+    if (query && !searched) {
+      populateList(query);
+    } else if (query.length === 0) {
+      setList([]);
+    }
   }, [query, searched]);
 
   useEffect(() => {
-      setSearched(false);
+    setSearched(false);
   }, [query.length])
 
   return (
     <>
       <div className="search-container" onBlur={loseFocus}>
+        <button id="search-button" disabled>
+          <i className="fa fa-search" />
+        </button>
         <input
-            className="search"
-            type="text"
-            value={query}
-            onChange={updateQuery}
-            placeholder="search..."
-            />
+          className="search"
+          type="text"
+          value={query}
+          onChange={updateQuery}
+          placeholder="Search and discover music"
+          />
       </div>
       <div className="search-results-container">
-          {(Object.keys(list).length > 0) ? <Results list={list} /> : null}
+        {list.length > 0 && 
+          <div className="search-results">
+            {list.map(item => {
+              if (item.artist) {
+                return <AlbumResult album={item} />
+              } else {
+                return <ArtistResult artist={item} />
+              }
+            })}
+          </div>}
       </div>
     </>
   );

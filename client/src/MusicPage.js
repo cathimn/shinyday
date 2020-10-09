@@ -101,12 +101,12 @@ export default ({ type }) => {
             alt="artist pic" />
           <h3 style={{ margin: "10px 0"}}>{artist.artistName}</h3>
           <FollowButton artistId={artist.id} />
-          {artist.description && <p className="description">{artist.description}</p>}
+          <p className="description">{artist.description}</p>
           {type === "album" &&
           <>
             {discography.map(album =>
             <div key={album.id} className="small-album">
-              <Link to={`/${artist.url}/album/${album.url}`}>
+              <Link to={`/${artist.url}/${album.url}`}>
                 <img src={album.cover_url} className="small-cover" alt="album art" />
                 <span className="pink">{album.name}</span>
               </Link>

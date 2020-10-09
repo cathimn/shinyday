@@ -1,67 +1,28 @@
 const asyncHandler = require('express-async-handler');
+const { Op } = require('sequelize');
 const { Song, Artist, Album } = require('../../db/models');
 const router = require('express').Router();
+const matchSorter = require('match-sorter').default;
 
 router.get('/:query', asyncHandler(async (req, res) => {
-    const { query } = req.params;
-    const search = new Object();
-    let id = 0;
+  const { query } = req.params;
 
-    // const searchArray = await Artist.findAll({
-    //     include: [{ model: Album, as: "albums", required: true, attributes: ["id", "name"],
-    //             include: [{ model: Song, as: "songs", required: true, attributes: ["id", "name"] }]}],
-    //     attributes: [ "id", "artist_name"]});
+  const search = await Artist.findAll({
+    attributes: ["artist_name", "url", "avatar_url"]
+  })
 
-    // searchArray.forEach(ele => {
-    //     const artistName = ele.artist_name;
-    //     ele.albums.forEach(ele => {
-    //         const albumName = ele.name;
-    //         ele.songs.forEach(ele => {
-    //             search[id] = {
-    //                 song: ele.name,
-    //                 album: albumName,
-    //                 artist: artistName,
-    //             };
-    //             id++;
-    //         })
-    //         search[id] = {
-    //             album: albumName,
-    //             artist: artistName,
-    //         }
-    //         id++;
-    //     })
-    //     search[id] = {
-    //         artist: artistName
-    //     }
-    //     id++;
-    // })
+  const albums = await Album.findAll({
+    attributes: ["name", "url", "cover_url"],
+    include: {
+      model: Artist,
+      as: "artist",
+      attributes: ["artist_name", "url"]
+    }
+  })
 
-    const albArtSearch = await Artist.findAll({
-        include: [{ model: Album, as: "albums", required: true, attributes: ["id", "name"] }],
-        attributes: ["id", "artist_name"],
-    })
+  search.push(...albums);
 
-    
-    albArtSearch.forEach(ele => {
-        const artistName = ele.artist_name;
-        const art = artistName.toLowerCase();
-        ele.albums.forEach(ele => {
-            const albumName = ele.name;
-            const alb = albumName.toLowerCase();
-            if (alb.includes(query)) {
-                search[id] = {
-                    album: ele.name,
-                    artist: artistName }
-                id++;
-            }
-        })
-        if (art.includes(query)) {
-            search[id] = {
-                artist: artistName };
-            id++;
-        }
-    })
-    res.json(search)
+  res.json(matchSorter(search, query, { keys: ["artist_name", "name"] }).slice(0, 5));
 }));
 
 module.exports = router;

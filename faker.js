@@ -14,5 +14,5 @@ while (fakes.length < 5) {
         })
 }
 
-console.log(fakes)
-console.log(faker.image.cats(300, 300)) 
+// console.log(fakes)
+// console.log(faker.image.cats(300, 300)) 

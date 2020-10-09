@@ -98,7 +98,7 @@ const App = () => {
             <Route path='/profile/:username'>
               <Profile />
             </Route>
-            <Route path="/:artistTerm/album/:albumTerm">
+            <Route path="/:artistTerm/:albumTerm">
               <MusicPage type="album"/>
             </Route>
             <Route path="/:artistTerm">
