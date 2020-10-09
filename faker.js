@@ -1,6 +1,6 @@
-const faker = require('faker')
+const faker = require('faker');
 
-faker.seed(4444)
+faker.seed(4444);
 
 let fakes = [];
 while (fakes.length < 5) {
@@ -16,3 +16,7 @@ while (fakes.length < 5) {
 
 // console.log(fakes)
 // console.log(faker.image.cats(300, 300)) 
+
+
+console.log(faker.lorem.sentences(3))
+// console.log(faker.lorem.sentence())

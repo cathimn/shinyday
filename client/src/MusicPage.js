@@ -16,6 +16,7 @@ export default ({ type }) => {
     coverUrl: null,
     description: null,
     name: null,
+    createdAt: null,
     songs: [], });
   const [ artist, setArtist ] = useState({
     id: null,
@@ -53,6 +54,7 @@ export default ({ type }) => {
               artistId: res.artist_id,
               coverUrl: res.cover_url,
               description: res.description,
+              createdAt: res.createdAt,
               name: res.name,
               songs: [...res.songs]
             })

@@ -1,8 +1,13 @@
 'use strict';
 
+const faker = require('faker');
+
+faker.seed(4444);
+
 function r(o) {
   o.createdAt = new Date();
   o.updatedAt = new Date();
+  o.description = faker.lorem.sentence();
   return o;
 }
 

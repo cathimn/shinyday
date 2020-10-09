@@ -35,14 +35,14 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Users', [
       r({ username: 'rin-bear', email: 'rin@outdooractivities.club', password: createPassword(), avatar_url: 'https://shinyday.s3.us-east-2.amazonaws.com/users/rin-bear.png' }),
-      r({ username: 'nadeshiko_loves_food', email: 'nadeshiko@outdooractivities.club', password: createPassword() }),
-      r({ username: 'bisou', email: 'bisou@mail.com', password: createSecretPassword() }),
+      r({ username: 'nadeshiko_loves_food', email: 'nadeshiko@outdooractivities.club', password: createPassword(), avatar_url: 'https://shinyday.s3.us-east-2.amazonaws.com/users/nadeshiko-loves-food.png' }),
+      r({ username: 'bisou', email: 'bisou@mail.com', password: createSecretPassword(), }),
       r({ username: 'breakmasterc', email: 'breakmasterc@mail.com', password: createSecretPassword() }),
       r({ username: 'dyankey', email: 'dyankey@mail.com', password: createSecretPassword() }),
       r({ username: 'gritt', email: 'gritt@mail.com', password: createSecretPassword() }),
       r({ username: 'monplaisir', email: 'monplaisir@mail.com', password: createSecretPassword() }),
       r({ username: 'blearmoon', email: 'blearmoon@mail.com', password: createSecretPassword() }),
-      r({ username: 'luna', email: 'luna@thecat.com', password: createSecretPassword() }),
+      r({ username: 'luna', email: 'luna@thecat.com', password: createSecretPassword(), avatar_url: 'https://shinyday.s3.us-east-2.amazonaws.com/users/luna.png'}),
       r({ username: 'captain', email: 'captain@thecat.com', password: createSecretPassword() }),
       r({ username: 'blahblahblah', email: 'blahblahblah@mail.com', password: createSecretPassword() }),
       r({ username: 'cryosyncopy', email: 'cryosyncopy@mail.com', password: createSecretPassword() }),

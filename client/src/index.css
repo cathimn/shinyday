@@ -64,66 +64,6 @@ h3 {
   margin: auto;
 }
 
-.center > h1 {
-  color: rgb(80, 80, 80);
-  padding-bottom: 10px;
-  border-bottom: 2px dotted lightpink;
-}
-
-.login__form {
-  display: flex;
-  flex-direction: column;
-  width: 350px;
-  height: 225px;
-  justify-content: space-evenly;
-}
-
-.login__form > div {
-  display: flex;
-  justify-content: space-between;
-
-}
-
-.login__form > button {
-  font-size: 16px;
-  font-weight: 600;
-  width: 100px;
-  margin: 0 auto;
-  border-radius: 20px;
-  padding: 5px 0px;
-  background-color: pink;
-}
-
-.login__form > div {
-  margin: 0px 10px;
-}
-
-.login__form > div > label {
-  align-self: center;
-}
-
-.login__form > div > input {
-  padding: 5px 10px;
-  border-radius: 20px;
-  background-color: white;
-}
-
-.login__redirects {
-  text-align: center;
-  width: 100%;
-  font-size: 12px;
-}
-
-.login__redirects > a {
-  color: rgb(126, 91, 126);
-  text-decoration: underline lightpink;
-}
-
-.errors {
-  color: maroon;
-  font-size: 14px;
-}
-
 /* MODULE STYLES */
 .module {
   margin-right: 20px;
@@ -201,13 +141,13 @@ h3 {
   margin: 0;
 }
 
-.small-album-card__image{
+.small-album-card__image {
   box-sizing: border-box;
-  height: 200px;
-  width: 200px;
   object-fit: cover;
   object-position: center;
   border: 1px solid rgba(59, 59, 59, 0.123);
+  height: 200px;
+  width: 200px;
 }
 
 .small-album-card__blurb {
@@ -289,8 +229,39 @@ h3 {
 }
 
 #genre-albums {
-  margin: 25px auto;
-  min-height: 350px;
+  margin-top: 25px;
+  min-height: 300px;
+}
+
+#page-buttons> button.current-page {
+  border: 1px solid rgb(255, 78, 116);
+  color: rgb(255, 78, 116);
+}
+
+#page-buttons {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+#page-buttons > button {
+  border: 1px solid pink;
+  border-radius: 4px;
+  cursor: pointer;
+  color: pink;
+  background-color: white;
+  padding: 5px 15px;
+  margin: 5px;
+}
+
+#page-buttons > button:hover {
+  color: rgb(255, 78, 116);
+  border: 1px solid rgb(255, 78, 116);
+}
+
+#page-buttons > button:disabled {
+  border: 1px solid lightgray;
+  color: lightgray;
+  cursor: not-allowed;
 }
 
 
@@ -406,12 +377,12 @@ audio {
   margin: auto;
 }
 
-.new-album__container > form {
+/* .new-album__container > form {
   display: flex;
   flex-direction: column;
   width: 500px;
   margin: auto;
-}
+} */
 
 #change-avatar {
   position: absolute;
@@ -430,3 +401,4 @@ audio {
 @import 'styles/musicpage.css';
 @import 'styles/header.css';
 @import 'styles/banner.css';
+@import 'styles/forms.css';

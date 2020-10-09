@@ -21,7 +21,7 @@
 .overlay.hover,
 .overlay:hover {
   transition: background-color .15s;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 .banner__left {
@@ -99,6 +99,8 @@
 
 .banner__left,
 .banner__right-item {
+  background-blend-mode: soft-light;
+  background-color: rgba(88, 59, 70, 0.5);
   background-position: center;
   background-size: cover;
 }

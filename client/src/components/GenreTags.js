@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { baseUrl } from '../config';
-import AlbumCard from './AlbumCard';
 
 export default () => {
   const genres = [
@@ -14,29 +14,31 @@ export default () => {
     { id: 7, genre: "punk" },
   ];
 
-  const [selected, setSelected] = useState(0);
+  const [currentGenre, setCurrentGenre] = useState({ id: 0, genre: "all" });
   const [albums, setAlbums] = useState([]);
+  const [pages, setPages] = useState([]);
   const [page, setPage] = useState(0);
   const [lastPage, setLastPage] = useState(false);
   
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`${baseUrl}/music/genre=${selected}/page=${page}`)
+      const response = await fetch(`${baseUrl}/music/genre=${currentGenre.id}/page=${page}`)
       if (response.ok) {
         const res = await response.json();
         setAlbums([...res.albums]);
-        console.log(res.end)
         setLastPage(res.end);
+        setPages(Array.from({ length: res.total }, (_, i) => i + 1));
       } else {
         setAlbums([]);
       }
     }
     fetchData();
-  }, [selected, page])
+  }, [currentGenre, page])
 
   useEffect(() => {
     setPage(0);
-  }, [selected])
+  }, [currentGenre])
+
   return (
     <>
     <div className="main-section">
@@ -50,9 +52,10 @@ export default () => {
         <div className="button-row">
           {genres.map(genre =>
             <button
-              onClick={e => setSelected(genre.id)}
+              key={genre.id}
+              onClick={e => setCurrentGenre({ id: genre.id, genre: genre.genre })}
               className={
-                selected === genre.genre
+                currentGenre.genre === genre.genre
                 ? "genre-button selected"
                 : "genre-button"} >{genre.genre}</button>)}
         </div>
@@ -66,11 +69,25 @@ export default () => {
     </div>
     <div className="main-section">
       <div id="genre-albums" className="main-section__container">
-        {albums.map(album => <AlbumCard album={album} />)}
+        {albums.map(album => 
+          <Link key={album.url} to={`/${album.artist.url}/${album.url}`}>
+            <div className="small-album-card" style={{ backgroundColor: "transparent", fontSize: "12px" }}>
+              <img src={album.cover_url} className="small-album-card__image" alt="album cover" />
+              <span className="small-album-card__name">{album.name}</span>
+              <span>{album.artist.artist_name}</span>
+              <span className="gray">{album.genre.genre}</span>
+            </div>
+          </Link>
+          )}
       </div>
-      {page > 0 && <button onClick={e => setPage(page - 1)}>PREV PAGE</button>}
-      {!lastPage && <button onClick={e => setPage(page + 1)}>NEXT PAGE</button>}
+        <div id="page-buttons">
+          <button disabled={page === 0} onClick={e => setPage(page - 1)}>previous</button>
+          {pages.map(pageNum =>
+            <button className={pageNum - 1 === page ? "current-page" : null} onClick={e => setPage(pageNum - 1)}>{pageNum}</button>)}
+          <button disabled={lastPage} onClick={e => setPage(page + 1)}>next</button>
+        </div>
     </div>
+    <div className="divider"></div>
     </>
   );
 }

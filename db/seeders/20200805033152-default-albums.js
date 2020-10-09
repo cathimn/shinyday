@@ -1,8 +1,13 @@
 'use strict';
 
+const faker = require('faker');
+
+faker.seed(4444);
+
 function r(o) {
   o.createdAt = new Date();
   o.updatedAt = new Date();
+  o.description = faker.lorem.sentences(3);
   return o;
 }
 
@@ -27,7 +32,7 @@ module.exports = {
         cover_url: 'https://shinyday.s3.us-east-2.amazonaws.com/artists/monplaisir/heatofthesummer/art.jpg'}),
       r({ name: 'Town of Two Houses', artist_id: 7, genre_id: 3, url: "townoftwohouses",
         cover_url: 'https://shinyday.s3.us-east-2.amazonaws.com/artists/blearmoon/townoftwohouses/art.jpg'}),
-      r({ name: 'split', artist_id: 7, genre_id: 3, url: "split",
+      r({ name: 'split', artist_id: 7, genre_id: 2, url: "split",
         cover_url: 'https://shinyday.s3.us-east-2.amazonaws.com/artists/blearmoon/split/art.jpg'}),
       r({ name: 'Funeral Void', artist_id: 8, genre_id: 4, url: "funeralvoid",
         cover_url: 'https://shinyday.s3.us-east-2.amazonaws.com/artists/cryosyncopy/funeralvoid/art.jpg'}),

@@ -39,8 +39,10 @@ const LoginPanel = () => {
   };
 
   const demo = e => {
+    e.preventDefault();
     setLogin('rin-bear');
     setPassword('password');
+    document.getElementById("login-button").click();
   }
 
   if (session.token && loaded) {
@@ -49,26 +51,28 @@ const LoginPanel = () => {
 
   return (
     <>
-    <div className="center">
+    <div className="login center">
       <div className="divider" />
       <h1>log in</h1>
       <div>
         {errors && <span className="errors">{errors} Please try again.</span>}
       </div>
-      <form onSubmit={handleSubmit} className="login__form">
-        <div>
-          <label>username / email</label>
+      <form onSubmit={handleSubmit}>
+        <div className="form-line">
+          <label className="form-label">username / email</label>
           <input type="text"
-              value={login}
-              onChange={e => setLogin(e.target.value)} />
+            className="form-input"
+            value={login}
+            onChange={e => setLogin(e.target.value)} />
         </div>
-        <div>
-          <label>password</label>
+        <div className="form-line">
+          <label className="form-label">password</label>
           <input type="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)} />
+            className="form-input"
+            value={password}
+            onChange={e => setPassword(e.target.value)} />
         </div>
-        <button type="submit">log in</button>
+        <button id="login-button" type="submit">log in</button>
       </form>
       <div className="login__redirects">
         <Link to="/login" onClick={demo}>Click here</Link> to use a fan's demo account.

@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef} from 'react';
 import { Link } from 'react-router-dom'
 
+const options = {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric' };
+
 export default ({ artist, album }) => {
   const player = useRef(null);
   const [currentSong, setCurrentSong] = useState({
@@ -55,19 +60,20 @@ export default ({ artist, album }) => {
             <source src={currentSong.song_url} type="audio/mp3" />
           </audio>
           <button onClick={playing ? pause : play} id="play-pause-button">
-            {playing ? "pause" : "play"}
+            <i className={playing ? "fa fa-pause" : "fa fa-play"} />
           </button>
         </div>
+        <button id="buy-button">Buy Digital Album</button><span style={{ color: "gray", fontSize: "14px", fontWeight: "600"}}>&nbsp;$0 USD</span>
         <div>
           {album.songs.map((song, index) =>
-            <div key={song.id}>
-              <button value={index} onClick={updateCurrentSong}>
-                <span>▶</span> 
-                <span>{song.track_num}.&nbsp;</span>
-                {song.name}
-              </button>
+            <div className="track-item" value={index} onClick={updateCurrentSong}>
+              <i className="fa fa-play mini-play"/>
+              <span>{song.track_num}.&nbsp;</span>
+              <span className="track-name">{song.name}</span>
             </div>)}
         </div>
+        <p className="album-description">{album.description}</p>
+        <span>released {album.createdAt}</span>
       </div>
       <div>
         <img

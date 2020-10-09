@@ -106,7 +106,7 @@
 }
 
 .small-album {
-  font-size: 14px;
+  font-size: 12px;
   margin-bottom: 15px;
 }
 
@@ -124,13 +124,13 @@
 
 #currently-playing {
   margin-left: 65px;
-  font-size: 15px;
+  font-size: 12px;
   padding: 10px 0;
 }
 
 #music-player-container {
+  margin-top: 20px;
   position: relative;
-  margin: 15px 0;
   min-height: 55px;
 }
 
@@ -138,11 +138,51 @@
   position: absolute;
   top: 0;
   background-color: white;
-  border: 1px solid lightpink;
-  border-radius: 4px;
+  border: 1px solid gray;
+  border-radius: 2px;
   height: 55px;
-  width: 55px;
-  font-size: 30px;
-  color: deeppink;
+  width: 60px;
+  font-size: 28px;
+  color: black;
   cursor: pointer;
+  box-shadow: 1px 1px 1px lightgray;
+}
+
+#buy-button {
+  color: hotpink;
+  margin: 20px 0;
+  background: none;
+  font-size: 24px;
+  font-weight: 600;
+  padding: 0;
+}
+
+.track-item {
+  font-size: 12px;
+  margin: 0 0 5px 0;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.track-name {
+  color: deeppink;
+}
+
+.track-name:hover {
+  text-decoration: underline;
+}
+
+.mini-play {
+  font-size: 10px;
+  background-color: white;
+  border: 1px solid gray;
+  color: black;
+  border-radius: 2px;
+  padding: 4px 5px 5px 6px;
+  margin-right: 10px;
+}
+
+.album-description {
+  font-size: 12px;
+  margin: 20px 0;
 }

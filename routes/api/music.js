@@ -41,11 +41,13 @@ router.get('/curated', asyncHandler(async (req, res) => {
 
 router.get('/genre=:id/page=:page', asyncHandler(async (req, res) => {
   const { id, page } = req.params;
+  const limit = 5;
+  const offset = limit;
 
   if (Number(id) === 0) {
     Album.findAndCountAll({
-      limit: 5,
-      offset: 5 * page,
+      limit: limit,
+      offset: offset * page,
       attributes: ["name", "url", "cover_url", "description", "createdAt"],
       include: [
         {
@@ -64,12 +66,13 @@ router.get('/genre=:id/page=:page', asyncHandler(async (req, res) => {
     }).then(result =>
       res.json({
         albums: result.rows,
-        end: (result.count - (5 * page)) < 5 }))
+        total: Math.ceil(result.count/limit),
+        end: (result.count - (limit * page)) < limit }))
   } else {
     Album.findAndCountAll({
       attributes: ["name", "url", "cover_url", "description", "createdAt"],
-      limit: 5,
-      offset: 5 * page,
+      limit: limit,
+      offset: offset * page,
       include: [
         {
           model: Artist,
@@ -88,7 +91,7 @@ router.get('/genre=:id/page=:page', asyncHandler(async (req, res) => {
     }).then(result =>
       res.json({
         albums: result.rows,
-        end: (result.count - (5 * page)) < 5
+        end: (result.count - (limit * page)) < limit
       }))
   }
 
@@ -123,8 +126,9 @@ router.get('/:artistTerm/:albumTerm?', asyncHandler(async (req, res) => {
         required: true,
         attributes: { exclude: ["createdAt", "updatedAt", "album_id"]},
       },
-      attributes: { exclude: ["createdAt", "updatedAt"] }
+      attributes: { exclude: ["updatedAt"] }
     })
+
     if (album) {
       res.json(album);
     } else {

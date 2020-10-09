@@ -20,5 +20,6 @@ module.exports = (sequelize, DataTypes) => {
 
     Album.hasMany(models.Song, { foreignKey: 'album_id', as: "songs" })
   };
+
   return Album;
 };

@@ -1,11 +1,28 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { baseUrl } from '../config';
 
-import AlbumCard from './AlbumCard'; 
+const AlbumCard = ({ album }) => {
+
+  return (
+    <Link to={`/${album.artist.url}/${album.url}`}>
+      <div className="small-album-card">
+        <img src={album.cover_url} className="small-album-card__image" alt="album cover" />
+        <div className="small-album-card__blurb">
+          <span className="small-album-card__name">{album.name}<br />by {album.artist.artist_name}</span>
+          <span className="gray">{album.genre.genre}</span>
+          <p>{album.description}</p>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 
 export default () => {
   const [latest, setLatest] = useState([]);
+
   useEffect(() => {
     async function fetchLatest() {
       const response = await fetch(`${baseUrl}/music/curated`);
