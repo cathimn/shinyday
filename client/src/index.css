@@ -39,6 +39,11 @@ h3 {
   padding: 0;
 }
 
+button {
+  cursor: pointer;
+  background-color: transparent;
+}
+
 .gray {
   color: darkgray
 }
@@ -210,7 +215,6 @@ h3 {
 }
 
 .genre-button {
-  cursor: pointer;
   background-color: rgb(255, 119, 149);
   font-size: 16px;
   color: white;
@@ -221,7 +225,8 @@ h3 {
 }
 
 .genre-button:hover {
-  background-color: powderblue;
+  transition: background-color .25s;
+  background-color: rgb(255, 78, 116);
 }
 
 .genre-button.selected {
@@ -246,7 +251,6 @@ h3 {
 #page-buttons > button {
   border: 1px solid pink;
   border-radius: 4px;
-  cursor: pointer;
   color: pink;
   background-color: white;
   padding: 5px 15px;
@@ -261,7 +265,7 @@ h3 {
 #page-buttons > button:disabled {
   border: 1px solid lightgray;
   color: lightgray;
-  cursor: not-allowed;
+  cursor: default;
 }
 
 

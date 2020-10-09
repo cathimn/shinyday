@@ -18,5 +18,11 @@ while (fakes.length < 5) {
 // console.log(faker.image.cats(300, 300)) 
 
 
-console.log(faker.lorem.sentences(3))
+console.log(faker.address.city(), faker.address.state())
+console.log(faker.address.city(), faker.address.state())
+console.log(faker.address.city(), faker.address.state())
+console.log(faker.address.city(), faker.address.state())
+console.log(faker.address.city(), faker.address.state())
+console.log(faker.address.city(), faker.address.state())
+
 // console.log(faker.lorem.sentence())

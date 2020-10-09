@@ -47,11 +47,9 @@
 }
 
 #search-button {
-  cursor: pointer;
   position: absolute;
   right: 10px;
   vertical-align: center;
-  background-color: transparent;
   height: 40px;
 }
 

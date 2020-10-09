@@ -81,9 +81,9 @@ export default () => {
           <div className="search-results">
             {list.map(item => {
               if (item.artist) {
-                return <AlbumResult album={item} />
+                return <AlbumResult key={item.url} album={item} />
               } else {
-                return <ArtistResult artist={item} />
+                return <ArtistResult key={item.url} artist={item} />
               }
             })}
           </div>}

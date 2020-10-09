@@ -83,7 +83,7 @@ export default () => {
         <div id="page-buttons">
           <button disabled={page === 0} onClick={e => setPage(page - 1)}>previous</button>
           {pages.map(pageNum =>
-            <button className={pageNum - 1 === page ? "current-page" : null} onClick={e => setPage(pageNum - 1)}>{pageNum}</button>)}
+            <button key={pageNum} className={pageNum - 1 === page ? "current-page" : null} onClick={e => setPage(pageNum - 1)}>{pageNum}</button>)}
           <button disabled={lastPage} onClick={e => setPage(page + 1)}>next</button>
         </div>
     </div>

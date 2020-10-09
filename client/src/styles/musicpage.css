@@ -25,7 +25,6 @@
 
 /* Follow Button */
 .follow-button {
-  cursor: pointer;
   font-size: 12px;
   font-weight: 600;
   color: darkgray;
@@ -144,8 +143,6 @@
   width: 60px;
   font-size: 28px;
   color: black;
-  cursor: pointer;
-  box-shadow: 1px 1px 1px lightgray;
 }
 
 #buy-button {
@@ -157,29 +154,34 @@
   padding: 0;
 }
 
-.track-item {
+.track__container {
   font-size: 12px;
-  margin: 0 0 5px 0;
-  cursor: pointer;
-  background-color: transparent;
+  margin-bottom: 5px;
+  display: grid;
+  grid-template-columns: 35px 12px auto;
 }
 
-.track-name {
-  color: deeppink;
-}
-
-.track-name:hover {
-  text-decoration: underline;
-}
-
-.mini-play {
+.track__play-button {
   font-size: 10px;
   background-color: white;
   border: 1px solid gray;
   color: black;
   border-radius: 2px;
-  padding: 4px 5px 5px 6px;
+  padding: 4px 6px 5px 6px;
   margin-right: 10px;
+}
+
+.track__num {
+  place-self: center;
+}
+
+.track__name {
+  text-align: start;
+  color: deeppink;
+}
+
+.track__name:hover {
+  text-decoration: underline;
 }
 
 .album-description {

@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useRef} from 'react';
 import { Link } from 'react-router-dom'
 
-const options = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric' };
-
 export default ({ artist, album }) => {
   const player = useRef(null);
   const [currentSong, setCurrentSong] = useState({
@@ -15,14 +10,22 @@ export default ({ artist, album }) => {
   });
   const [playing, setPlaying] = useState(false);
 
-  const updateCurrentSong = (e) => {
+  const updateCurrentSongAndPlay = (e, index) => {
     e.preventDefault();
     player.current.pause();
-    setCurrentSong(album.songs[e.target.value]);
+    setCurrentSong({...album.songs[index]});
     player.current.currentTime = 0;
     player.current.load();
     player.current.play();
     setPlaying(true);
+  }
+
+  const updateCurrentSong = (e, index) => {
+    e.preventDefault();
+    player.current.pause();
+    setCurrentSong({...album.songs[index]});
+    player.current.currentTime = 0;
+    player.current.load();
   }
   
   const play = () => {
@@ -40,7 +43,7 @@ export default ({ artist, album }) => {
   }
 
   useEffect(() => {
-    setCurrentSong(album.songs[0]);
+    setCurrentSong({...album.songs[0]});
     player.current.load();
   }, [album.songs])
 
@@ -66,11 +69,18 @@ export default ({ artist, album }) => {
         <button id="buy-button">Buy Digital Album</button><span style={{ color: "gray", fontSize: "14px", fontWeight: "600"}}>&nbsp;$0 USD</span>
         <div>
           {album.songs.map((song, index) =>
-            <div className="track-item" value={index} onClick={updateCurrentSong}>
-              <i className="fa fa-play mini-play"/>
-              <span>{song.track_num}.&nbsp;</span>
-              <span className="track-name">{song.name}</span>
-            </div>)}
+          <div key={song.id} className="track__container">
+            <button
+              className="track__play-button"
+              onClick={e => updateCurrentSongAndPlay(e, index)}>
+              <i className="fa fa-play"/>
+            </button>
+            <span className="track__num">{song.track_num}.&nbsp;</span>
+            <button
+              className="track__name"
+              onClick={e => updateCurrentSong(e, index)}>
+              {song.name}</button>
+          </div>)}
         </div>
         <p className="album-description">{album.description}</p>
         <span>released {album.createdAt}</span>
