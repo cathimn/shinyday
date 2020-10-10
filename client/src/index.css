@@ -71,10 +71,23 @@ button {
 
 /* MODULE STYLES */
 .module {
-  margin-right: 20px;
+  font-size: 14px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 55px;
+  padding: 0 15px;
+  min-width: 60px;
+  position: relative;
 }
 
-.module__heart {
+.module:hover {
+  transition: background-color .25s;
+  background-color: whitesmoke;
+}
+
+.heart {
   color: black;
   font-size: 1.5rem;
 }
@@ -83,39 +96,39 @@ button {
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  overflow: hidden;
-}
-
-.module__avatar > img {
-  width: 40px;
-  height: 40px;
   object-fit: cover;
+  object-position: center;
 }
 
-.module__avatar-container {
-  position: relative;
-}
-
-.module__menu {
-  box-shadow: 0 0 2px lightgray;
-  border-radius: 4px;
+#module__menu {
+  z-index: 2;
   position: absolute;
-  top: 38px;
+  box-shadow: 0 0 5px lightgray;
+  border-radius: 4px;
+  top: 55px;
   right: 0px;
+  width: 225px;
   background-color: white;
-  height: 60px;
-  width: 100px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  padding: 10px 5px;
-  font-size: small;
-  text-align: center;
-}
-.module__menu :hover {
-  color: #7cc5d2;
 }
 
+#module__menu--logout:hover,
+.module__menu--item:hover {
+  cursor: pointer;
+  background-color: whitesmoke;
+}
+
+.module__menu--item,
+#module__menu--logout {
+  font-size: 16px;
+  margin: 3px 0;
+  text-align: left;
+  padding: 10px 20px;
+}
+/* END MODULE STYLES */
+
+/* MAIN PAGE */
 .main-header {
   margin-bottom: 20px;
 }
@@ -136,7 +149,6 @@ button {
   position: relative;
 }
 
-/* Used for MAIN PAGE */
 .small-album-card {
   position: relative;
   background-color: white;
@@ -276,16 +288,6 @@ button {
 }
 
 /* TESTING */
-.asdf {
-  background-color: mediumturquoise;
-}
-
-
-audio {
-  height: 30px;
-  width: 100%;
-  margin-bottom: 5px;
-}
 
 .follow-card__button > .follow-button {
   text-transform: uppercase;
@@ -407,3 +409,4 @@ audio {
 @import 'styles/banner.css';
 @import 'styles/forms.css';
 @import 'styles/modal.css';
+@import 'styles/profile.css';

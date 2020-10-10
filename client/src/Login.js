@@ -40,7 +40,7 @@ export const LoginForm = ({ setSession }) => {
     e.preventDefault();
     setLogin('rin-bear');
     setPassword('password');
-    document.getElementById("login-button").click();
+    setTimeout(() => document.getElementById("login-button").click(), 0);
   }
 
   return (
@@ -66,7 +66,7 @@ export const LoginForm = ({ setSession }) => {
       <button id="login-button" type="submit">Log in</button>
     </form>
     <div className="login__redirects">
-      <Link to="/login" onClick={demo}>Click here</Link> to use a fan's demo account.
+      <button onClick={demo}>Click here</button> to use a fan's demo account.
       <br />
     </div>
   </>

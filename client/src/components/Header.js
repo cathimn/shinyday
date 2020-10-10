@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import Searchbar from './Searchbar';
-import LoginModule from './LoginModule';
-import UserModule from './UserModule';
+import { LoginModule, UserModule } from './HeaderModules';
 
 import { AppContext } from '../AppContext';
 

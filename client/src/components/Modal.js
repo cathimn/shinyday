@@ -26,7 +26,7 @@ export default () => {
       setHeader("");
       setShowModal(false);
     }
-  }, [pathname])
+  }, [pathname, setShowModal])
 
   if (!showModal || session.token) {
     return null;

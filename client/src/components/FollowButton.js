@@ -8,24 +8,6 @@ export default ({ artistId }) => {
   const [loaded, setLoaded] = useState(false)
   const [followStatus, setFollowStatus] = useState(false);
 
-  const checkFollow = async () => {
-    if (session.token) {
-      const response = await fetch(`${baseUrl}/follows/id/${artistId}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${session.token}`
-        },
-      })
-
-      if (response.ok) {
-        let res = await response.json();
-        setFollowStatus(res.following);
-      }
-    }
-    setLoaded(true)
-  }
-
   const follow = async () => {
     if (!session.token) {
       setShowModal(true);
@@ -60,8 +42,26 @@ export default ({ artistId }) => {
   }
 
   useEffect(() => {
+    async function checkFollow() {
+      if (session.token) {
+        const response = await fetch(`${baseUrl}/follows/id/${artistId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.token}`
+          },
+        })
+
+        if (response.ok) {
+          let res = await response.json();
+          setFollowStatus(res.following);
+        }
+      }
+      setLoaded(true)
+    }
+
     checkFollow();
-  }, [])
+  }, [artistId, session.token])
 
   if (!loaded) {
       return null

@@ -36,38 +36,38 @@ const App = () => {
   const [ loaded, setLoaded ] = useState(false);
   const [ showModal, setShowModal ] = useState(false);
   
-  const loadProfile = async () => {
-    if (authToken) {
-      const response = await fetch(`${baseUrl}/user/me`, {
-        headers: { Authorization: `Bearer ${authToken}` }
-      });
-
-      const res = await response.json();
-      if (response.ok) {
-        setSession({
-          token: authToken,
-          id: res.id,
-          username: res.username,
-          isArtist: res.checkArtist,
-          avatarUrl: res.avatarUrl,
-          bannerUrl: res.bannerUrl,
-        })
-      } else {
-        setSession({
-          token: null,
-          id: null,
-          username: null,
-          isArtist: null,
-          avatarUrl: null,
-          bannerUrl: null
-        })
-        window.localStorage.removeItem("shinyday_session");
-      }
-    }
-    setLoaded(true);
-  };
-
   useEffect(() => {
+    async function loadProfile() {
+      if (authToken) {
+        const response = await fetch(`${baseUrl}/user/me`, {
+          headers: { Authorization: `Bearer ${authToken}` }
+        });
+
+        const res = await response.json();
+        if (response.ok) {
+          setSession({
+            token: authToken,
+            id: res.id,
+            username: res.username,
+            isArtist: res.checkArtist,
+            avatarUrl: res.avatarUrl,
+            bannerUrl: res.bannerUrl,
+          })
+        } else {
+          setSession({
+            token: null,
+            id: null,
+            username: null,
+            isArtist: null,
+            avatarUrl: null,
+            bannerUrl: null
+          })
+          window.localStorage.removeItem("shinyday_session");
+        }
+      }
+      setLoaded(true);
+    };
+
     loadProfile();
   }, [authToken])
 

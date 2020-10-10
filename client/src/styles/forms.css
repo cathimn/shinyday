@@ -30,6 +30,10 @@ form {
   background-color: pink;
 }
 
+#login-button:hover {
+  background-color: rgb(255, 119, 149);
+}
+
 .form-label {
   align-self: center;
 }
@@ -56,6 +60,8 @@ form {
 
 .login__redirects > button,
 .login__redirects > a {
+  margin: 0;
+  padding: 0;
   font-size: 12px;
   text-decoration: underline lightpink;
 }

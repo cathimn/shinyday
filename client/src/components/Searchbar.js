@@ -5,7 +5,7 @@ import { baseUrl } from '../config';
 const AlbumResult = ({ album }) => (
   <Link to={`/${album.artist.url}/${album.url}`}>
     <div className="result-container">
-      <img src={album.cover_url} className="result-img-placeholder" />
+      <img src={album.cover_url} className="result-img" alt="album art" />
       <ul className="result">
         <li className="search-matched-term">{album.name}</li>
         <li>by {album.artist.artist_name}</li>
@@ -18,7 +18,7 @@ const AlbumResult = ({ album }) => (
 const ArtistResult = ({ artist }) => (
   <Link to={`/${artist.url}`}>
     <div className="result-container">
-        <img src={artist.avatar_url} className="result-img-placeholder artist" />
+      <img src={artist.avatar_url} className="result-img artist" alt="artist avatar" />
         <ul className="result">
           <li className="search-matched-term">{artist.artist_name}</li>
           <li>ARTIST</li>
@@ -32,25 +32,21 @@ export default () => {
   const [searched, setSearched] = useState(false);
   const [list, setList] = useState([]);
 
-  const updateQuery = e => {
-      setQuery(e.target.value);
-  }
-
-  const populateList = async () => {
-    const response = await fetch(`${baseUrl}/search/${query}`);
-
-    if (response.ok) {   
-      const res = await response.json();
-      setList(res);
-      setSearched(true);
-    }
-  }
-
   const loseFocus = e => {
     setTimeout(() => setQuery(''), 100)
   }
 
   useEffect(() => {
+    async function populateList() {
+      const response = await fetch(`${baseUrl}/search/${query}`);
+
+      if (response.ok) {
+        const res = await response.json();
+        setList(res);
+        setSearched(true);
+      }
+    }
+
     if (query && !searched) {
       populateList(query);
     } else if (query.length === 0) {
@@ -72,7 +68,7 @@ export default () => {
           className="search"
           type="text"
           value={query}
-          onChange={updateQuery}
+          onChange={e => setQuery(e.target.value)}
           placeholder="Search and discover music"
           />
       </div>

@@ -95,7 +95,7 @@
   background-color: rgb(252, 245, 245);
 }
 
-.result-img-placeholder {
+.result-img {
   width: 40px;
   height: 40px;
   align-self: center;
@@ -105,7 +105,7 @@
   border: 1px solid rgba(139, 88, 88, 0.1);
 }
 
-.result-img-placeholder.artist {
+.result-img.artist {
   border-radius: 50%;
 }
 
