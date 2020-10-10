@@ -45,17 +45,15 @@ export default ({ artistId }) => {
     async function checkFollow() {
       if (session.token) {
         const response = await fetch(`${baseUrl}/follows/id/${artistId}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${session.token}`
-          },
+          headers: { Authorization: `Bearer ${session.token}` },
         })
 
         if (response.ok) {
           let res = await response.json();
           setFollowStatus(res.following);
         }
+      } else {
+        setFollowStatus(false);
       }
       setLoaded(true)
     }
@@ -64,7 +62,7 @@ export default ({ artistId }) => {
   }, [artistId, session.token])
 
   if (!loaded) {
-      return null
+    return null;
   }
 
   return (

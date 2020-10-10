@@ -1,7 +1,10 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef, useContext} from 'react';
 import { Link } from 'react-router-dom'
+import { AppContext } from '../AppContext';
+import { baseUrl } from '../config';
 
 export default ({ artist, album }) => {
+  const { session, modalType, setModalType, setShowModal } = useContext(AppContext);
   const player = useRef(null);
   const [currentSong, setCurrentSong] = useState({
     index: 0,
@@ -9,6 +12,8 @@ export default ({ artist, album }) => {
     songUrl: '',
   });
   const [playing, setPlaying] = useState(false);
+  const [inCollection, setInCollection] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const updateCurrentSongAndPlay = (e, index) => {
     e.preventDefault();
@@ -43,9 +48,22 @@ export default ({ artist, album }) => {
   }
 
   useEffect(() => {
+    async function checkCollection () {
+      const response = await fetch(`${baseUrl}/collections/id/${album.id}`, {
+        headers: { Authorization: `Bearer ${session.token}` },
+      })
+
+      if (response.ok) {
+        const res = await response.json();
+        setInCollection(res.collection);
+      }
+      setLoaded(true);
+    }
+
+    checkCollection();
     setCurrentSong({...album.songs[0]});
     player.current.load();
-  }, [album.songs])
+  }, [album, session.token, modalType])
 
   return (
     <>
@@ -66,7 +84,31 @@ export default ({ artist, album }) => {
             <i className={playing ? "fa fa-pause" : "fa fa-play"} />
           </button>
         </div>
-        <button id="buy-button">Buy Digital Album</button><span style={{ color: "gray", fontSize: "14px", fontWeight: "600"}}>&nbsp;$0 USD</span>
+        <div id="buy-button-container">
+        {inCollection ?
+        <>
+          <i className="fa fa-heart-o pink" />&nbsp;&nbsp;
+          <Link to={`/profile/${session.username}`}>You own this</Link>
+        </>
+        :
+        loaded &&
+        <>
+          <button
+            onClick={e => {
+              e.preventDefault();
+              if (!session.token) {
+                setModalType("");
+                setShowModal(true);
+              } else {
+                setModalType("Digital Album");
+                setShowModal(true);
+              }
+            }}
+            id="buy-button">Buy Digital Album
+          </button>
+          <span style={{ color: "gray" }}>&nbsp;$0 USD</span>
+        </>}
+        </div>
         <div>
           {album.songs.map((song, index) =>
           <div key={song.id} className="track__container">

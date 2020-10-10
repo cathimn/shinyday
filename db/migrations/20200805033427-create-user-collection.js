@@ -38,6 +38,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+    },
+    {
+      uniqueKeys: {
+        compositeIndex: {
+          customIndex: true,
+          fields: ["album_id", "user_id"]
+        }
+      }
     });
   },
   down: (queryInterface, Sequelize) => {

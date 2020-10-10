@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { AppContext } from '../AppContext';
-import { bucketUrl, baseUrl } from '../config';
+import { baseUrl } from '../config';
 
 export const LoginModule = () => {
   const { pathname } = useLocation();

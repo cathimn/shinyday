@@ -46,7 +46,7 @@
 
 .following {
   border: 1px solid rgba(0, 0, 0, 0);
-  background-color: rgb(230, 105, 147);
+  background-color: deeppink;
   color: white;
 }
 
@@ -55,7 +55,7 @@
 }
 
 .following:hover {
-  background-color: rgb(206, 173, 184);
+  background-color: hotpink;
 }
 
 .following:hover:after {
@@ -145,10 +145,14 @@
   color: black;
 }
 
+#buy-button-container {
+  padding: 20px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
 #buy-button {
-  color: hotpink;
-  margin: 20px 0;
-  background: none;
+  color: deeppink;
   font-size: 24px;
   font-weight: 600;
   padding: 0;

@@ -4,6 +4,7 @@ import { AppContext } from './AppContext';
 import { baseUrl } from './config';
 
 export const LoginForm = ({ setSession }) => {
+  const { setShowModal } = useContext(AppContext);
   const [errors, setErrors] = useState();
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -31,6 +32,7 @@ export const LoginForm = ({ setSession }) => {
         bannerUrl: res.user["bannerUrl"],
       })
       window.localStorage.setItem("shinyday_session", res.token);
+      setShowModal(false);
     } else {
       setErrors(res.message);
     }

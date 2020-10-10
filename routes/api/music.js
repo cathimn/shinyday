@@ -107,8 +107,8 @@ router.get('/:artistTerm/:albumTerm?', asyncHandler(async (req, res) => {
       required: true,
       attributes: { exclude: ["createdAt", "updatedAt", "artist_id"] },
     },
+    attributes: { exclude: ["createdAt", "updatedAt"] },
     where: { url: artistTerm },
-    attributes: { exclude: ["createdAt", "updatedAt"] }
   });
 
   if (!albumTerm) {

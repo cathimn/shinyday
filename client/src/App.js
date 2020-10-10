@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 
 import { baseUrl } from './config';
@@ -13,10 +13,12 @@ import Header from './components/Header';
 import Modal from './components/Modal';
 
 const ScrollToTop = () => {
+  const { setShowModal } = useContext(AppContext);
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setShowModal(false);
   }, [pathname]);
 
   return null;
@@ -35,6 +37,7 @@ const App = () => {
   });
   const [ loaded, setLoaded ] = useState(false);
   const [ showModal, setShowModal ] = useState(false);
+  const [ modalType, setModalType ] = useState('');
   
   useEffect(() => {
     async function loadProfile() {
@@ -77,7 +80,8 @@ const App = () => {
 
   return (
     <AppContext.Provider
-      value={{ session, setSession, loaded, showModal, setShowModal }}>
+      value={{
+        session, setSession, loaded, showModal, setShowModal, modalType, setModalType }}>
       <Router>
         <ScrollToTop />
         <Header session={session} />

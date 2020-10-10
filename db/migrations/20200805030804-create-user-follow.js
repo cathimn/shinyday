@@ -32,7 +32,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    },
+      {
+        uniqueKeys: {
+          compositeIndex: {
+            customIndex: true,
+            fields: ["artist_id", "user_id"]
+          }
+        }
+      });
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('User_Follows');
