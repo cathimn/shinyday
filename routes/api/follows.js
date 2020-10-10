@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 
 const { authenticated } = require('./security-utils');
 
-const { User_Follow, User, Artist } = require('../../db/models');
+const { User_Follow } = require('../../db/models');
 
 router.get('/id/:artistId', authenticated, asyncHandler(async (req, res) => {
   const { artistId } = req.params;
@@ -47,34 +47,5 @@ router.delete('/', authenticated, asyncHandler(async (req, res) => {
   res.json({ "following": false })
 }))
 
-router.get('/:username', asyncHandler(async (req, res) => {
-    const { username } = req.params;
-
-    const user = await User.findOne({
-      where: { "username": username },
-      attributes: ["id"]
-    });
-
-    const checkArtist = await Artist.findOne({
-      where: { user_id: user.id }
-    });
-
-    if (checkArtist) {
-      res.json({ isArtist: true });
-    } else {
-      Artist.findAndCountAll({
-        include: {
-          where: { id: user.id },
-          model: User,
-          through: { model: User_Follow },
-          attributes: [],
-        },
-        attributes: ["id", "artist_name", "url", "avatar_url"]
-      }).then(result => res.json({
-        artists: result.rows,
-        total: result.count
-      }))
-    }
-}));
 
 module.exports = router;

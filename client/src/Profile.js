@@ -6,15 +6,26 @@ import { baseUrl } from './config';
 import FollowButton from './components/FollowButton'
 import { AppContext } from './AppContext';
 
-export default ({ needLogin, loggedInUser, artistAccount }) => {
-
+export default () => {
   const { username } = useParams();
   const { session } = useContext(AppContext);
   const [editMode, setEditMode] = useState(false);
 
   const [tab, setTab] = useState("collection");
   const [allowEditMode, setAllowEditMode] = useState(false);
-  const [following, setFollowing] = useState([]);
+  const [userInfo, setUserInfo] = useState({
+    id: null,
+    avatarUrl: null,
+    bannerUrl: null,
+  });
+  const [following, setFollowing] = useState({
+    artists: [],
+    total: null,
+  });
+  const [collection, setCollection] = useState({
+    albums: [],
+    total: null,
+  });
 
   useEffect(() => {
     if (username === session.username) {
@@ -23,39 +34,60 @@ export default ({ needLogin, loggedInUser, artistAccount }) => {
   }, [username, session])
 
   useEffect(() => {
-    async function fetchFollows() {
-      const response = await fetch(`${baseUrl}/follows/${username}`);
+    async function fetchUserInfo () {
+      const response = await fetch(`${baseUrl}/user/${username}`);
 
       if (response.ok) {
         const res = await response.json();
         console.log(res)
-        setFollowing(res);
+        setUserInfo({
+          id: res.user.id,
+          avatarUrl: res.user.avatar_url,
+          bannerUrl: res.user.banner_url,
+        });
+        setFollowing({...res.following});
+        setCollection({...res.collection});
       }
     }
 
-    fetchFollows();
+    // async function fetchFollows() {
+    //   const response = await fetch(`${baseUrl}/follows/${username}`);
+
+    //   if (response.ok) {
+    //     const res = await response.json();
+    //     console.log(res)
+    //     setFollowing({
+    //       artists: res.artists,
+    //       total: res.total,
+    //     });
+    //   }
+    // }
+
+    fetchUserInfo();
   }, [username])
 
   return (
   <>
-    <div className="profile__header" />
-    <div className="profile-container">
-      <div className="profile__fan-bio">
-        <img src="" alt="avatar" id="profile-avatar"/>
-          <h1>{username}</h1>
-          <div>
-          </div>
+    <div id="profile-header" style={{ backgroundImage: `url(${userInfo.bannerUrl})`}} />
+    <div id="profile-container">
+      <div id="profile-bio">
+        <img src={userInfo.avatarUrl} alt="avatar" id="profile-avatar"/>
+        <h1 id="profile-username">{username}</h1>
       </div>
       <div className="profile__tabs">
-        <button onClick={e => setTab("collection")}>
-          collection <span></span>
+        <button
+          className={tab === "collection" ? "tab-button selected" : "tab-button"}
+          onClick={e => setTab("collection")}>
+          <strong>collection</strong>&nbsp;&nbsp;<span></span>
         </button>
-        <button onClick={e => setTab("following")}>
-          following <span></span>
+        <button 
+          className={tab === "following" ? "tab-button selected" : "tab-button"}
+          onClick={e => setTab("following")}>
+          <strong>following</strong>&nbsp;&nbsp;<span>{following.total}</span>
         </button>
       </div>
       {tab === "collection" && <Collection />}
-      {tab === "following" && <Following following={following} />}
+      {tab === "following" && <Following artists={following.artists} />}
     </div>
   </>
   )
@@ -70,21 +102,17 @@ const Collection = () => {
   )
 }
 
-const Following = ({ following }) => {
+const Following = ({ artists }) => {
   
   return (
     <div className="profile__following-box">
-      {following.map(artist => 
-        <div className="follow-card">
-          <img src="" alt="artist avatar" />
-          <div className="follow-card--blurb">
-            <Link to={`/${artist.url}`}>
-              {artist.name}
-            </Link>
-            <div className="follow-card__button">
-              <FollowButton artistId={artist.id} />
-            </div>
-          </div>
+      {artists.map(artist => 
+        <div key={artist.id} className="follow-card">
+          <img src={artist.avatar_url} alt="artist avatar" />
+          <Link to={`/${artist.url}`}>
+            {artist.artist_name}
+          </Link>
+          <FollowButton artistId={artist.id} profile="true" />
         </div>)}
     </div>
   )

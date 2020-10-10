@@ -3,10 +3,11 @@ import { AppContext } from '../AppContext';
 
 import { baseUrl } from '../config';
 
-export default ({ artistId }) => {
+export default ({ artistId, profile }) => {
   const { session, setShowModal } = useContext(AppContext);
   const [loaded, setLoaded] = useState(false)
   const [followStatus, setFollowStatus] = useState(false);
+  const [showCheck, setShowCheck] = useState(profile);
 
   const follow = async () => {
     if (!session.token) {
@@ -65,12 +66,27 @@ export default ({ artistId }) => {
     return null;
   }
 
-  return (
-    <>
-    <button
-      className={followStatus ? "follow-button following" : "follow-button"}
-      onClick={followStatus ? unfollow : follow}>
-    </button>
-    </>
-  )
+  if (profile) {
+    return (
+      <>
+        <button
+          onMouseOver={e => setShowCheck(false)}
+          onMouseLeave={e => setShowCheck(true)}
+          className={followStatus ? "follow-button following profile" : "follow-button profile"}
+          onClick={followStatus ? unfollow : follow}>
+          {showCheck && followStatus ? <i className="fa fa-check"/> : null}
+        </button>
+      </>
+    )
+  } else {
+    return (
+      <>
+      <button
+        className={followStatus ? "follow-button following" : "follow-button"}
+        onClick={followStatus ? unfollow : follow}>
+      </button>
+      </>
+    )
+  }
+
 }
