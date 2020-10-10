@@ -13,11 +13,6 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true
       },
-      url: {
-        allowNull: false,
-        type: Sequelize.STRING,
-        unique: true
-      },
       user_id: {
         allowNull: false,
         type: Sequelize.INTEGER,

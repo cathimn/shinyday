@@ -7,7 +7,7 @@ function r(o) {
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('User_Collections', [
-      r({ user_id: 1, album_id: 1 }),
+      r({ user_id: 1, album_id: 1, favorite: 36 }),
       r({ user_id: 2, album_id: 1 }),
     ]);
   },

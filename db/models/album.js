@@ -2,7 +2,12 @@
 module.exports = (sequelize, DataTypes) => {
   const Album = sequelize.define('Album', {
     name: DataTypes.STRING,
-    url: DataTypes.STRING,
+    url: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        return this.artist_name.toLowerCase().replace(/[\s|\W]/gm, "");
+      }
+    },
     artist_id: DataTypes.INTEGER,
     genre_id: DataTypes.INTEGER,
     cover_url: DataTypes.STRING,

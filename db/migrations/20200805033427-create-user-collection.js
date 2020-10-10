@@ -24,6 +24,12 @@ module.exports = {
         },
         unique: 'compositeIndex'
       },
+      favorite: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Songs'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

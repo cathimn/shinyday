@@ -50,6 +50,12 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: 'album_id',
       foreignKey: 'user_id',
     })
+
+    User.belongsToMany(models.Song, {
+      through: 'User_Collections',
+      otherKey: 'favorite',
+      foreignKey: 'user_id',
+    })
   };
 
   User.prototype.isValid = () => true;
