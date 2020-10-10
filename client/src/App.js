@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 
 import { baseUrl } from './config';
+import { AppContext } from './AppContext';
 
-import Login from './Login';
+import { LoginPage } from './Login';
+import { SignupPage } from './Signup';
 import Main from './Main';
-import Signup from './Signup';
 import MusicPage from './MusicPage';
 import Profile from './Profile';
 import Header from './components/Header';
-import { AppContext } from './AppContext';
-
+import Modal from './components/Modal';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -34,9 +34,9 @@ const App = () => {
     bannerUrl: null,
   });
   const [ loaded, setLoaded ] = useState(false);
+  const [ showModal, setShowModal ] = useState(false);
   
   const loadProfile = async () => {
-
     if (authToken) {
       const response = await fetch(`${baseUrl}/user/me`, {
         headers: { Authorization: `Bearer ${authToken}` }
@@ -71,29 +71,24 @@ const App = () => {
     loadProfile();
   }, [authToken])
 
-  // const updateToken = authToken => {
-  //   window.localStorage.setItem('shinyday_session', authToken);
-  //   setToken(authToken);
-  //   loadProfile(authToken);
-  // };
-
   if(!loaded) {
     return null;
   }
 
   return (
     <AppContext.Provider
-      value={{ session, setSession, loaded }}>
+      value={{ session, setSession, loaded, showModal, setShowModal }}>
       <Router>
         <ScrollToTop />
         <Header session={session} />
+        <Modal />
           <div className="container">
           <Switch>
             <Route path='/login'>
-              <Login />
+              <LoginPage />
             </Route>
             <Route path='/signup'>
-              <Signup />
+              <SignupPage />
             </Route>
             <Route path='/profile/:username'>
               <Profile />

@@ -4,26 +4,34 @@ import { AppContext } from '../AppContext';
 import { baseUrl } from '../config';
 
 export default ({ artistId }) => {
-  const { session } = useContext(AppContext);
+  const { session, setShowModal } = useContext(AppContext);
   const [loaded, setLoaded] = useState(false)
   const [followStatus, setFollowStatus] = useState(false);
 
   const checkFollow = async () => {
-    const response = await fetch(`${baseUrl}/follows/id/${artistId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${session.token}` },
-    })
+    if (session.token) {
+      const response = await fetch(`${baseUrl}/follows/id/${artistId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.token}`
+        },
+      })
 
-    if (response.ok) {
-      let res = await response.json();
-      setFollowStatus(res.following)
+      if (response.ok) {
+        let res = await response.json();
+        setFollowStatus(res.following);
+      }
     }
     setLoaded(true)
   }
 
   const follow = async () => {
+    if (!session.token) {
+      setShowModal(true);
+      return;
+    }
+
     const response = await fetch(`${baseUrl}/follows/`, {
       method: 'post',
       headers: {
@@ -52,32 +60,19 @@ export default ({ artistId }) => {
   }
 
   useEffect(() => {
-    if (session.token) checkFollow();
-  }, [session.token])
+    checkFollow();
+  }, [])
 
   if (!loaded) {
       return null
   }
-  
 
   return (
+    <>
     <button
       className={followStatus ? "follow-button following" : "follow-button"}
       onClick={followStatus ? unfollow : follow}>
     </button>
+    </>
   )
-  // if (followStatus) {
-  //     return (
-  //         <button className="follow-button following"
-  //             onMouseEnter={() => setFollowingButton(false)}
-  //             onMouseLeave={() => setFollowingButton(true)}
-  //             onClick={() => unfollow(username, artistId)}>
-  //             { followingButton ? "Following" : "Unfollow" }
-  //         </button>
-  //     )
-  // } else {
-  //     return (
-  //         <button className="follow-button" onClick={() => follow(username, artistId)}>Follow</button>
-  //     )
-  // }
 }
