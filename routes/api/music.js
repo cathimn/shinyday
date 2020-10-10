@@ -14,7 +14,7 @@ AWS.config.update({
 const s3 = new AWS.S3();
 const router = express.Router();
 
-const { Artist, Album, Song, Genre, Sequelize, sequelize } = require('../../db/models')
+const { Artist, Album, Song, Genre } = require('../../db/models')
 
 router.get('/curated', asyncHandler(async (req, res) => {
   const curated = await Album.findAll({

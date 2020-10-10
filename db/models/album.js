@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     url: {
       type: DataTypes.VIRTUAL,
       get() {
-        return this.artist_name.toLowerCase().replace(/[\s|\W]/gm, "");
+        return this.name.toLowerCase().replace(/[\s|\W]/gm, "");
       }
     },
     artist_id: DataTypes.INTEGER,
