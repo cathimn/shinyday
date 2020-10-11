@@ -49,7 +49,10 @@ export default ({ artist, album }) => {
 
   useEffect(() => {
     async function checkCollection () {
-      if (!session.token) return;
+      if (!session.token) {
+        setLoaded(true);
+        return;
+      }
       const response = await fetch(`${baseUrl}/collections/id/${album.id}`, {
         headers: { Authorization: `Bearer ${session.token}` },
       })
