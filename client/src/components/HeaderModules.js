@@ -30,21 +30,24 @@ const Menu = ({ setMenuDisplay }) => {
   const { session, setSession } = useContext(AppContext);
 
   const logout = async (e) => {
-    const authToken = window.localStorage.getItem("shinyday_session");
     const response = await fetch(`${baseUrl}/session`, {
       method: 'delete',
-      headers: { Authorization: `Bearer ${authToken}` }
+      headers: { Authorization: `Bearer ${session.token}` }
     })
 
+    const res = await response.json();
     if (response.ok) {
-      window.localStorage.removeItem("shinyday_session");
       setSession({
         token: null,
         id: null,
         username: null,
         isArtist: null,
       });
+      window.localStorage.removeItem("shinyday_session");
+    } else {
+      console.log(res)
     }
+
   }
 
   const closeMenu = (e) => {

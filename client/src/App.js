@@ -25,7 +25,8 @@ const ScrollToTop = () => {
 }
 
 const App = () => {
-  const authToken = window.localStorage.getItem("shinyday_session");
+  // const authToken = window.localStorage.getItem("shinyday_session");
+  const [authToken, setAuthToken] = useState(window.localStorage.getItem("shinyday_session"));
 
   const [session, setSession] = useState({
     token: null,

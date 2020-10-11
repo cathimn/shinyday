@@ -33,6 +33,8 @@ export default () => {
   useEffect(() => {
     if (username === session.username) {
       setAllowEditMode(true);
+    } else {
+      setAllowEditMode(false);
     }
   }, [username, session])
 

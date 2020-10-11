@@ -43,6 +43,7 @@
 }
 
 #modal-body {
+  font-size: 14px;
   height: min-content;
   padding: 20px;
 }

@@ -8,7 +8,7 @@ import { SignupForm } from '../Signup'
 
 const DefaultModal = ({ setModalType }) => (
   <div id="modal-body">
-    To follow this artist, please sign up for a free Shinyday account (or log in if you already have one):
+    To perform this action, please sign up for a free Shinyday account (or log in if you already have one):
     <div style={{ display: "flex", justifyContent: "center" }}>
       <button className="modal-button" onClick={e => setModalType("Sign up")}>Sign up</button>
       <button className="modal-button" onClick={e => setModalType("Log in")}>Log in</button>
