@@ -102,7 +102,7 @@ router.get('/:username', asyncHandler(async (req, res) => {
       }
       ],
       attributes: ["id", "name", "url", "cover_url"],
-      order: ["name"],
+      order: [["id", "DESC"]],
     }).then((result) => {
       result.rows.forEach((album, i) => {
         const songId = album.Users[0].User_Collection.favorite;

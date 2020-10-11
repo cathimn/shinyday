@@ -3,6 +3,7 @@ import React from 'react';
 import Banner from './components/Banner';
 import LatestAlbums from './components/LatestAlbums';
 import GenreTags from './components/GenreTags';
+import { Footer } from './components/Footer';
 
 export default () => {
 
@@ -13,6 +14,7 @@ export default () => {
       <LatestAlbums />
       <div className="divider" />
       <GenreTags />
+      <Footer />
     </>
   );
 };

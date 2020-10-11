@@ -62,7 +62,7 @@ router.get('/genre=:id/page=:page', asyncHandler(async (req, res) => {
           required: true,
           attributes: ["genre"]
         }],
-      order: [['createdAt', 'DESC']],
+      order: [['id', 'DESC']],
     }).then(result =>
       res.json({
         albums: result.rows,

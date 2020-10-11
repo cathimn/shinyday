@@ -5,6 +5,7 @@ import { baseUrl } from './config';
 
 import FollowButton from './components/FollowButton'
 import { AppContext } from './AppContext';
+import { Footer } from './components/Footer';
 
 export default () => {
   const { username } = useParams();
@@ -79,6 +80,8 @@ export default () => {
       {tab === "collection" && <Collection albums={collection.albums} allowEditMode={allowEditMode} setChanged={setChanged} />}
       {tab === "following" && <Following artists={following.artists} />}
     </div>
+    <div className="divider"/>
+    <Footer />
   </>
   )
 }

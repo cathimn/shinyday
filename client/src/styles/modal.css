@@ -20,7 +20,7 @@
 
 #modal-header {
   font-weight: 600;
-  color: black;
+  color: rgb(50, 50, 50);
   box-sizing: border-box;
   min-height: 40px;
   position: relative;

@@ -74,10 +74,6 @@ const App = () => {
     loadProfile();
   }, [authToken])
 
-  if(!loaded) {
-    return null;
-  }
-
   return (
     <AppContext.Provider
       value={{

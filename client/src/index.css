@@ -3,6 +3,7 @@ html, main, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  color: rgb(50, 50, 50);
 }
 
 body {
@@ -11,12 +12,12 @@ body {
 }
 
 a {
-  color: black;
+  color: rgb(50, 50, 50);
   text-decoration: none;
 }
 
 a:visited {
-  color: black;
+  color: rgb(50, 50, 50);
 }
 
 button, input {
@@ -45,7 +46,7 @@ button {
 }
 
 .gray {
-  color: darkgray
+  color: rgb(145, 145, 145)
 }
 
 .divider {
@@ -92,7 +93,7 @@ button {
 }
 
 .heart {
-  color: black;
+  color: rgb(50, 50, 50);
   font-size: 1.5rem;
 }
 
@@ -286,9 +287,33 @@ button {
 
 
 /* FOOTER */
-.footer {
+#footer,
+#mini-footer {
+  font-size: 12px;
+  color: gray;
+  display: grid;
   width: auto;
-  background-color: wheat;
+  background-color: rgb(230, 230, 230);
+}
+
+#footer {
+  grid-template-columns: 150px 1fr auto;
+  padding: 20px 10%;
+}
+
+#mini-footer {
+  color: rgb(150, 150, 150);
+  place-items: center;
+  padding: 10px;
+}
+
+#mini-footer > div {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 975px;
+  padding: 0 20px;
 }
 
 /* TESTING */

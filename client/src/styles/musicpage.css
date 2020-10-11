@@ -142,7 +142,7 @@
   height: 55px;
   width: 60px;
   font-size: 28px;
-  color: black;
+  color: rgb(50, 50, 50);
 }
 
 #buy-button-container {
@@ -169,7 +169,7 @@
   font-size: 10px;
   background-color: white;
   border: 1px solid gray;
-  color: black;
+  color: rgb(50, 50, 50);
   border-radius: 2px;
   padding: 4px 6px 5px 6px;
   margin-right: 10px;

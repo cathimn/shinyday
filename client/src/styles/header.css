@@ -34,7 +34,7 @@
 }
 
 #logo-text {
-  color: black;
+  color: rgb(50, 50, 50);
   align-self: flex-end;
   font-size: 20px;
 }

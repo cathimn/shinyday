@@ -6,6 +6,7 @@ import { baseUrl } from './config';
 import Player from './components/Player';
 import ArtistLeft from './components/ArtistLeft';
 import FollowButton from './components/FollowButton';
+import { MiniFooter } from './components/Footer';
 
 export default ({ type }) => {
   const { artistTerm, albumTerm } = useParams();
@@ -118,6 +119,8 @@ export default ({ type }) => {
       </div>
     </div>
     <div className="divider"/>
+    <div className="divider"/>
+    <MiniFooter />
     </>
   )
 }
