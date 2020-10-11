@@ -84,6 +84,8 @@ export default ({ artist, album }) => {
             <i className={playing ? "fa fa-pause" : "fa fa-play"} />
           </button>
         </div>
+        {loaded &&
+        <>
         <div id="buy-button-container">
         {inCollection ?
         <>
@@ -91,7 +93,6 @@ export default ({ artist, album }) => {
           <Link to={`/profile/${session.username}`}>You own this</Link>
         </>
         :
-        loaded &&
         <>
           <button
             onClick={e => {
@@ -126,6 +127,7 @@ export default ({ artist, album }) => {
         </div>
         <p className="album-description">{album.description}</p>
         <span>released {album.createdAt}</span>
+        </>}
       </div>
       <div>
         <img

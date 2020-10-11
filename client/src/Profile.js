@@ -62,6 +62,7 @@ export default () => {
       <div id="profile-bio">
         <img src={userInfo.avatarUrl} alt="avatar" id="profile-avatar"/>
         <h1 id="profile-username">{username}</h1>
+        {allowEditMode && <button>EDIT PROFILE <i className="fa fa-pencil"/></button>}
       </div>
       <div className="profile__tabs">
         <button
