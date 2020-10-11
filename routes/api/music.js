@@ -32,7 +32,7 @@ router.get('/curated', asyncHandler(async (req, res) => {
         attributes: ["genre"]
       }],
     where: {
-      id: { [Op.or]: [2, 5, 11, 10, 12] }
+      url: { [Op.or]: ["heatofthesummer", "lullaby", "iwannahearthemusic", "funeralvoid", "haumea"] }
     }
   });
 

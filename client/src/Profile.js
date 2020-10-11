@@ -150,7 +150,7 @@ const CollectionCard = ({ album, allowEditMode, setChanged }) => {
             </button>
           </span>
           <br/>
-          <span>{album.songs.filter((song) => song.id == Number(album.favorite))[0].name}</span>
+          <span>{album.songs.filter((song) => song.id === Number(album.favorite))[0].name}</span>
           </>
           :
             <span className={hovered && allowEditMode ? "" : "gone"}>

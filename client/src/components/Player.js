@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext} from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Link } from 'react-router-dom'
 import { AppContext } from '../AppContext';
 import { baseUrl } from '../config';
@@ -14,6 +14,8 @@ export default ({ artist, album }) => {
   const [playing, setPlaying] = useState(false);
   const [inCollection, setInCollection] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [totalTime, setTotalTime] = useState();
+  const [displayTime, setDisplayTime] = useState();
 
   const updateCurrentSongAndPlay = (e, index) => {
     e.preventDefault();
@@ -28,6 +30,7 @@ export default ({ artist, album }) => {
   const updateCurrentSong = (e, index) => {
     e.preventDefault();
     player.current.pause();
+    setPlaying(false);
     setCurrentSong({...album.songs[index]});
     player.current.currentTime = 0;
     player.current.load();
@@ -47,6 +50,24 @@ export default ({ artist, album }) => {
     }
   }
 
+  function formatTime(seconds) {
+    const h = Math.floor(seconds / 3600)
+    const m = Math.floor((seconds % 3600) / 60)
+    const s = Math.floor(seconds % 60)
+    return [h, m > 9 ? m : h ? '0' + m : m || '0', s > 9 ? s : '0' + s]
+      .filter(a => a)
+      .join(':')
+  }
+
+  useEffect(() => {
+    setTotalTime(player.current.duration)
+    if (playing) {
+      setInterval(() => {
+        setDisplayTime(player.current.currentTime)
+      }, 100)
+    }
+  }, [playing])
+
   useEffect(() => {
     async function checkCollection () {
       if (!session.token) {
@@ -61,27 +82,43 @@ export default ({ artist, album }) => {
         const res = await response.json();
         setInCollection(res.collection);
       }
+    }
+    
+    function setSongData() {
+      player.current.load();
+      player.current.play();
+      player.current.pause();
+      setDisplayTime(player.current.currentTime);
+      setTotalTime(player.current.duration);
       setLoaded(true);
     }
-
+    
+    setCurrentSong({ ...album.songs[0] });
     checkCollection();
-    setCurrentSong({...album.songs[0]});
-    player.current.load();
+    setSongData()
   }, [album, session.token, modalType])
 
   return (
     <>
       <div style={{ marginRight: "25px" }}>
-        <h1>{album.name}</h1>
-        <div>
+        <h2>{album.name}</h2>
+        <div style={{ fontSize: "14px" }}>
           by&nbsp;
           <Link to={`/${artist.url}`} style={{ color: "deeppink" }}>{artist.artistName}</Link>
         </div>
+        <div id="scrubber">
+          {formatTime(displayTime)}<br/>
+          {formatTime(totalTime)}<br/>
+          <div id="elapsed" style={{ width: `${displayTime / totalTime * 100}%`}}>
+        </div>
+        </div>
         <div id="music-player-container">
           <div id="currently-playing">
-            {currentSong.name}<br/>
+            {currentSong.name}
           </div>
-          <audio id="player" controls ref={player} className="hidden">
+          <audio id="player" controls ref={player}
+            className="hidden"
+            >
             <source src={currentSong.song_url} type="audio/mp3" />
           </audio>
           <button onClick={playing ? pause : play} id="play-pause-button">

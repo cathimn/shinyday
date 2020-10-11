@@ -121,28 +121,43 @@
   margin-bottom: 15px;
 }
 
-#currently-playing {
-  margin-left: 65px;
-  font-size: 12px;
-  padding: 10px 0;
-}
-
 #music-player-container {
   margin-top: 20px;
   position: relative;
   min-height: 55px;
 }
 
+#currently-playing {
+  position: absolute;
+  margin-left: 70px;
+  font-size: 12px;
+  padding: 10px 0;
+}
+
 #play-pause-button {
   position: absolute;
   top: 0;
   background-color: white;
-  border: 1px solid gray;
+  border: 1px solid rgb(200, 200, 200);
   border-radius: 2px;
-  height: 55px;
-  width: 60px;
-  font-size: 28px;
+  height: 50px;
+  width: 55px;
+  font-size: 24px;
   color: rgb(50, 50, 50);
+}
+
+#scrubber {
+  position: relative;
+  background-color: lightblue;
+  width: 300px;
+}
+
+#elapsed {
+  /* max-width: 300px; */
+  position: absolute;
+  width: 0px;
+  background-color: lightgray;
+  height: 20px;
 }
 
 #buy-button-container {
@@ -166,12 +181,13 @@
 }
 
 .track__play-button {
-  font-size: 10px;
+  font-size: 9px;
   background-color: white;
-  border: 1px solid gray;
+  border: 1px solid rgb(200, 200, 200);
   color: rgb(50, 50, 50);
   border-radius: 2px;
-  padding: 4px 6px 5px 6px;
+  width: min-content;
+  padding: 3px 4px 3px 6px;
   margin-right: 10px;
 }
 

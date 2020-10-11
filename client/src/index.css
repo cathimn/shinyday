@@ -35,6 +35,7 @@ ul {
 
 p,
 h1,
+h2,
 h3 {
   margin: 0;
   padding: 0;
@@ -145,6 +146,7 @@ button {
 }
 
 .main-section__container {
+  min-height: 370px;
   width: 1200px;
   margin: 0 auto;
   display: grid;
@@ -180,8 +182,42 @@ button {
   margin: 10px;
 }
 
+.small-album-card__blurb > p {
+  overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 5;
+   -webkit-box-orient: vertical;
+}
+
 .small-album-card__name {
   font-weight: 600;
+}
+
+.fade-in-play,
+.hidden-play {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  transition: opacity .25s;
+  display: grid;
+  place-items: center;
+  color: white;
+}
+
+.fade-in-play {
+  opacity: 1;
+}
+.hidden-play {
+  opacity: 0;
+}
+
+.fade-in-play-button {
+  background-color: rgba(0, 0, 0, 0.7);
+  background-blend-mode: overlay;
+  border-radius: 3px;
+  padding: 10px 25px;
+  font-size: 20px;
 }
 
 /* Genre Gradient and Buttons */

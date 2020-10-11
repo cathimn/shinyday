@@ -4,11 +4,17 @@ import { Link } from 'react-router-dom';
 import { baseUrl } from '../config';
 
 const AlbumCard = ({ album }) => {
+  const [hover, setHover] = useState(false);
 
   return (
     <Link to={`/${album.artist.url}/${album.url}`}>
-      <div className="small-album-card">
+      <div className="small-album-card" onMouseEnter={e => setHover(true)} onMouseLeave={e => setHover(false)}>
         <img src={album.cover_url} className="small-album-card__image" alt="album cover" />
+        <div className={hover ? "fade-in-play" : "hidden-play"}>
+          <div className="fade-in-play-button">
+            <i className="fa fa-play"/>
+          </div>
+        </div>
         <div className="small-album-card__blurb">
           <span className="small-album-card__name">{album.name}<br />by {album.artist.artist_name}</span>
           <span className="gray">{album.genre.genre}</span>
