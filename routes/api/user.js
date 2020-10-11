@@ -84,28 +84,38 @@ router.get('/:username', asyncHandler(async (req, res) => {
       include: [{
         model: User,
         where: { id: user.id },
-        through: { model: User_Collection, attributes: ["favorite"] },
+        through: {
+          model: User_Collection,
+          attributes: ["favorite"],
+        },
         attributes: { exclude: ["username", "avatar_url", "email", "password", "banner_url", "session_token", "createdAt", "updatedAt"] }
       },
       {
         model: Song,
         as: "songs",
         attributes: ["id", "name"]
+      },
+      {
+        model: Artist,
+        as: "artist",
+        attributes: ["artist_name", "url"],
       }
       ],
-      attributes: ["id", "name", "url", "cover_url"]
+      attributes: ["id", "name", "url", "cover_url"],
+      order: ["name"],
     }).then((result) => {
       result.rows.forEach((album, i) => {
-        const fav = album.Users[0].User_Collection.favorite;
+        const songId = album.Users[0].User_Collection.favorite;
 
-        album.setDataValue("favorite", fav)
+      
+        album.setDataValue("favorite", songId);
         album.setDataValue("Users", null);
       })
       return res.json({
         user: user,
         collection: {
           albums: result.rows,
-          total: result.count
+          total: result.rows.length
         },
         following: {
           artists: follows.rows,

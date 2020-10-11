@@ -45,5 +45,21 @@ router.post('/', authenticated, asyncHandler(async (req, res) => {
   res.json(album);
 }));
 
+router.put('/favorite', authenticated, asyncHandler(async (req, res) => {
+  const { albumId, songId } = req.body;
+
+  const collection = await User_Collection.findOne({
+    where: {
+      user_id: req.user.id,
+      album_id: albumId
+    }
+  });
+
+  collection.favorite = songId;
+
+  await collection.save();
+
+  res.json(collection);
+}))
 
 module.exports = router;

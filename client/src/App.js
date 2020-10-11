@@ -19,7 +19,7 @@ const ScrollToTop = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setShowModal(false);
-  }, [pathname]);
+  }, [pathname, setShowModal]);
 
   return null;
 }

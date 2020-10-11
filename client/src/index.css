@@ -58,6 +58,10 @@ button {
   color: deeppink;
 }
 
+.small {
+  font-size: 12px;
+}
+
 .container {
   display: flex;
   flex-direction: column;

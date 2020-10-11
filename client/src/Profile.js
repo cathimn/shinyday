@@ -9,10 +9,12 @@ import { AppContext } from './AppContext';
 export default () => {
   const { username } = useParams();
   const { session } = useContext(AppContext);
-  const [editMode, setEditMode] = useState(false);
-
+  
   const [tab, setTab] = useState("collection");
+  const [editMode, setEditMode] = useState(false);
   const [allowEditMode, setAllowEditMode] = useState(false);
+  const [changed, setChanged] = useState(false);
+
   const [userInfo, setUserInfo] = useState({
     id: null,
     avatarUrl: null,
@@ -39,7 +41,6 @@ export default () => {
 
       if (response.ok) {
         const res = await response.json();
-        console.log(res)
         setUserInfo({
           id: res.user.id,
           avatarUrl: res.user.avatar_url,
@@ -47,24 +48,12 @@ export default () => {
         });
         setFollowing({...res.following});
         setCollection({...res.collection});
+        setChanged(false);
       }
     }
 
-    // async function fetchFollows() {
-    //   const response = await fetch(`${baseUrl}/follows/${username}`);
-
-    //   if (response.ok) {
-    //     const res = await response.json();
-    //     console.log(res)
-    //     setFollowing({
-    //       artists: res.artists,
-    //       total: res.total,
-    //     });
-    //   }
-    // }
-
     fetchUserInfo();
-  }, [username])
+  }, [username, changed])
 
   return (
   <>
@@ -78,7 +67,7 @@ export default () => {
         <button
           className={tab === "collection" ? "tab-button selected" : "tab-button"}
           onClick={e => setTab("collection")}>
-          <strong>collection</strong>&nbsp;&nbsp;<span></span>
+          <strong>collection</strong>&nbsp;&nbsp;<span>{collection.total}</span>
         </button>
         <button 
           className={tab === "following" ? "tab-button selected" : "tab-button"}
@@ -86,34 +75,126 @@ export default () => {
           <strong>following</strong>&nbsp;&nbsp;<span>{following.total}</span>
         </button>
       </div>
-      {tab === "collection" && <Collection />}
+      {tab === "collection" && <Collection albums={collection.albums} allowEditMode={allowEditMode} setChanged={setChanged} />}
       {tab === "following" && <Following artists={following.artists} />}
     </div>
   </>
   )
 }
 
-const Collection = () => {
+const Collection = ({ albums, allowEditMode, setChanged }) => (
+  <div className="profile__content">
+    {albums.map(album => <CollectionCard key={album.id + "album"} setChanged={setChanged} album={album} allowEditMode={allowEditMode} />)}
+  </div>
+);
+
+const CollectionCard = ({ album, allowEditMode, setChanged }) => {
+  const { session } = useContext(AppContext);
+  const [showFavSelect, setShowFavSelect] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [selectedSong, setSelectedSong] = useState("");
+
+  const handleFavoriteChange = async (e) => {
+    e.preventDefault();
+    const response = await fetch(`${baseUrl}/collections/favorite`, {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session.token}`
+      },
+      body: JSON.stringify({
+        "songId": selectedSong,
+        "albumId": album.id
+      })
+    })
+
+    if (response.ok) {
+      const res = await response.json();
+      setShowFavSelect(false);
+      setChanged(true);
+    }
+  }
 
   return (
-    <div>
+    <div key={album.id}
+      className="collection-card"
+      onMouseEnter={e => setHovered(true)}
+      onMouseLeave={e => {
+        setHovered(false);
+        setShowFavSelect(false);
+      }}
+      >
+      <Link to={`/${album.artist.url}/${album.url}`}>
+        <img src={album.cover_url} className="small-album-card__image" alt="album cover" />
+      </Link>
+      <div className="collection-blurb">
+        <Link to={`/${album.artist.url}/${album.url}`}>
+          <span className="small-album-card__name">{album.name}</span><br/>
+          <span>by {album.artist.artist_name}</span>
+        </Link>
+        <br />
+        <div>
+          {album.favorite ?
+          <>
+          <span style={{ color: "gray" }}>favorite track</span>
+          <span className={hovered && allowEditMode ? "" : "gone"}>
+          &nbsp;-
+            <button
+              className="pink small"
+              onClick={e => setShowFavSelect(!showFavSelect)}>
+              edit
+            </button>
+          </span>
+          <br/>
+          <span>{album.songs.filter((song) => song.id == Number(album.favorite))[0].name}</span>
+          </>
+          :
+            <span className={hovered && allowEditMode ? "" : "gone"}>
+              <span style={{ color: "gray" }}>favorite track</span>
+              &nbsp;-
+              <button
+                className="pink small"
+                onClick={e => setShowFavSelect(!showFavSelect)}>
+                  set
+              </button>
+            </span>
+          }
+          <form className={showFavSelect ? "favorite-form" : "favorite-form gone"}>
+            <select
+              className={showFavSelect ? "" : "gone"}
+              value={selectedSong}
+              onChange={e => setSelectedSong(e.target.value)}>
+              <option disabled value="">select a track</option>
+              {album.songs.map(song => <option key={song.name} value={song.id}>{song.name}</option>)}
+            </select>
+            <div>
+              <button onClick={handleFavoriteChange}>SAVE</button>
+              <button
+                onClick={e=> {
+                  e.preventDefault();
+                  setShowFavSelect(false);
+                }}>
+                CANCEL</button>
+            </div>
+          </form>
 
+        </div>
+        <br/>
+        {allowEditMode && <a>download</a>}
+      </div>
     </div>
   )
 }
 
-const Following = ({ artists }) => {
-  
-  return (
-    <div className="profile__following-box">
-      {artists.map(artist => 
-        <div key={artist.id} className="follow-card">
-          <img src={artist.avatar_url} alt="artist avatar" />
-          <Link to={`/${artist.url}`}>
-            {artist.artist_name}
-          </Link>
-          <FollowButton artistId={artist.id} profile="true" />
-        </div>)}
-    </div>
-  )
-}
+const Following = ({ artists }) => (
+  <div className="profile__content">
+    {artists.map(artist => 
+      <div key={artist.id} className="follow-card">
+        <img src={artist.avatar_url} alt="artist avatar" />
+        <Link to={`/${artist.url}`}>
+          {artist.artist_name}
+        </Link>
+        <FollowButton artistId={artist.id} profile="true" />
+      </div>)}
+  </div>
+)

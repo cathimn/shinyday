@@ -45,10 +45,11 @@
   border-bottom: 2px solid black;
 }
 
-
-.profile__following-box {
+.profile__content {
   margin-top: 25px;
   display: grid;
+  row-gap: 30px;
+  place-items: center, start;
   grid-template-columns: repeat(5, 1fr);
 }
 
@@ -56,7 +57,6 @@
   position: relative;
   width: 200px;
   height: 70px;
-  margin: 25px auto;
   font-size: 13px;
   font-weight: 600;
   display: grid;
@@ -109,4 +109,55 @@
 
 .follow-button.following.profile:hover {
   border: 1px solid gray;
+}
+
+.collection-card {
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 200px;
+  height: min-content;
+}
+
+.collection-card:hover {
+  border: 1px dotted lightgray;
+  transition: border .25s;
+}
+
+.collection-blurb {
+  background-color: whitesmoke;
+  padding: 5px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.favorite-form {
+  width: 190px;
+  margin: 10px 0;
+  padding: 0;
+}
+
+.favorite-form.gone {
+  height: 0;
+}
+
+.favorite-form > div {
+  display: flex;
+  margin: 10px 0;
+}
+
+.favorite-form > div > button {
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 5px;
+  background-color: lightpink;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.favorite-form > div > button:nth-child(2) {
+  color: gray;
+  background-color: transparent;
 }
