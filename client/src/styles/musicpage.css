@@ -47,7 +47,7 @@
 
 .following {
   border: 1px solid rgba(0, 0, 0, 0);
-  background-color: rgba(255, 20, 145, 0.75);
+  background-color: deeppink;
   color: white;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .following:hover {
-  background-color: rgb(255, 68, 168, 0.75);
+  background-color: deeppink;
 }
 
 .following:hover:after {
@@ -160,8 +160,8 @@
   position: relative;
   background-color: white;
   border: 1px solid rgb(200, 200, 200);
-  margin-top: 10px;
-  /* width: 25px; */
+  margin-top: 8px;
+  margin-left: 2px;
   height: 8px;
 }
 

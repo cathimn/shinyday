@@ -53,7 +53,7 @@
   box-sizing: border-box;
   font-size: 15px;
   border-radius: 4px;
-  background-color: rgb(255, 119, 149);
+  background-color: deeppink;
   padding: 10px;
   margin: 30px 10px 10px 10px;
   min-width: 200px;
@@ -62,6 +62,6 @@
 
 .modal-button:nth-child(2) {
   background-color: white;
-  color: rgb(255, 119, 149);
-  border: 1px solid rgb(255, 119, 149);
+  color: deeppink;
+  border: 1px solid deeppink;
 }

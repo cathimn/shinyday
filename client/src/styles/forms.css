@@ -27,11 +27,11 @@ form {
   margin: 30px auto;
   border-radius: 4px;
   padding: 10px 0px;
-  background-color: pink;
+  background-color: deeppink;
 }
 
 #login-button:hover {
-  background-color: rgb(255, 119, 149);
+  background-color: deeppink;
 }
 
 .form-label {

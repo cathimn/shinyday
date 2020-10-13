@@ -12,9 +12,9 @@ export const Footer = () => (
         <span><a href="https://www.linkedin.com/in/cath-lee/"><i className="fa fa-linkedin" /> LinkedIn</a></span><br />
       </p>
       <p style={{ textAlign: "right" }}>
-        <span>Images from public domain through <a href="https://www.rawpixel.com/category/53/public-domain">rawpixel</a></span><br/>
-        <span>Music from public domain through <a href="https://freemusicarchive.org/">Free Music Archive</a></span><br/>
-        <span>Logo by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> flaticon</a> </span>
+        <span>Images from <a href="https://www.rawpixel.com/category/53/public-domain">rawpixel</a></span><br/>
+        <span>Music from <a href="https://freemusicarchive.org/">Free Music Archive</a></span><br/>
+        <span>Logo by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a></span>
       </p>
     </div>
 );

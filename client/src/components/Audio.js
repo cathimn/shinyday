@@ -38,9 +38,6 @@ export default ({ playing, setPlaying, player, currentSong, setCurrentSong, song
   useEffect(() => {
     const audio = document.getElementById("player");
 
-    // audio.onplaying = setPlaying(true);
-    // audio.onpause = setPlaying(false);
-
     const setInitTime = () => {
       setCurrent(audio.currentTime);
       setTotal(audio.duration);
@@ -54,7 +51,9 @@ export default ({ playing, setPlaying, player, currentSong, setCurrentSong, song
       setPlaying(false);
 
       if (currentSong.index !== lastIndex) {
-        setCurrentSong({...songs[currentSong.index + 1], index: currentSong.index + 1});
+        setCurrentSong({
+          ...songs[currentSong.index + 1],
+          index: currentSong.index + 1});
         setPlaying(true);
       }
     }
@@ -75,15 +74,19 @@ export default ({ playing, setPlaying, player, currentSong, setCurrentSong, song
     <div id="music-player-container">
       <div id="currently-playing">
         <span>{currentSong.name}</span>
-        <span style={{ color: "deeppink" }}>{getTime(current)} : {getTime(total)}</span>
+        <span className="pink">{getTime(current)} : {getTime(total)}</span>
         <div id="scrubber" onMouseDown={e => scrub(e)}>
           <div id="skip-buttons">
             <button
-              onClick={e => setCurrentSong({ ...songs[currentSong.index - 1], index: currentSong.index - 1})}
+              onClick={e => setCurrentSong({
+                ...songs[currentSong.index - 1],
+                index: currentSong.index - 1})}
               disabled={currentSong.index === 0}>
               <i className="fa fa-fast-backward"/></button>
             <button
-              onClick={e => setCurrentSong({ ...songs[currentSong.index + 1], index: currentSong.index + 1 })}
+              onClick={e => setCurrentSong({
+                ...songs[currentSong.index + 1],
+                index: currentSong.index + 1 })}
               disabled={currentSong.index === lastIndex}>
               <i className="fa fa-fast-forward" /></button>
           </div>

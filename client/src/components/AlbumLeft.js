@@ -94,7 +94,13 @@ export default ({ artist, album }) => {
           <div key={song.id} className="track__container">
             <button
               className="track__play-button"
-              onClick={e => updateCurrentSongAndPlay(e, index)}>
+              onClick={e => {
+                if (currentSong.index !== index) {
+                  updateCurrentSongAndPlay(e, index)
+                } else {
+                  setPlaying(!playing);
+                }
+              }}>
               {currentSong.index === index && playing ? <i className="fa fa-pause"/> : <i className="fa fa-play"/>}
             </button>
             <span className="track__num">{song.track_num}.&nbsp;</span>
