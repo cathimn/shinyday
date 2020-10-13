@@ -28,6 +28,11 @@ export default ({ artist, album }) => {
 
   useEffect(() => {
     async function checkCollection () {
+      if (!session.token) {
+        setLoaded(true);
+        return;
+      }
+
       const response = await fetch(`${baseUrl}/collections/id/${album.id}`, {
         headers: { Authorization: `Bearer ${session.token}` },
       })
@@ -36,7 +41,6 @@ export default ({ artist, album }) => {
         const res = await response.json();
         setInCollection(res.collection);
       }
-      
       setLoaded(true);
     }
 
@@ -90,13 +94,7 @@ export default ({ artist, album }) => {
           <div key={song.id} className="track__container">
             <button
               className="track__play-button"
-              onClick={e => {
-                if (playing) {
-                  setPlaying(false);
-                } else {
-                  updateCurrentSongAndPlay(e, index);
-                }
-              }}>
+              onClick={e => updateCurrentSongAndPlay(e, index)}>
               {currentSong.index === index && playing ? <i className="fa fa-pause"/> : <i className="fa fa-play"/>}
             </button>
             <span className="track__num">{song.track_num}.&nbsp;</span>

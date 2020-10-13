@@ -3,7 +3,7 @@ import { useParams, Redirect, Link } from 'react-router-dom'
 
 import { baseUrl } from './config';
 
-import Player from './components/Player';
+import AlbumLeft from './components/AlbumLeft';
 import ArtistLeft from './components/ArtistLeft';
 import FollowButton from './components/FollowButton';
 import { MiniFooter } from './components/Footer';
@@ -95,7 +95,7 @@ export default ({ type }) => {
             discography={discography}
             artist={artist.url} />}
           {type === "album" &&
-          <Player
+          <AlbumLeft
             artist={artist}
             album={album}/>}
         </div>

@@ -161,7 +161,7 @@
   background-color: white;
   border: 1px solid rgb(200, 200, 200);
   margin-top: 10px;
-  width: 250px;
+  /* width: 25px; */
   height: 8px;
 }
 
@@ -175,13 +175,18 @@
 #skip-buttons {
   position: absolute;
   top: -4px;
-  right: -55px;
+  right: -60px;
+}
+
+#drag-container {
+  position: relative;
+  width: 94%;
 }
 
 #draggable {
   position: absolute;
   top: -2px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 1);
   border: 1px solid rgb(150, 150, 150);
   border-radius: 2px;
   width: 22px;

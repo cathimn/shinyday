@@ -115,7 +115,6 @@ const CollectionCard = ({ album, allowEditMode, setChanged }) => {
     })
 
     if (response.ok) {
-      const res = await response.json();
       setShowFavSelect(false);
       setChanged(true);
     }
@@ -186,7 +185,7 @@ const CollectionCard = ({ album, allowEditMode, setChanged }) => {
 
         </div>
         <br/>
-        {allowEditMode && <a>download</a>}
+        {allowEditMode && <span>download</span>}
       </div>
     </div>
   )
