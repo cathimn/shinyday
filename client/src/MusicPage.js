@@ -44,6 +44,7 @@ export default ({ type }) => {
           avatarUrl: res.avatar_url,
           bannerUrl: res.banner_url
         });
+
         setDiscography([...res.albums]);
 
         if (type === "album") {
@@ -111,7 +112,10 @@ export default ({ type }) => {
             <div key={album.id} className="small-album">
               <Link to={`/${artist.url}/${album.url}`}>
                 <img src={album.cover_url} className="small-cover" alt="album art" />
-                <span className="pink">{album.name}</span>
+                <span className="pink">{album.name}</span><br/>
+                <span style={{ fontSize: "10px" }}>
+                  {new Date(album.createdAt).toLocaleDateString(undefined, {month: "short", year: "numeric"})}
+                </span>
               </Link>
             </div>)}
           </>}

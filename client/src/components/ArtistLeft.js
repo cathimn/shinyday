@@ -12,6 +12,9 @@ export default ({ discography, artist }) => (
             className="large-cover" />
           <span className="pink album-name">
             {album.name}
+          </span><br/>
+          <span style={{ fontSize: "12px" }}>
+            {new Date(album.createdAt).toLocaleDateString(undefined, { month: "short", year: "numeric" })}
           </span>
           </Link>
       </div>)}
