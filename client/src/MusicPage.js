@@ -32,7 +32,7 @@ export default ({ type }) => {
   const [invalidAlbum, setInvalidAlbum] = useState(null);
 
   useEffect(() => {
-    async function fetchData () {
+    async function fetchArtistData () {
       const response = await fetch(`${baseUrl}/music/${artistTerm}`);
       if (response.ok) {
         const res = await response.json();
@@ -47,30 +47,34 @@ export default ({ type }) => {
 
         setDiscography([...res.albums]);
 
-        if (type === "album") {
-          const response = await fetch(`${baseUrl}/music/${artistTerm}/${albumTerm}`);
-          if (response.ok) {
-            const res = await response.json();
-            setAlbum({
-              id: res.id,
-              artistId: res.artist_id,
-              coverUrl: res.cover_url,
-              description: res.description,
-              createdAt: res.createdAt,
-              name: res.name,
-              songs: [...res.songs]
-            })
-          } else {
-            setInvalidAlbum(true);
-          }
-        }
       } else {
         setInvalidArtist(true);
       }
+      if (type === "artist") setLoaded(true);
+    }
+
+    async function fetchAlbumData () {
+      const response = await fetch(`${baseUrl}/music/${artistTerm}/${albumTerm}`);
+      if (response.ok) {
+        const res = await response.json();
+        setAlbum({
+          id: res.id,
+          artistId: res.artist_id,
+          coverUrl: res.cover_url,
+          description: res.description,
+          createdAt: res.createdAt,
+          name: res.name,
+          songs: [...res.songs]
+        })
+      } else {
+        setInvalidAlbum(true);
+      }
       setLoaded(true);
     }
+
     setLoaded(false);
-    fetchData();
+    fetchArtistData();
+    if (type === "album") fetchAlbumData();
   }, [artistTerm, albumTerm, type])
 
   if ((invalidArtist || invalidAlbum) && loaded) {

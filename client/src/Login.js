@@ -76,9 +76,9 @@ export const LoginForm = ({ setSession }) => {
 }
 
 export const LoginPage = () => {
-  const { session, setSession, loaded } = useContext(AppContext);
+  const { session, setSession } = useContext(AppContext);
 
-  if (session.token && loaded) {
+  if (session.token) {
     return <Redirect to="/" />;
   }
 

@@ -75,9 +75,9 @@ export const SignupForm = ({ setSession }) => {
 }
 
 export const SignupPage = () => {
-    const { session, setSession, loaded } = useContext(AppContext);
+    const { session, setSession } = useContext(AppContext);
 
-  if (session.token && loaded) {
+  if (session.token) {
     return <Redirect to="/" />;
   }
 

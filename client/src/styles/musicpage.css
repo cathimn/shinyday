@@ -207,6 +207,7 @@
 }
 
 .track__container {
+  height: 20px;
   font-size: 12px;
   margin-bottom: 5px;
   display: grid;
@@ -214,15 +215,23 @@
 }
 
 .track__play-button {
-  font-size: 9px;
+  position: relative;
+  box-sizing: border-box;
+  font-size: 8px;
   background-color: white;
   border: 1px solid rgb(200, 200, 200);
   color: rgb(50, 50, 50);
   border-radius: 2px;
-  width: min-content;
+  width: 20px;
+  height: 20px;
   display: grid;
   place-items: center;
-  padding: 3px 4px 3px 4px;
+}
+
+.track__play-button > i.fa-pause {
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
 
 .track__num {
@@ -232,6 +241,7 @@
 .track__name {
   text-align: start;
   color: deeppink;
+  font-size: 12px;
 }
 
 .track__name:hover {

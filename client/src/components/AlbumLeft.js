@@ -44,8 +44,8 @@ export default ({ artist, album }) => {
       setLoaded(true);
     }
 
-    checkCollection();
-  }, [album, session.token, modalType])
+    if (album.id) checkCollection();
+  }, [album.id, session.token, modalType])
 
   return (
     <>
@@ -105,6 +105,7 @@ export default ({ artist, album }) => {
             </button>
             <span className="track__num">{song.track_num}.&nbsp;</span>
             <button
+              as="a"
               className="track__name"
               onClick={e => updateCurrentSong(e, index)}>
               {song.name}</button>

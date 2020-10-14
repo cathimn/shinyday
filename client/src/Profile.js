@@ -12,7 +12,7 @@ export default () => {
   const { session } = useContext(AppContext);
   
   const [tab, setTab] = useState("collection");
-  const [editMode, setEditMode] = useState(false);
+  // const [editMode, setEditMode] = useState(false);
   const [allowEditMode, setAllowEditMode] = useState(false);
   const [changed, setChanged] = useState(false);
 
@@ -65,7 +65,7 @@ export default () => {
       <div id="profile-bio">
         <img src={userInfo.avatarUrl} alt="avatar" id="profile-avatar"/>
         <h1 id="profile-username">{username}</h1>
-        {allowEditMode && <button>EDIT PROFILE <i className="fa fa-pencil"/></button>}
+        {/* {allowEditMode && <button>EDIT PROFILE <i className="fa fa-pencil"/></button>} */}
       </div>
       <div className="profile__tabs">
         <button
@@ -185,7 +185,7 @@ const CollectionCard = ({ album, allowEditMode, setChanged }) => {
 
         </div>
         <br/>
-        {allowEditMode && <span>download</span>}
+        {allowEditMode && <a href={album.download_url} download>download</a>}
       </div>
     </div>
   )

@@ -32,6 +32,9 @@ module.exports = {
       cover_url: {
         type: Sequelize.STRING
       },
+      download_url: {
+        type: Sequelize.STRING
+      },
       description: {
         type: Sequelize.STRING
       },
