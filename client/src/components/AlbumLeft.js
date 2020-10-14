@@ -45,7 +45,7 @@ export default ({ artist, album }) => {
     }
 
     if (album.id) checkCollection();
-  }, [album.id, session.token, modalType])
+  }, [album, session.token, modalType])
 
   return (
     <>

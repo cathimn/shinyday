@@ -46,6 +46,10 @@ export default ({ playing, setPlaying, player, currentSong, setCurrentSong, song
   }
 
   useEffect(() => {
+    player.current.load();
+  }, [player])
+
+  useEffect(() => {
     const audio = document.getElementById("player");
 
     audio.loop = false;
@@ -55,6 +59,7 @@ export default ({ playing, setPlaying, player, currentSong, setCurrentSong, song
 
       if (promise !== undefined) {
         promise.catch(error => {
+          console.log(error)
         }).then(() => {
         });
       }
@@ -98,6 +103,7 @@ export default ({ playing, setPlaying, player, currentSong, setCurrentSong, song
         onCanPlay={e => {
           setCurrent(e.target.currentTime);
           setTotal(e.target.duration);
+          e.target.click();
         }}
         onTimeUpdate={e => setCurrent(e.target.currentTime)}
         onEnded={nextTrack}
