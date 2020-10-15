@@ -77,15 +77,25 @@ export default ({ playing, setPlaying, player, currentSong, setCurrentSong, song
         <div id="scrubber" onMouseDown={e => scrub(e)}>
           <div id="skip-buttons">
             <button
-              onClick={e => setCurrentSong({
-                ...songs[currentSong.index - 1],
-                index: currentSong.index - 1})}
+              onClick={e => {
+                if (playing) setPlaying(false);
+                setCurrentSong({
+                  ...songs[currentSong.index - 1],
+                  index: currentSong.index - 1
+                })
+                setPlaying(true);
+              }}
               disabled={currentSong.index === 0}>
               <i className="fa fa-fast-backward"/></button>
             <button
-              onClick={e => setCurrentSong({
-                ...songs[currentSong.index + 1],
-                index: currentSong.index + 1 })}
+              onClick={e => {
+                if (playing) setPlaying(false);
+                setCurrentSong({
+                  ...songs[currentSong.index + 1],
+                  index: currentSong.index + 1
+                })
+                setPlaying(true);
+              }}
               disabled={currentSong.index === lastIndex}>
               <i className="fa fa-fast-forward" /></button>
           </div>
