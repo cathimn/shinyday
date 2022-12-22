@@ -34,7 +34,7 @@
     "express-validator": "^6.6.1",
     "faker": "^5.1.0",
     "http-errors": "^1.8.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "match-sorter": "^4.2.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
